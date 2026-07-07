@@ -22,13 +22,18 @@ export default class EntryAbility extends UIAbility {
     // Main window is created, set main page for this ability
     hilog.info(DOMAIN, 'testTag', '%{public}s', 'Ability onWindowStageCreate');
 
-    windowStage.loadContent('pages/Index', (err) => {
+    windowStage.getMainWindow().then((data: window.Window) => {
+      data.setWindowLayoutFullScreen(true).catch()
+    }).catch()
+
+    windowStage.loadContent('pages/Welcome', (err) => {
       if (err.code) {
         hilog.error(DOMAIN, 'testTag', 'Failed to load the content. Cause: %{public}s', JSON.stringify(err));
         return;
       }
       hilog.info(DOMAIN, 'testTag', 'Succeeded in loading the content.');
     });
+
   }
 
   onWindowStageDestroy(): void {
