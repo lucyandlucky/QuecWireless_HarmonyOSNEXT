@@ -1,0 +1,7 @@
+{
+  "startWindowType": "REQUIRED_SHOW",
+  "startWindowColorModeType": "FOLLOW_SYSTEM",
+  "startWindowBackgroundColor": "$color:start_window_background",
+  "startWindowBackgroundImage": "$media:app_startup",
+  "startWindowBackgroundImageFit": "Cover"
+}
