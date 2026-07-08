@@ -1,6 +1,32 @@
 @Entry
 @ComponentV2
 struct Welcome {
+  private hasShownAgreement: boolean = false
+
+  onPageShow() {
+    if (this.hasShownAgreement) {
+      return
+    }
+    this.hasShownAgreement = true
+    this.getUIContext().showAlertDialog({
+      title: '用户协议',
+      message: '请你阅读',
+      autoCancel: false,
+      primaryButton: {
+        value: '不同意',
+        action: () => {
+
+        }
+      },
+      secondaryButton: {
+        value: '同意',
+        action: () => {
+
+        }
+      }
+    })
+  }
+
   build() {
     // Column()
     //   .width('100%')
