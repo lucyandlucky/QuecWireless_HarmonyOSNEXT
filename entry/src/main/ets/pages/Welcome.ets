@@ -1,6 +1,20 @@
+import { AgreementDialog } from '../components/AgreementDialog';
+
 @Entry
 @ComponentV2
 struct Welcome {
+  agreementDialogController: CustomDialogController | null = new CustomDialogController({
+    builder: AgreementDialog({
+      onAgree: () => {
+      },
+      onCancel: () => {
+      }
+    }),
+    cancel: this.exitApp,
+    autoCancel: false,
+    alignment: DialogAlignment.Center,
+    backgroundColor: '#FFFFFF'
+  })
   private hasShownAgreement: boolean = false
 
   onPageShow() {
@@ -8,23 +22,15 @@ struct Welcome {
       return
     }
     this.hasShownAgreement = true
-    this.getUIContext().showAlertDialog({
-      title: '用户协议',
-      message: '请你阅读',
-      autoCancel: false,
-      primaryButton: {
-        value: '不同意',
-        action: () => {
+    this.agreementDialogController?.open()
+  }
 
-        }
-      },
-      secondaryButton: {
-        value: '同意',
-        action: () => {
+  aboutToDisappear(): void {
+    this.agreementDialogController = null
+  }
 
-        }
-      }
-    })
+  exitApp() {
+    console.log('Click the callback in the blank area')
   }
 
   build() {
