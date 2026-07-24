@@ -14,11 +14,11 @@
     },
     {
       "name": "quec_important_tip",
-      "value": "Import Tips"
+      "value": "重要提示"
     },
     {
       "name": "quec_warning_content1",
-      "value": "Thank you for trusting and using %s! We are aware of the importance of privacy to you. In order to present a more comprehensive situation of our collection and use of your personal information, according to the requirements of the latest laws and regulations, we have formulated"
+      "value": "感谢您信任并使用%s！我们深知隐私对您的重要性，为了更全面地呈现我们收集和使用您个人信息的相关情况，我们根据最新法律法规的要求，制定了"
     }
   ]
 }

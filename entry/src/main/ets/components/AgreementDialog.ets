@@ -8,7 +8,8 @@ export struct AgreementDialog {
 
   build() {
     Column() {
-      Text('demo')
+      Text($r('app.string.quec_important_tip'))
+      Text($r('app.string.quec_warning_content1', $r('app.string.app_name')))
     }
   }
 }

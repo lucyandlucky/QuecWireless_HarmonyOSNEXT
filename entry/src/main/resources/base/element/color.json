@@ -3,6 +3,138 @@
     {
       "name": "start_window_background",
       "value": "#168AF7"
+    },
+    {
+      "name": "B1",
+      "value": "#F7F8FC"
+    },
+    {
+      "name": "B2",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "B3",
+      "value": "#F7F8FC"
+    },
+    {
+      "name": "B4",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "B5",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "B6",
+      "value": "#E0F2FF"
+    },
+    {
+      "name": "M0",
+      "value": "#0091FF"
+    },
+    {
+      "name": "M0_12",
+      "value": "#1F0091FF"
+    },
+    {
+      "name": "M0_2",
+      "value": "#7A0091FF"
+    },
+    {
+      "name": "M0_3",
+      "value": "#1F0091FF"
+    },
+    {
+      "name": "M0_48",
+      "value": "#7A0091FF"
+    },
+    {
+      "name": "M1",
+      "value": "#0091FF"
+    },
+    {
+      "name": "M1_12",
+      "value": "#1F0091FF"
+    },
+    {
+      "name": "M1_2",
+      "value": "#7A0091FF"
+    },
+    {
+      "name": "M1_3",
+      "value": "#1F0091FF"
+    },
+    {
+      "name": "M1_48",
+      "value": "#7A0091FF"
+    },
+    {
+      "name": "M2",
+      "value": "#FF7E27"
+    },
+    {
+      "name": "M3",
+      "value": "#00CF63"
+    },
+    {
+      "name": "M4",
+      "value": "#FF3E3E"
+    },
+    {
+      "name": "M5",
+      "value": "#0091FF"
+    },
+    {
+      "name": "M6",
+      "value": "#EFEFEF"
+    },
+    {
+      "name": "W1",
+      "value": "#080F19"
+    },
+    {
+      "name": "W2",
+      "value": "#6B6F75"
+    },
+    {
+      "name": "W3",
+      "value": "#9C9FA3"
+    },
+    {
+      "name": "W4",
+      "value": "#CECFD1"
+    },
+    {
+      "name": "W5",
+      "value": "#9C9FA3"
+    },
+    {
+      "name": "W6",
+      "value": "#F3F3F4"
+    },
+    {
+      "name": "quec_color_0091FF",
+      "value": "#0091FF"
+    },
+    {
+      "name": "quec_color_91",
+      "value": "#91919F"
+    },
+    {
+      "name": "quec_color_b3deff",
+      "value": "#B3DEFF"
+    },
+    {
+      "name": "quec_color_bf",
+      "value": "#BFBFBF"
+    },
+    {
+      "name": "quec_color_cce7ff",
+      "value": "#CCE7FF"
+    },
+    {
+      "name": "quec_color_ed5d4f",
+      "value": "#ED5D4F"
     }
   ]
 }
