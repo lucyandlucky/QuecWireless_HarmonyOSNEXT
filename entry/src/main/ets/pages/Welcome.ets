@@ -9,6 +9,7 @@ struct Welcome {
       onAgree: () => {
       },
       onCancel: () => {
+        this.exitApp()
       }
     }),
     cancel: this.exitApp,

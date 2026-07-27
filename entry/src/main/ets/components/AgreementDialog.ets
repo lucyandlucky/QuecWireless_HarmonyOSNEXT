@@ -67,6 +67,7 @@ export struct AgreementDialog {
       Row() {
         Text($r('app.string.quec_disagree'))
           .dialogActionText($r('app.color.W3'))
+          .onClick(this.onCancel)
 
         Divider()
           .color($r('app.color.W6'))
