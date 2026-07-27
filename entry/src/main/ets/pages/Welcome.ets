@@ -13,7 +13,7 @@ struct Welcome {
     cancel: this.exitApp,
     autoCancel: false,
     alignment: DialogAlignment.Center,
-    backgroundColor: '#FFFFFF'
+    backgroundColor: $r('app.color.B3')
   })
   private hasShownAgreement: boolean = false
 

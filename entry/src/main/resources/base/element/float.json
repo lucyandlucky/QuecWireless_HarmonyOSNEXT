@@ -3,6 +3,162 @@
     {
       "name": "page_text_font_size",
       "value": "50fp"
+    },
+    {
+      "name": "T1_F",
+      "value": "11fp"
+    },
+    {
+      "name": "T1_H",
+      "value": "16vp"
+    },
+    {
+      "name": "T1_P",
+      "value": "1vp"
+    },
+    {
+      "name": "T2_F",
+      "value": "12fp"
+    },
+    {
+      "name": "T2_H",
+      "value": "16vp"
+    },
+    {
+      "name": "T2_P",
+      "value": "2vp"
+    },
+    {
+      "name": "T3_F",
+      "value": "13fp"
+    },
+    {
+      "name": "T3_H",
+      "value": "20vp"
+    },
+    {
+      "name": "T3_P",
+      "value": "1vp"
+    },
+    {
+      "name": "T4_F",
+      "value": "14fp"
+    },
+    {
+      "name": "T4_H",
+      "value": "20vp"
+    },
+    {
+      "name": "T4_P",
+      "value": "2vp"
+    },
+    {
+      "name": "T5_F",
+      "value": "15fp"
+    },
+    {
+      "name": "T5_H",
+      "value": "20vp"
+    },
+    {
+      "name": "T5_P",
+      "value": "3vp"
+    },
+    {
+      "name": "T6_F",
+      "value": "16fp"
+    },
+    {
+      "name": "T6_H",
+      "value": "24vp"
+    },
+    {
+      "name": "T6_P",
+      "value": "3vp"
+    },
+    {
+      "name": "T7_F",
+      "value": "18fp"
+    },
+    {
+      "name": "T7_H",
+      "value": "28vp"
+    },
+    {
+      "name": "T7_P",
+      "value": "4vp"
+    },
+    {
+      "name": "T8_F",
+      "value": "20fp"
+    },
+    {
+      "name": "T8_H",
+      "value": "28vp"
+    },
+    {
+      "name": "T8_P",
+      "value": "4vp"
+    },
+    {
+      "name": "T9_F",
+      "value": "24fp"
+    },
+    {
+      "name": "T9_H",
+      "value": "40vp"
+    },
+    {
+      "name": "T9_P",
+      "value": "4vp"
+    },
+    {
+      "name": "T10_F",
+      "value": "32fp"
+    },
+    {
+      "name": "T10_H",
+      "value": "48vp"
+    },
+    {
+      "name": "T10_P",
+      "value": "6vp"
+    },
+    {
+      "name": "T11_F",
+      "value": "48fp"
+    },
+    {
+      "name": "T11_H",
+      "value": "76vp"
+    },
+    {
+      "name": "T11_P",
+      "value": "6vp"
+    },
+    {
+      "name": "T12_F",
+      "value": "60fp"
+    },
+    {
+      "name": "T12_H",
+      "value": "92vp"
+    },
+    {
+      "name": "T12_P",
+      "value": "6vp"
+    },
+    {
+      "name": "T13_F",
+      "value": "32fp"
+    },
+    {
+      "name": "T13_H",
+      "value": "56vp"
+    },
+    {
+      "name": "T13_P",
+      "value": "6vp"
     }
   ]
 }
