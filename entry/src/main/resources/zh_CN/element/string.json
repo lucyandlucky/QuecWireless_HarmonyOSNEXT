@@ -10,7 +10,7 @@
     },
     {
       "name": "EntryAbility_label",
-      "value": "QuecWireless"
+      "value": "移联万物"
     },
     {
       "name": "quec_important_tip",
@@ -19,6 +19,14 @@
     {
       "name": "quec_warning_content1",
       "value": "感谢您信任并使用%s！我们深知隐私对您的重要性，为了更全面地呈现我们收集和使用您个人信息的相关情况，我们根据最新法律法规的要求，制定了"
+    },
+    {
+      "name": "quec_disagree",
+      "value": "不同意"
+    },
+    {
+      "name": "quec_agree",
+      "value": "同意"
     }
   ]
 }

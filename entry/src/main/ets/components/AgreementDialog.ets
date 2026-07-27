@@ -1,3 +1,13 @@
+@Extend(Text)
+function dialogActionText(color: ResourceColor) {
+  .layoutWeight(1)
+  .height('100%')
+  .fontColor(color)
+  .fontSize('16fp')
+  .textAlign(TextAlign.Center)
+}
+
+
 @CustomDialog
 export struct AgreementDialog {
   controller?: CustomDialogController
@@ -17,10 +27,33 @@ export struct AgreementDialog {
           .margin({ top: '15vp' })
           .fontColor($r('app.color.W2'))
           .fontSize($r('app.float.T4_F'))
-          .lineHeight('')
+          .lineHeight($r('app.float.T4_H'))
       }
-      .padding({ left: '16vp', right: '16vp' })
+      .padding({
+        top: '25vp',
+        bottom: '15vp',
+        left: '16vp',
+        right: '16vp'
+      })
+
+      Divider()
+        .color($r('app.color.W6'))
+        .strokeWidth(0.7)
+
+      Row() {
+        Text($r('app.string.quec_disagree'))
+          .dialogActionText($r('app.color.W3'))
+
+        Divider()
+          .color($r('app.color.W6'))
+          .strokeWidth(0.7)
+          .vertical(true)
+
+        Text($r('app.string.quec_agree'))
+          .dialogActionText($r('app.color.M0'))
+      }
+      .width('100%')
+      .height('56fp')
     }
-    .padding({ top: '25vp' })
   }
 }

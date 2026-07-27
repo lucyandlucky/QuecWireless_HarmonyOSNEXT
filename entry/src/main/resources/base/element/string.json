@@ -19,6 +19,14 @@
     {
       "name": "quec_warning_content1",
       "value": "Thank you for trusting and using %s! We are aware of the importance of privacy to you. In order to present a more comprehensive situation of our collection and use of your personal information, according to the requirements of the latest laws and regulations, we have formulated"
+    },
+    {
+      "name": "quec_disagree",
+      "value": "Disagree"
+    },
+    {
+      "name": "quec_agree",
+      "value": "Agree"
     }
   ]
 }
