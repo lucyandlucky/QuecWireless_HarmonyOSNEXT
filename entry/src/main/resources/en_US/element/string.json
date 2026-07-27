@@ -27,6 +27,26 @@
     {
       "name": "quec_agree",
       "value": "Agree"
+    },
+    {
+      "name": "quec_setting_service_privacy",
+      "value": "Service Agreement"
+    },
+    {
+      "name": "quec_warning_and",
+      "value": "and"
+    },
+    {
+      "name": "quec_login_privacy",
+      "value": "Privacy Policy"
+    },
+    {
+      "name": "quec_warning_content2",
+      "value": ", when you click 'Agree', you have fully read, understood and accepted the full contents of our terms. Please take some time to familiarize yourself with Privacy Policy (We have marked the key terms in it for you to understand your rights). If you have any questions, please feel free to contact us."
+    },
+    {
+      "name": "quec_login_user_privacy",
+      "value": "Service Agreement"
     }
   ]
 }
