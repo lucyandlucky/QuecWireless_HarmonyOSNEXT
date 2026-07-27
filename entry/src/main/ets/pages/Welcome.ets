@@ -1,4 +1,5 @@
 import { AgreementDialog } from '../components/AgreementDialog';
+import common from '@ohos.app.ability.common';
 
 @Entry
 @ComponentV2
@@ -16,6 +17,15 @@ struct Welcome {
     backgroundColor: $r('app.color.B3'),
     cornerRadius: '16vp',
     alignment: DialogAlignment.Center,
+    onWillDismiss: (action) => {
+      action.dismiss()
+      if (
+        action.reason === DismissReason.PRESS_BACK ||
+          action.reason === DismissReason.TOUCH_OUTSIDE
+      ) {
+        this.exitApp()
+      }
+    }
 
   })
   private hasShownAgreement: boolean = false
@@ -33,16 +43,14 @@ struct Welcome {
   }
 
   exitApp() {
-    console.log('Click the callback in the blank area')
+    const context = this.getUIContext().getHostContext() as common.UIAbilityContext
+    context.terminateSelf().catch((err: Error) => {
+      console.error(`terminateSelf failed: ${JSON.stringify(err)}`)
+
+    })
   }
 
   build() {
-    // Column()
-    //   .width('100%')
-    //   .height('100%')
-    //   .backgroundImage($r('app.media.app_startup'))
-    //   .backgroundImageSize(ImageSize.Cover)
-    //   .backgroundImagePosition(Alignment.Center)
     Stack() {
       Image($r('app.media.app_startup'))
         .width('100%')

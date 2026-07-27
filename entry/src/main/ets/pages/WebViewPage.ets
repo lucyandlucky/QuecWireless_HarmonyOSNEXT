@@ -46,7 +46,6 @@ struct WebViewPage {
         .onErrorReceive(() => {
 
         })
-
     }
     .width('100%')
     .height('100%')

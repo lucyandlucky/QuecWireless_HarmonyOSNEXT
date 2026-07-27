@@ -20,14 +20,13 @@ export struct AgreementDialog {
   }
   onCancel = () => {
   }
-
   navigationWebView = () => {
     const router = this.getUIContext().getRouter()
     router.pushUrl({
       url: 'pages/WebViewPage',
-      // params: {
-      //   url: 'https://www.example.com'
-      // }
+      params: {
+        url: 'https://www.baidu.com'
+      }
     })
   }
 
