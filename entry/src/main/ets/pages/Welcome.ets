@@ -12,8 +12,11 @@ struct Welcome {
     }),
     cancel: this.exitApp,
     autoCancel: false,
+    width: '80%',
+    backgroundColor: $r('app.color.B3'),
+    cornerRadius: '16vp',
     alignment: DialogAlignment.Center,
-    backgroundColor: $r('app.color.B3')
+
   })
   private hasShownAgreement: boolean = false
 
