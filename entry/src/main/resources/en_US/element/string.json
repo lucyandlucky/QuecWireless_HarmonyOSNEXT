@@ -38,7 +38,7 @@
     },
     {
       "name": "quec_login_privacy",
-      "value": "Privacy Policy"
+      "value": " Privacy Policy"
     },
     {
       "name": "quec_warning_content2",
@@ -46,7 +46,7 @@
     },
     {
       "name": "quec_login_user_privacy",
-      "value": "Service Agreement"
+      "value": " Service Agreement "
     }
   ]
 }

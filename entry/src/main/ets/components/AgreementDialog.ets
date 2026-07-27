@@ -52,6 +52,8 @@ export struct AgreementDialog {
         .fontColor($r('app.color.W2'))
         .fontSize($r('app.float.T4_F'))
         .lineHeight($r('app.float.T4_H'))
+
+        .wordBreak(WordBreak.BREAK_ALL)
       }
       .padding({
         top: '25vp',
