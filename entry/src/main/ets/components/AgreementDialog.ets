@@ -1,3 +1,8 @@
+@Extend(Span)
+function policyText() {
+  .fontColor($r('app.color.M0'))
+}
+
 @Extend(Text)
 function dialogActionText(color: ResourceColor) {
   .layoutWeight(1)
@@ -23,11 +28,19 @@ export struct AgreementDialog {
           .fontColor($r('app.color.W1'))
           .fontSize($r('app.float.T7_F'))
           .fontWeight(FontWeight.Bold)
-        Text($r('app.string.quec_warning_content1', $r('app.string.app_name')))
-          .margin({ top: '15vp' })
-          .fontColor($r('app.color.W2'))
-          .fontSize($r('app.float.T4_F'))
-          .lineHeight($r('app.float.T4_H'))
+        Text() {
+          Span($r('app.string.quec_warning_content1', $r('app.string.app_name')))
+          Span($r('app.string.quec_login_user_privacy'))
+            .policyText()
+          Span($r('app.string.quec_warning_and'))
+          Span($r('app.string.quec_login_privacy'))
+            .policyText()
+          Span($r('app.string.quec_warning_content2'))
+        }
+        .margin({ top: '15vp' })
+        .fontColor($r('app.color.W2'))
+        .fontSize($r('app.float.T4_F'))
+        .lineHeight($r('app.float.T4_H'))
       }
       .padding({
         top: '25vp',
