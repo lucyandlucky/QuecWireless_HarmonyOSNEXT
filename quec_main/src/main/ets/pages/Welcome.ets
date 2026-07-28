@@ -30,14 +30,6 @@ export struct WelcomePage {
   })
   private hasShownAgreement: boolean = false
 
-  onPageShow() {
-    if (this.hasShownAgreement) {
-      return
-    }
-    this.hasShownAgreement = true
-    this.agreementDialogController?.open()
-  }
-
   aboutToDisappear(): void {
     this.agreementDialogController = null
   }
@@ -58,5 +50,12 @@ export struct WelcomePage {
     }
     .width('100%')
     .height('100%')
+    .onAppear(() => {
+      if (this.hasShownAgreement) {
+        return
+      }
+      this.hasShownAgreement = true
+      this.agreementDialogController?.open()
+    })
   }
 }

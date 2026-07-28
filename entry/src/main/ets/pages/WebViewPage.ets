@@ -1,7 +1,5 @@
 import webview from '@ohos.web.webview'
 
-// import { webview } from '@kit.ArkWeb'
-
 @Entry
 @ComponentV2
 struct WebViewPage {
