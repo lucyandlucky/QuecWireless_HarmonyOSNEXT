@@ -1,9 +1,8 @@
 import { AgreementDialog } from '../components/AgreementDialog';
 import common from '@ohos.app.ability.common';
 
-@Entry
 @ComponentV2
-struct Welcome {
+export struct WelcomePage {
   agreementDialogController: CustomDialogController | null = new CustomDialogController({
     builder: AgreementDialog({
       onAgree: () => {
@@ -47,13 +46,12 @@ struct Welcome {
     const context = this.getUIContext().getHostContext() as common.UIAbilityContext
     context.terminateSelf().catch((err: Error) => {
       console.error(`terminateSelf failed: ${JSON.stringify(err)}`)
-
     })
   }
 
   build() {
     Stack() {
-      Image($r('app.media.app_startup'))
+      Image($r('app.media.quec_app_welcome_page'))
         .width('100%')
         .height('100%')
         .objectFit(ImageFit.Cover)

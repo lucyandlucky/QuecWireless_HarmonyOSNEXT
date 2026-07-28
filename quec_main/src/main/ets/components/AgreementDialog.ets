@@ -21,13 +21,13 @@ export struct AgreementDialog {
   onCancel = () => {
   }
   navigationWebView = () => {
-    const router = this.getUIContext().getRouter()
-    router.pushUrl({
-      url: 'pages/WebViewPage',
-      params: {
-        url: 'https://www.baidu.com'
-      }
-    })
+    // const router = this.getUIContext().getRouter()
+    // router.pushUrl({
+    //   url: 'pages/WebViewPage',
+    //   params: {
+    //     url: 'https://www.baidu.com'
+    //   }
+    // })
   }
 
   build() {

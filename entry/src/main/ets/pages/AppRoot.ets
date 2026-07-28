@@ -1,3 +1,5 @@
+import { WelcomePage } from 'quec_main';
+
 enum AppStage {
   LOADING,
   WELCOME,
@@ -16,8 +18,8 @@ struct AppRoot {
   }
 
   private async resolveAppStage(): Promise<void> {
-    const hasAgreePolicy: boolean = true
-    const hasLogin: boolean = true
+    const hasAgreePolicy: boolean = false
+    const hasLogin: boolean = false
 
     if (!hasAgreePolicy) {
       this.stage = AppStage.WELCOME
@@ -37,13 +39,13 @@ struct AppRoot {
     Navigation(this.pathStack) {
       if (this.stage === AppStage.LOADING) {
         Stack() {
-          Image($r('app.media.app_startup'))
+          Image($r('app.media.quec_app_welcome_page'))
             .width('100%')
             .height('100%')
             .objectFit(ImageFit.Cover)
         }
       } else if (this.stage === AppStage.WELCOME) {
-        Text('welcome')
+        WelcomePage()
       } else if (this.stage === AppStage.LOGIN) {
         Text('login')
       } else if (this.stage === AppStage.MAIN) {
