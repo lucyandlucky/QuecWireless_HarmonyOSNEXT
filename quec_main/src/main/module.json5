@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "quec_main",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ]
+  }
+}

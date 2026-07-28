@@ -11,42 +11,6 @@
     {
       "name": "EntryAbility_label",
       "value": "QuecWireless"
-    },
-    {
-      "name": "quec_important_tip",
-      "value": "Import Tips"
-    },
-    {
-      "name": "quec_warning_content1",
-      "value": "Thank you for trusting and using %s! We are aware of the importance of privacy to you. In order to present a more comprehensive situation of our collection and use of your personal information, according to the requirements of the latest laws and regulations, we have formulated"
-    },
-    {
-      "name": "quec_disagree",
-      "value": "Disagree"
-    },
-    {
-      "name": "quec_agree",
-      "value": "Agree"
-    },
-    {
-      "name": "quec_setting_service_privacy",
-      "value": "Service Agreement"
-    },
-    {
-      "name": "quec_warning_and",
-      "value": "and"
-    },
-    {
-      "name": "quec_login_privacy",
-      "value": " Privacy Policy"
-    },
-    {
-      "name": "quec_warning_content2",
-      "value": ", when you click 'Agree', you have fully read, understood and accepted the full contents of our terms. Please take some time to familiarize yourself with Privacy Policy (We have marked the key terms in it for you to understand your rights). If you have any questions, please feel free to contact us."
-    },
-    {
-      "name": "quec_login_user_privacy",
-      "value": " Service Agreement "
     }
   ]
 }

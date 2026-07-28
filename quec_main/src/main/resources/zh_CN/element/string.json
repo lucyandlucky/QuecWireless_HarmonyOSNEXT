@@ -1,0 +1,40 @@
+{
+  "string": [
+    {
+      "name": "quec_important_tip",
+      "value": "重要提示"
+    },
+    {
+      "name": "quec_warning_content1",
+      "value": "感谢您信任并使用%s！我们深知隐私对您的重要性，为了更全面地呈现我们收集和使用您个人信息的相关情况，我们根据最新法律法规的要求，制定了"
+    },
+    {
+      "name": "quec_disagree",
+      "value": "不同意"
+    },
+    {
+      "name": "quec_agree",
+      "value": "同意"
+    },
+    {
+      "name": "quec_setting_service_privacy",
+      "value": "服务协议"
+    },
+    {
+      "name": "quec_warning_and",
+      "value": "和"
+    },
+    {
+      "name": "quec_login_privacy",
+      "value": "《隐私政策》"
+    },
+    {
+      "name": "quec_warning_content2",
+      "value": "，当您点击同意即代表您已充分阅读、理解并接受我们条款的全部内容，请花一些时间熟悉我们的隐私政策（其中的重点条款我们已为您标注，方便您了解自己的权利），如果您有任何问题，请随时联系我们。"
+    },
+    {
+      "name": "quec_login_user_privacy",
+      "value": "《服务协议》"
+    }
+  ]
+}

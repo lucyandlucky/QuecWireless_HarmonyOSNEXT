@@ -41,6 +41,10 @@
     {
       "name": "quec_privacy_policy",
       "srcPath": "./quec_privacy_policy",
+    },
+    {
+      "name": "quec_main",
+      "srcPath": "./quec_main",
     }
   ]
 }

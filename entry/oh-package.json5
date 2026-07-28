@@ -6,7 +6,8 @@
   "author": "",
   "license": "",
   "dependencies": {
-    "quec_privacy_policy": "file:../quec_privacy_policy"
+    "quec_privacy_policy": "file:../quec_privacy_policy",
+    "quec_main": "file:../quec_main"
   }
 }
 
