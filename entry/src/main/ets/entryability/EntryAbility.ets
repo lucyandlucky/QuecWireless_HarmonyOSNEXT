@@ -18,7 +18,7 @@ export default class EntryAbility extends UIAbility {
       }).catch()
     }).catch()
 
-    windowStage.loadContent('pages/Welcome', (err) => {
+    windowStage.loadContent('pages/AppRoot', (err) => {
       if (err.code) {
         hilog.error(DOMAIN, 'testTag', 'Failed to load the content. Cause: %{public}s', JSON.stringify(err));
         return;
