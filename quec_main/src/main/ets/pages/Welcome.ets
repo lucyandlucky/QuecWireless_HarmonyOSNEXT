@@ -1,14 +1,25 @@
 import { AgreementDialog } from '../components/AgreementDialog';
 import common from '@ohos.app.ability.common';
 
+interface PolicyWebViewParams {
+  url: string
+}
+
 @ComponentV2
 export struct WelcomePage {
+  @Consumer('AppNavigation') navigation: NavPathStack = new NavPathStack()
   agreementDialogController: CustomDialogController | null = new CustomDialogController({
     builder: AgreementDialog({
       onAgree: () => {
       },
       onCancel: () => {
         this.exitApp()
+      },
+      onOpenPolicy: (url: string) => {
+        const params: PolicyWebViewParams = {
+          url
+        }
+        this.navigation.pushPathByName('QuecPrivacyWebViewPage', params)
       }
     }),
     cancel: this.exitApp,

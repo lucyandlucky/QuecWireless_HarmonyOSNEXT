@@ -11,7 +11,7 @@ enum AppStage {
 @ComponentV2
 struct AppRoot {
   @Local stage: AppStage = AppStage.LOADING
-  private pathStack: NavPathStack = new NavPathStack()
+  @Provider('AppNavigation') private pathStack: NavPathStack = new NavPathStack()
 
   aboutToAppear(): void {
     this.resolveAppStage()

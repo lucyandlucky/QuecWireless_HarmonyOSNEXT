@@ -1,1 +1,1 @@
-export { WebViewPage } from "./src/main/ets/components/WebViewPage";
+export { PolicyWebViewPage } from "./src/main/ets/components/PolicyWebViewPage";

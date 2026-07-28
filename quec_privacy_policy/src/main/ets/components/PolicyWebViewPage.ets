@@ -1,16 +1,19 @@
 import webview from '@ohos.web.webview'
 
-@ComponentV2
-export struct WebViewPage {
-  private controller: webview.WebviewController = new webview.WebviewController()
-  @Local url: string = "https://www.baidu.com"
+@Builder
+export function PolicyWebViewPageBuilder(
+  name: string,
+  param: Object
+) {
+  PolicyWebViewPage({
+    url: (param as Record<string, string>).url
+  })
+}
 
-  aboutToAppear(): void {
-    const params = this.getUIContext().getRouter().getParams() as Record<string, string>
-    if (params?.url) {
-      this.url = params.url
-    }
-  }
+@ComponentV2
+export struct PolicyWebViewPage {
+  private controller: webview.WebviewController = new webview.WebviewController()
+  @Param url: string = ""
 
   onBackPress(): boolean {
     try {
@@ -25,7 +28,7 @@ export struct WebViewPage {
   }
 
   build() {
-    Column() {
+    NavDestination() {
       Web({
         src: this.url,
         controller: this.controller
@@ -44,8 +47,6 @@ export struct WebViewPage {
 
         })
     }
-    .width('100%')
-    .height('100%')
-
+    .hideTitleBar(true)
   }
 }

@@ -20,14 +20,9 @@ export struct AgreementDialog {
   }
   onCancel = () => {
   }
+  onOpenPolicy: (url: string) => void = (_url: string) => {
+  }
   navigationWebView = () => {
-    // const router = this.getUIContext().getRouter()
-    // router.pushUrl({
-    //   url: 'pages/WebViewPage',
-    //   params: {
-    //     url: 'https://www.baidu.com'
-    //   }
-    // })
   }
 
   build() {
@@ -41,11 +36,15 @@ export struct AgreementDialog {
           Span($r('app.string.quec_warning_content1', $r('app.string.app_name')))
           Span($r('app.string.quec_login_user_privacy'))
             .policyText()
-            .onClick(this.navigationWebView)
+            .onClick(() => {
+              this.onOpenPolicy('https://www.baidu.com')
+            })
           Span($r('app.string.quec_warning_and'))
           Span($r('app.string.quec_login_privacy'))
             .policyText()
-            .onClick(this.navigationWebView)
+            .onClick(() => {
+              this.onOpenPolicy('https://www.bing.com/')
+            })
           Span($r('app.string.quec_warning_content2'))
         }
         .margin({ top: '15vp' })
