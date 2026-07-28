@@ -1,11 +1,9 @@
 {
-  "name": "quec_main",
+  "name": "quec_ui_config",
   "version": "1.0.0",
   "description": "Please describe the basic information.",
   "main": "Index.ets",
   "author": "",
   "license": "Apache-2.0",
-  "dependencies": {
-    "quec_ui_config": "file:../quec_ui_config"
-  }
+  "dependencies": {}
 }

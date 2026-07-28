@@ -45,6 +45,10 @@
     {
       "name": "quec_main",
       "srcPath": "./quec_main",
+    },
+    {
+      "name": "quec_ui_config",
+      "srcPath": "./quec_ui_config",
     }
   ]
 }
