@@ -8,10 +8,31 @@ enum AppStage {
 @Entry
 @ComponentV2
 struct AppRoot {
-  @Local stage: AppStage = AppStage.LOADING
-  @Provider('AppNavigation') private pathStack: NavPathStack = new NavPathStack()
+  @Provider('AppNavigation')
+  private pathStack: NavPathStack = new NavPathStack()
+  private hasInitialized: boolean = false
 
-  aboutToAppear(): void {
+  private resetToRoute(routeName: string) {
+    const rootPage = new NavPathInfo(
+      routeName,
+      undefined,
+      undefined,
+      true
+    )
+    this.pathStack.setPathStack([rootPage], false)
+  }
+
+  private initializeApp() {
+    if (this.hasInitialized) {
+      return
+    }
+    this.hasInitialized = true
+    const hasAgreePolicy: boolean = false
+
+    if (!hasAgreePolicy) {
+      this.resetToRoute('QuecWelcomePage')
+    }
+
   }
 
   build() {
@@ -40,6 +61,8 @@ struct AppRoot {
     }
     .hideTitleBar(true)
     .mode(NavigationMode.Stack)
-
+    .onAppear(() => {
+      this.initializeApp()
+    })
   }
 }

@@ -74,6 +74,6 @@ export struct WelcomePage {
         this.hasShownAgreement = true
         this.agreementDialogController?.open()
       })
-    }
+    }.hideTitleBar(true)
   }
 }
