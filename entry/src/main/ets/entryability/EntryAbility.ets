@@ -8,6 +8,24 @@ const DOMAIN = 0x0000;
 export default class EntryAbility extends UIAbility {
   private windowInsets: WindowInsetsState = getWindowInsetsState()
 
+  private async initWindowInsets(windowStage: window.WindowStage): Promise<void> {
+    try {
+      const windowClass = windowStage.getMainWindowSync()
+      await windowClass.setWindowLayoutFullScreen(true)
+      const avoidArea = windowClass.getWindowAvoidArea(window.AvoidAreaType.TYPE_SYSTEM)
+      this.windowInsets.top = avoidArea.topRect.height
+    } catch (error) {
+      const businessError = error as BusinessError
+      hilog.error(
+        DOMAIN,
+        'WindowInsets',
+        'Failed to initialize window. code: %{public}d, message: %{public}s',
+        businessError.code,
+        businessError.message
+      )
+    }
+  }
+
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
   }
 
@@ -15,13 +33,7 @@ export default class EntryAbility extends UIAbility {
   }
 
   onWindowStageCreate(windowStage: window.WindowStage): void {
-
-    let windowClass = windowStage.getMainWindowSync()
-    windowClass.setWindowLayoutFullScreen(true).then(() => {
-      const avoidArea = windowClass.getWindowAvoidArea(window.AvoidAreaType.TYPE_SYSTEM)
-      console.log('avoidArea.topRect.height', avoidArea.topRect.height)
-      this.windowInsets.top = avoidArea.topRect.height
-    }).catch()
+    this.initWindowInsets(windowStage)
 
     windowStage.loadContent('pages/AppRoot', (err) => {
       if (err.code) {
