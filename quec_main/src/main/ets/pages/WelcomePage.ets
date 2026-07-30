@@ -5,6 +5,11 @@ interface PolicyWebViewParams {
   url: string
 }
 
+@Builder
+export function WelcomePageBuilder() {
+  WelcomePage()
+}
+
 @ComponentV2
 export struct WelcomePage {
   @Consumer('AppNavigation') navigation: NavPathStack = new NavPathStack()
@@ -53,20 +58,22 @@ export struct WelcomePage {
   }
 
   build() {
-    Stack() {
-      Image($r('app.media.quec_app_welcome_page'))
-        .width('100%')
-        .height('100%')
-        .objectFit(ImageFit.Cover)
-    }
-    .width('100%')
-    .height('100%')
-    .onAppear(() => {
-      if (this.hasShownAgreement) {
-        return
+    NavDestination() {
+      Stack() {
+        Image($r('app.media.quec_app_welcome_page'))
+          .width('100%')
+          .height('100%')
+          .objectFit(ImageFit.Cover)
       }
-      this.hasShownAgreement = true
-      this.agreementDialogController?.open()
-    })
+      .width('100%')
+      .height('100%')
+      .onAppear(() => {
+        if (this.hasShownAgreement) {
+          return
+        }
+        this.hasShownAgreement = true
+        this.agreementDialogController?.open()
+      })
+    }
   }
 }
