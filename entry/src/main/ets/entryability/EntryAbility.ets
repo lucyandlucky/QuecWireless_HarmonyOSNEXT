@@ -1,10 +1,13 @@
 import { AbilityConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
+import { getWindowInsetsState, WindowInsetsState } from 'quec_basic_ui';
 
 const DOMAIN = 0x0000;
 
 export default class EntryAbility extends UIAbility {
+  private windowInsets: WindowInsetsState = getWindowInsetsState()
+
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
   }
 
@@ -13,9 +16,11 @@ export default class EntryAbility extends UIAbility {
 
   onWindowStageCreate(windowStage: window.WindowStage): void {
 
-    windowStage.getMainWindow().then((data: window.Window) => {
-      data.setWindowLayoutFullScreen(true).then(() => {
-      }).catch()
+    let windowClass = windowStage.getMainWindowSync()
+    windowClass.setWindowLayoutFullScreen(true).then(() => {
+      const avoidArea = windowClass.getWindowAvoidArea(window.AvoidAreaType.TYPE_SYSTEM)
+      console.log('avoidArea.topRect.height', avoidArea.topRect.height)
+      this.windowInsets.top = avoidArea.topRect.height
     }).catch()
 
     windowStage.loadContent('pages/AppRoot', (err) => {

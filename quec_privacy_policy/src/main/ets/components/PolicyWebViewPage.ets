@@ -1,4 +1,5 @@
 import webview from '@ohos.web.webview'
+import { QuecTitleBar } from 'quec_basic_ui'
 
 @Builder
 export function PolicyWebViewPageBuilder(
@@ -29,6 +30,7 @@ export struct PolicyWebViewPage {
 
   build() {
     NavDestination() {
+      QuecTitleBar()
       Web({
         src: this.url,
         controller: this.controller
