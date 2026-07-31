@@ -31,7 +31,7 @@ export struct QuecTitleBar {
       })
     }
     .padding({
-      top: this.getUIContext().px2vp(this.windowInsets.top)
+      top: this.windowInsets.top
     })
     .backgroundColor($r('app.color.B2'))
   }

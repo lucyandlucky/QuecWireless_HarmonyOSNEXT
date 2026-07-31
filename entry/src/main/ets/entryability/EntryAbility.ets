@@ -8,18 +8,42 @@ const DOMAIN = 0x0000;
 export default class EntryAbility extends UIAbility {
   private windowInsets: WindowInsetsState = getWindowInsetsState()
 
-  private async initWindowInsets(windowStage: window.WindowStage): Promise<void> {
+  private async initializeWindow(windowStage: window.WindowStage): Promise<void> {
     try {
       const windowClass = windowStage.getMainWindowSync()
       await windowClass.setWindowLayoutFullScreen(true)
-      const avoidArea = windowClass.getWindowAvoidArea(window.AvoidAreaType.TYPE_SYSTEM)
-      this.windowInsets.top = avoidArea.topRect.height
+      windowStage.loadContent('pages/AppRoot', (err) => {
+        if (err.code) {
+          hilog.error(DOMAIN, 'testTag', 'Failed to load the content. Cause: %{public}s', JSON.stringify(err));
+          return;
+        }
+        this.updateWindowInsets(windowClass)
+        hilog.info(DOMAIN, 'testTag', 'Succeeded in loading the content.');
+      });
     } catch (error) {
       const businessError = error as BusinessError
       hilog.error(
         DOMAIN,
         'WindowInsets',
         'Failed to initialize window. code: %{public}d, message: %{public}s',
+        businessError.code,
+        businessError.message
+      )
+    }
+  }
+
+  private updateWindowInsets(windowClass: window.Window): void {
+    try {
+      const uiContext = windowClass.getUIContext()
+      const avoidArea = windowClass.getWindowAvoidArea(window.AvoidAreaType.TYPE_SYSTEM)
+      this.windowInsets.top = uiContext.px2vp(avoidArea.topRect.height)
+
+    } catch (error) {
+      const businessError = error as BusinessError
+      hilog.error(
+        DOMAIN,
+        'WindowInsets',
+        'Failed to update window insets. code: %{public}d, message: %{public}s',
         businessError.code,
         businessError.message
       )
@@ -33,17 +57,7 @@ export default class EntryAbility extends UIAbility {
   }
 
   onWindowStageCreate(windowStage: window.WindowStage): void {
-    this.initWindowInsets(windowStage)
-
-    windowStage.loadContent('pages/AppRoot', (err) => {
-      if (err.code) {
-        hilog.error(DOMAIN, 'testTag', 'Failed to load the content. Cause: %{public}s', JSON.stringify(err));
-        return;
-      }
-      hilog.info(DOMAIN, 'testTag', 'Succeeded in loading the content.');
-    });
-
-
+    this.initializeWindow(windowStage)
   }
 
   onWindowStageDestroy(): void {
