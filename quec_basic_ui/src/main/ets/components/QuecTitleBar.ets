@@ -4,6 +4,8 @@ import { getWindowInsetsState, WindowInsetsState } from '../state/WindowInsetSta
 @ComponentV2
 export struct QuecTitleBar {
   @Local private windowInsets: WindowInsetsState = getWindowInsetsState()
+  @Event onBack: () => void = () => {
+  }
 
   build() {
     Column() {
@@ -12,9 +14,7 @@ export struct QuecTitleBar {
           QuecBackIcon()
         }
         .alignContent(Alignment.Center)
-        .onClick(() => {
-
-        })
+        .onClick(() => this.onBack())
 
         Text('Title')
           .layoutWeight(1)

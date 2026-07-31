@@ -13,6 +13,7 @@ export function PolicyWebViewPageBuilder(
 
 @ComponentV2
 export struct PolicyWebViewPage {
+  @Consumer('AppNavigation') navigation: NavPathStack = new NavPathStack()
   private controller: webview.WebviewController = new webview.WebviewController()
   @Param url: string = ""
 
@@ -30,7 +31,19 @@ export struct PolicyWebViewPage {
 
   build() {
     NavDestination() {
-      QuecTitleBar()
+      QuecTitleBar({
+        onBack: () => {
+          try {
+            if (this.controller.accessBackward()) {
+              this.controller.backward()
+              return
+            }
+            this.navigation.pop()
+          } catch (error) {
+            console.error(`WebView back failed: ${JSON.stringify(error)}`)
+          }
+        }
+      })
       Web({
         src: this.url,
         controller: this.controller
