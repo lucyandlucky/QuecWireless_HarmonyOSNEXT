@@ -35,8 +35,10 @@ export default class EntryAbility extends UIAbility {
   private updateWindowInsets(windowClass: window.Window): void {
     try {
       const uiContext = windowClass.getUIContext()
-      const avoidArea = windowClass.getWindowAvoidArea(window.AvoidAreaType.TYPE_SYSTEM)
-      this.windowInsets.top = uiContext.px2vp(avoidArea.topRect.height)
+      const systemArea = windowClass.getWindowAvoidArea(window.AvoidAreaType.TYPE_SYSTEM)
+      const navigationArea = windowClass.getWindowAvoidArea(window.AvoidAreaType.TYPE_NAVIGATION_INDICATOR)
+      this.windowInsets.top = uiContext.px2vp(systemArea.topRect.height)
+      this.windowInsets.bottom = uiContext.px2vp(navigationArea.bottomRect.height)
 
     } catch (error) {
       const businessError = error as BusinessError

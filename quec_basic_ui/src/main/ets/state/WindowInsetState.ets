@@ -3,6 +3,7 @@ import { AppStorageV2 } from '@kit.ArkUI'
 @ObservedV2
 export class WindowInsetsState {
   @Trace top: number = 0
+  @Trace bottom: number = 0
 }
 
 export function getWindowInsetsState(): WindowInsetsState {
