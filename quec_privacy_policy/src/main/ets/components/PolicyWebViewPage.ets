@@ -18,7 +18,6 @@ export function PolicyWebViewPageBuilder(
 export struct PolicyWebViewPage {
   @Consumer('AppNavigation') navigation: NavPathStack = new NavPathStack()
   private controller: webview.WebviewController = new webview.WebviewController()
-  @Param url: string = ""
   @Param params: PolicyRouteParams = {
     source: PolicySource.DIRECT_URL,
     url: '',
@@ -34,7 +33,7 @@ export struct PolicyWebViewPage {
         return true
       }
       this.navigation.pop()
-      return false
+      return true
     } catch (error) {
       console.error(`Policy back failed: ${JSON.stringify(error)}`)
       return false
@@ -78,7 +77,10 @@ export struct PolicyWebViewPage {
               })
               .onErrorReceive((event) => {
                 if (event.request.isMainFrame()) {
-                  this.viewModel.onWebLoadError(event.error.getErrorInfo())
+                  const requestUrl = event.request.getRequestUrl()
+                  const errorInfo = event.error.getErrorInfo()
+                  console.error(`Policy page load failed: ${requestUrl}, ${errorInfo}`)
+                  this.viewModel.onWebLoadError()
                 }
               })
           }
@@ -89,11 +91,11 @@ export struct PolicyWebViewPage {
           }
           if (this.state.webError) {
             Column({ space: 12 }) {
-              Text('policy Load error')
-              Text(this.state.errorMessage)
-              Text(this.state.htmlUrl)
+              Text(this.state.htmlUrl.length > 0
+                ? $r('app.string.quec_policy_load_error')
+                : $r('app.string.quec_policy_invalid_link'))
               if (this.state.htmlUrl.length > 0) {
-                Button('retry')
+                Button($r('app.string.quec_policy_retry'))
                   .onClick(() => {
                     this.viewModel.preparedRetry()
                     this.controller.refresh()

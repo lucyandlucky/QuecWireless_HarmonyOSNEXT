@@ -21,6 +21,10 @@
       "value": "服务协议"
     },
     {
+      "name": "quec_setting_privacy_simple",
+      "value": "隐私政策"
+    },
+    {
       "name": "quec_warning_and",
       "value": "和"
     },

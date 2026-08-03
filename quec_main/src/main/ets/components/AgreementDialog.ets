@@ -43,7 +43,7 @@ export struct AgreementDialog {
           Span($r('app.string.quec_login_privacy'))
             .policyText()
             .onClick(() => {
-              this.onOpenPolicy('https://www.bing.com/', $r('app.string.quec_setting_service_privacy'))
+              this.onOpenPolicy('https://www.bing.com/', $r('app.string.quec_setting_privacy_simple'))
             })
           Span($r('app.string.quec_warning_content2'))
         }
@@ -77,6 +77,7 @@ export struct AgreementDialog {
 
         Text($r('app.string.quec_agree'))
           .dialogActionText($r('app.color.M0'))
+          .onClick(this.onAgree)
       }
       .width('100%')
       .height('56fp')

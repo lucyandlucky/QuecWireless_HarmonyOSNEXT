@@ -2,15 +2,15 @@
   "string": [
     {
       "name": "quec_policy_load_error",
-      "value": "Failed to load this page. Please try again."
+      "value": "页面加载失败，请重试"
     },
     {
       "name": "quec_policy_invalid_link",
-      "value": "Unable to open this page because the link is invalid."
+      "value": "链接无效，无法打开页面"
     },
     {
       "name": "quec_policy_retry",
-      "value": "Retry"
+      "value": "重试"
     }
   ]
 }

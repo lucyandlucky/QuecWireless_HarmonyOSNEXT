@@ -25,6 +25,10 @@
       "value": "Service Agreement"
     },
     {
+      "name": "quec_setting_privacy_simple",
+      "value": "Privacy Policy"
+    },
+    {
       "name": "quec_warning_and",
       "value": "and"
     },

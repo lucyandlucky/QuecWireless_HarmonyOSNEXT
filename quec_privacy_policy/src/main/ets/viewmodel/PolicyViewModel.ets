@@ -13,13 +13,11 @@ export class PolicyViewModel {
     this.state.title = params.title
     this.state.pdfUrl = params.downloadUrl ?? ''
     this.state.webError = false
-    this.state.errorMessage = ''
 
     const url = params.url?.trim() ?? ''
 
     if (params.source !== PolicySource.DIRECT_URL || url.length === 0) {
       this.state.webError = true
-      this.state.errorMessage = 'Invalid policy route parameters'
       return
     }
 
@@ -29,22 +27,19 @@ export class PolicyViewModel {
   onWebLoadStart(): void {
     this.state.webLoading = true
     this.state.webError = false
-    this.state.errorMessage = ''
   }
 
   onWebLoadingFinish(): void {
     this.state.webLoading = false
   }
 
-  onWebLoadError(msg: string): void {
+  onWebLoadError(): void {
     this.state.webLoading = false
     this.state.webError = true
-    this.state.errorMessage = msg
   }
 
   preparedRetry(): void {
     this.state.webLoading = true
     this.state.webError = false
-    this.state.errorMessage = ''
   }
 }
