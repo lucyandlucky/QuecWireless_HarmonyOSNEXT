@@ -1,13 +1,16 @@
 import webview from '@ohos.web.webview'
 import { QuecTitleBar } from 'quec_basic_ui'
+import { PolicyRouteParams, PolicySource } from '../model/PolicyRoute'
+import { PolicyUiState } from '../state/PolicyUiState'
+import { PolicyViewModel } from '../viewmodel/PolicyViewModel'
 
 @Builder
 export function PolicyWebViewPageBuilder(
-  name: string,
+  _name: string,
   param: Object
 ) {
   PolicyWebViewPage({
-    url: (param as Record<string, string>).url
+    params: param as PolicyRouteParams
   })
 }
 
@@ -16,51 +19,94 @@ export struct PolicyWebViewPage {
   @Consumer('AppNavigation') navigation: NavPathStack = new NavPathStack()
   private controller: webview.WebviewController = new webview.WebviewController()
   @Param url: string = ""
+  @Param params: PolicyRouteParams = {
+    source: PolicySource.DIRECT_URL,
+    url: '',
+    title: ''
+  }
+  private viewModel: PolicyViewModel = new PolicyViewModel()
+  @Local state: PolicyUiState = this.viewModel.state
 
-  onBackPress(): boolean {
+  private handleBack(): boolean {
     try {
       if (this.controller.accessBackward()) {
         this.controller.backward()
         return true
       }
-    } catch (err) {
-      console.error(`WebViewPage back failed: ${JSON.stringify(err)}`)
+      this.navigation.pop()
+      return false
+    } catch (error) {
+      console.error(`Policy back failed: ${JSON.stringify(error)}`)
+      return false
     }
-    return false
+  }
+
+  aboutToAppear(): void {
+    this.viewModel.initialize(this.params)
+  }
+
+  onBackPress(): boolean {
+    return this.handleBack()
   }
 
   build() {
     NavDestination() {
-      QuecTitleBar({
-        onBack: () => {
-          try {
-            if (this.controller.accessBackward()) {
-              this.controller.backward()
-              return
-            }
-            this.navigation.pop()
-          } catch (error) {
-            console.error(`WebView back failed: ${JSON.stringify(error)}`)
+      Column() {
+        QuecTitleBar({
+          title: this.state.title,
+          onBack: () => this.handleBack()
+        })
+
+        Stack({ alignContent: Alignment.Center }) {
+          if (this.state.htmlUrl.length > 0) {
+            Web({
+              src: this.state.htmlUrl,
+              controller: this.controller
+            })
+              .width('100%')
+              .height('100%')
+              .visibility(this.state.webError ? Visibility.Hidden : Visibility.Visible)
+              .javaScriptAccess(true)
+              .domStorageAccess(true)
+              .onPageBegin(() => {
+                this.viewModel.onWebLoadStart()
+
+              })
+              .onPageEnd(() => {
+                this.viewModel.onWebLoadingFinish()
+
+              })
+              .onErrorReceive((event) => {
+                if (event.request.isMainFrame()) {
+                  this.viewModel.onWebLoadError(event.error.getErrorInfo())
+                }
+              })
+          }
+          if (this.state.webLoading && !this.state.webError) {
+            LoadingProgress()
+              .width(32)
+              .height(32)
+          }
+          if (this.state.webError) {
+            Column({ space: 12 }) {
+              Text('policy Load error')
+              Text(this.state.errorMessage)
+              Text(this.state.htmlUrl)
+              if (this.state.htmlUrl.length > 0) {
+                Button('retry')
+                  .onClick(() => {
+                    this.viewModel.preparedRetry()
+                    this.controller.refresh()
+                  })
+              }
+            }.alignItems(HorizontalAlign.Center)
           }
         }
-      })
-      Web({
-        src: this.url,
-        controller: this.controller
-      })
+        .layoutWeight(1)
         .width('100%')
-        .height('100%')
-        .javaScriptAccess(true)
-        .domStorageAccess(true)
-        .onPageBegin(() => {
-
-        })
-        .onPageEnd(() => {
-
-        })
-        .onErrorReceive(() => {
-
-        })
+      }
+      .width('100%')
+      .height('100%')
     }
     .hideTitleBar(true)
   }

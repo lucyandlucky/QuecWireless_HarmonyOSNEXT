@@ -20,7 +20,7 @@ export struct AgreementDialog {
   }
   onCancel = () => {
   }
-  onOpenPolicy: (url: string) => void = (_url: string) => {
+  onOpenPolicy: (url: string, title: ResourceStr) => void = (_url: string) => {
   }
   navigationWebView = () => {
   }
@@ -37,13 +37,13 @@ export struct AgreementDialog {
           Span($r('app.string.quec_login_user_privacy'))
             .policyText()
             .onClick(() => {
-              this.onOpenPolicy('https://www.baidu.com')
+              this.onOpenPolicy('https://www.baidu.com', $r('app.string.quec_setting_service_privacy'))
             })
           Span($r('app.string.quec_warning_and'))
           Span($r('app.string.quec_login_privacy'))
             .policyText()
             .onClick(() => {
-              this.onOpenPolicy('https://www.bing.com/')
+              this.onOpenPolicy('https://www.bing.com/', $r('app.string.quec_setting_service_privacy'))
             })
           Span($r('app.string.quec_warning_content2'))
         }
