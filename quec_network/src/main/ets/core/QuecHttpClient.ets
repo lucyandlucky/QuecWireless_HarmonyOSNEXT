@@ -18,6 +18,48 @@ export class QuecHttpClient {
     this.parser = new QuecResponseParser()
   }
 
+  public async get<T>(url: string, options?: QuecRequestOptions) {
+    return this.request<T>(url, QuecRequestMethod.GET, undefined, options)
+  }
+
+  public async post<T>(url: string, body?: QuecRequestBody, options?: QuecRequestOptions) {
+    return this.request<T>(url, QuecRequestMethod.POST, body, options)
+  }
+
+  public async requestRaw(
+    url: string,
+    method: QuecRequestMethod,
+    body?: QuecRequestBody,
+    options?: QuecRequestOptions
+  ): Promise<QuecRawResponse> {
+    return this.transport.request(
+      this.resolveUrl(url),
+      method,
+      body,
+      this.mergeOptions(options)
+    )
+  }
+
+  public async requestWithoutData(
+    url: string,
+    method: QuecRequestMethod,
+    body?: QuecRequestBody,
+    options?: QuecRequestOptions
+  ): Promise<void> {
+    const response: QuecRawResponse = await this.requestRaw(url, method, body, options)
+    this.parser.parseWithoutData(response)
+  }
+
+  public async request<T>(
+    url: string,
+    method: QuecRequestMethod,
+    body?: QuecRequestBody,
+    options?: QuecRequestOptions
+  ): Promise<T> {
+    const response: QuecRawResponse = await this.requestRaw(url, method, body, options)
+    return this.parser.parse<T>(response)
+  }
+
   private illegalRequest(message: string): QuecNetworkError {
     return new QuecNetworkError(
       QuecNetworkErrorType.REQUEST_ILLEGAL,
@@ -57,39 +99,5 @@ export class QuecHttpClient {
       connectTimeout: options?.connectTimeout ?? this.config.connectTimeout,
       readTimeout: options?.readTimeout ?? this.config.readTimeout
     }
-  }
-
-  public async requestRaw(
-    url: string,
-    method: QuecRequestMethod,
-    body?: QuecRequestBody,
-    options?: QuecRequestOptions
-  ): Promise<QuecRawResponse> {
-    return this.transport.request(
-      this.resolveUrl(url),
-      method,
-      body,
-      this.mergeOptions(options)
-    )
-  }
-
-  public async requestWithoutData(
-    url: string,
-    method: QuecRequestMethod,
-    body?: QuecRequestBody,
-    options?: QuecRequestOptions
-  ): Promise<void> {
-    const response: QuecRawResponse = await this.requestRaw(url, method, body, options)
-    this.parser.parseWithoutData(response)
-  }
-
-  public async request<T>(
-    url: string,
-    method: QuecRequestMethod,
-    body?: QuecRequestBody,
-    options?: QuecRequestOptions
-  ): Promise<T> {
-    const response: QuecRawResponse = await this.requestRaw(url, method, body, options)
-    return this.parser.parse<T>(response)
   }
 }

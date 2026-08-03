@@ -6,6 +6,7 @@
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
-    "quec_basic_ui": "file:../quec_basic_ui"
+    "quec_basic_ui": "file:../quec_basic_ui",
+    "quec_network": "file:../quec_network"
   }
 }
