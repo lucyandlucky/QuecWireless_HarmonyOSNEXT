@@ -14,8 +14,8 @@ export class QuecNetworkConstants {
   static readonly HEADER_APP_INFO: string = 'app-info'
   static readonly HEADER_CONTENT_TYPE: string = 'Content-Type'
   static readonly CONTENT_TYPE_JSON: string = 'application/json; charset=utf-8'
+  static readonly CONTENT_TYPE_FORM: string = 'application/x-www-form-urlencoded; charset=utf-8'
   static readonly LANGUAGE_CN: string = 'CN'
   static readonly LANGUAGE_EN: string = 'EN'
   static readonly LANGUAGE_HANT: string = 'zh-Hant'
-  static readonly CONTENT_TYPE_FORM: string = 'application/x-www-form-urlencoded; charset=utf-8'
 }
