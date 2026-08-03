@@ -20,3 +20,5 @@ export {
 } from './src/main/ets/error/QuecNetworkError'
 
 export { QuecNetworkConfig } from './src/main/ets/config/QuecNetworkConfig'
+
+export { QuecHttpTransport } from "./src/main/ets/transport/QuecHttpTransport";

@@ -17,4 +17,5 @@ export class QuecNetworkConstants {
   static readonly LANGUAGE_CN: string = 'CN'
   static readonly LANGUAGE_EN: string = 'EN'
   static readonly LANGUAGE_HANT: string = 'zh-Hant'
+  static readonly CONTENT_TYPE_FORM: string = 'application/x-www-form-urlencoded; charset=utf-8'
 }
