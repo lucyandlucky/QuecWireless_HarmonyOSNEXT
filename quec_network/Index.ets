@@ -1,1 +1,1 @@
-export { MainPage } from './src/main/ets/components/MainPage';
+// Public network APIs are exported from this file.

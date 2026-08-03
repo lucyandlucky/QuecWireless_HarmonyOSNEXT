@@ -1,7 +1,7 @@
 {
   "name": "quec_network",
   "version": "1.0.0",
-  "description": "Please describe the basic information.",
+  "description": "Quectel shared network library for HarmonyOS.",
   "main": "Index.ets",
   "author": "",
   "license": "Apache-2.0",
