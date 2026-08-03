@@ -22,3 +22,5 @@ export {
 export { QuecNetworkConfig } from './src/main/ets/config/QuecNetworkConfig'
 
 export { QuecHttpTransport } from "./src/main/ets/transport/QuecHttpTransport";
+
+export { QuecResponseParser } from "./src/main/ets/parser/QuecResponseParser";

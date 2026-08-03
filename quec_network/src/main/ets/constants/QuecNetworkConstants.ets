@@ -18,4 +18,7 @@ export class QuecNetworkConstants {
   static readonly LANGUAGE_CN: string = 'CN'
   static readonly LANGUAGE_EN: string = 'EN'
   static readonly LANGUAGE_HANT: string = 'zh-Hant'
+  static readonly HTTP_SUCCESS_MIN_CODE: number = 200
+  static readonly HTTP_SUCCESS_MAX_CODE: number = 299
+  static readonly UNKNOWN_ERROR_CODE: number = -1
 }
