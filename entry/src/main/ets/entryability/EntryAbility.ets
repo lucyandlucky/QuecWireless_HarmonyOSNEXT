@@ -2,6 +2,7 @@ import { AbilityConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
 import { getWindowInsetsState, WindowInsetsState } from 'quec_basic_ui';
+import { setupNetwork } from '../network/NetworkBootstrap';
 
 const DOMAIN = 0x0000;
 
@@ -53,6 +54,7 @@ export default class EntryAbility extends UIAbility {
   }
 
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
+    setupNetwork()
   }
 
   onDestroy(): void {
