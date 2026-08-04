@@ -1,6 +1,7 @@
 import { QuecNetworkConfig } from '../config/QuecNetworkConfig';
 import { QuecNetworkConstants } from '../constants/QuecNetworkConstants';
 import { QuecNetworkError, QuecNetworkErrorType } from '../error/QuecNetworkError';
+import { QuecHeaderProvider } from '../header/QuecHeaderProvider';
 import { QuecRawResponse } from '../model/QuecRawResponse';
 import { QuecRequestMethod } from '../model/QuecRequestMethod';
 import { QuecRequestBody, QuecRequestOptions } from '../model/QuecRequestOptions';
@@ -11,11 +12,13 @@ export class QuecHttpClient {
   private readonly config: QuecNetworkConfig
   private readonly transport: QuecHttpTransport
   private readonly parser: QuecResponseParser
+  private readonly headerProvider: QuecHeaderProvider
 
   constructor(config: QuecNetworkConfig) {
     this.config = config
     this.transport = new QuecHttpTransport()
     this.parser = new QuecResponseParser()
+    this.headerProvider = new QuecHeaderProvider(config)
   }
 
   public async get<T>(url: string, options?: QuecRequestOptions) {
@@ -93,7 +96,7 @@ export class QuecHttpClient {
 
   private mergeOptions(options?: QuecRequestOptions): QuecRequestOptions {
     return {
-      headers: options?.headers,
+      headers: this.headerProvider.createHeaders(options?.headers),
       queryParams: options?.queryParams,
       formBody: options?.formBody,
       connectTimeout: options?.connectTimeout ?? this.config.connectTimeout,
