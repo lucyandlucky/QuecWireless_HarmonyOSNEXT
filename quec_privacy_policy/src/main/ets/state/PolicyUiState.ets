@@ -7,4 +7,5 @@ export class PolicyUiState {
   @Trace webLoading: boolean = false
   @Trace downloading: boolean = false
   @Trace webError: boolean = false
+  @Trace apiError: boolean = false
 }

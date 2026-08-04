@@ -84,12 +84,21 @@ export struct PolicyWebViewPage {
                 }
               })
           }
-          if (this.state.webLoading && !this.state.webError) {
+          if ((this.state.apiLoading || this.state.webLoading)
+            && (!this.state.apiError && !this.state.webError)) {
             LoadingProgress()
               .width(32)
               .height(32)
           }
-          if (this.state.webError) {
+          if (this.state.apiError) {
+            Column({ space: 12 }) {
+              Text($r('app.string.quec_policy_load_error'))
+                .textAlign(TextAlign.Center)
+              Button($r('app.string.quec_policy_retry')).onClick(() => {
+                this.viewModel.retryLatest()
+              })
+            }
+          } else if (this.state.webError) {
             Column({ space: 12 }) {
               Text(this.state.htmlUrl.length > 0
                 ? $r('app.string.quec_policy_load_error')

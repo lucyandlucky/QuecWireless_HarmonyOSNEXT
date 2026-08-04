@@ -1,6 +1,6 @@
 import { AgreementDialog } from '../components/AgreementDialog';
 import common from '@ohos.app.ability.common';
-import { PolicyRouteParams, PolicySource } from 'quec_privacy_policy';
+import { PolicyRouteParams, PolicySource, PolicyType, PRIVACY_WEBVIEW_ROUTE } from 'quec_privacy_policy';
 
 
 @Builder
@@ -18,13 +18,13 @@ export struct WelcomePage {
       onCancel: () => {
         this.exitApp()
       },
-      onOpenPolicy: (url: string, title: ResourceStr) => {
+      onOpenPolicy: (type: PolicyType, title: ResourceStr) => {
         const params: PolicyRouteParams = {
-          source: PolicySource.DIRECT_URL,
-          url,
-          title,
+          source: PolicySource.LATEST,
+          type,
+          title
         }
-        this.navigation.pushPathByName('QuecPrivacyWebViewPage', params)
+        this.navigation.pushPathByName(PRIVACY_WEBVIEW_ROUTE, params)
       }
     }),
     cancel: this.exitApp,
