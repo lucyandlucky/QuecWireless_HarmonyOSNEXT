@@ -1,4 +1,5 @@
 import { common } from '@kit.AbilityKit'
+import { QuecTitleBar } from 'quec_basic_ui'
 
 @Builder
 export function LoginPageBuilder() {
@@ -18,14 +19,22 @@ export struct LoginPage {
   build() {
     NavDestination() {
       Column() {
+        QuecTitleBar({
+          transparent: true,
+          rightText: {
+            text: $r('app.string.quec_login_register'),
+            color: $r('app.color.W2'),
+            onClick: () => {
+            },
+          }
+        })
         Text($r('app.string.quec_login_title'))
           .fontSize($r('app.float.T8_F'))
           .fontColor($r('app.color.W1'))
       }
       .width('100%')
       .height('100%')
-      .justifyContent(FlexAlign.Center)
-      .backgroundColor($r('app.color.B2'))
+      .backgroundColor($r('app.color.B1'))
     }
     .hideTitleBar(true)
     .onBackPressed(() => {

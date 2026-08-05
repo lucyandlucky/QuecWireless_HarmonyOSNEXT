@@ -20,6 +20,8 @@ export struct QuecTitleBar {
   @Param leftIconVisible: boolean = true
   @Param rightText: QuecTitleBarRightText | null = null
   @Param rightIcons: QuecTitleBarRightIcon[] = []
+  @Param transparent: boolean = false
+  @Param bgColor: ResourceColor | null = null
   @Event onBack: Func = () => {
   }
   @Local private windowInsets: WindowInsetsState = getWindowInsetsState()
@@ -110,6 +112,8 @@ export struct QuecTitleBar {
     .padding({
       top: this.windowInsets.top
     })
-    .backgroundColor($r('app.color.B2'))
+    .backgroundColor(this.transparent
+      ? Color.Transparent
+      : (this.bgColor ?? $r('app.color.B2')))
   }
 }
