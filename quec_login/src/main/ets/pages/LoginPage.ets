@@ -1,5 +1,6 @@
 import { common } from '@kit.AbilityKit'
-import { QuecTitleBar } from 'quec_basic_ui'
+import { getWindowInsetsState, QuecTitleBar, WindowInsetsState } from 'quec_basic_ui'
+import { QuecColorUtils } from 'quec_foundation'
 
 @Builder
 export function LoginPageBuilder() {
@@ -10,6 +11,7 @@ export function LoginPageBuilder() {
 export struct LoginPage {
   @Consumer('AppNavigation')
   private navigation: NavPathStack = new NavPathStack()
+  @Local private windowInsets: WindowInsetsState = getWindowInsetsState()
 
   private moveAppToBackground(): void {
     const context = this.getUIContext().getHostContext() as common.UIAbilityContext
@@ -18,23 +20,36 @@ export struct LoginPage {
 
   build() {
     NavDestination() {
-      Column() {
-        QuecTitleBar({
-          transparent: true,
-          rightText: {
-            text: $r('app.string.quec_login_register'),
-            color: $r('app.color.W2'),
-            onClick: () => {
-            },
-          }
+      Stack({ alignContent: Alignment.Top }) {
+        Column() {
+        }
+        .width('100%')
+        .height(this.windowInsets.top + 180)
+        .linearGradient({
+          direction: GradientDirection.Bottom,
+          colors: [
+            [QuecColorUtils.getColorWithAlpha(0.12, $r('app.color.M1')), 0],
+            [QuecColorUtils.getColorWithAlpha(0.02, $r('app.color.B1')), 1]
+          ]
         })
-        Text($r('app.string.quec_login_title'))
-          .fontSize($r('app.float.T8_F'))
-          .fontColor($r('app.color.W1'))
+
+        Column() {
+          QuecTitleBar({
+            transparent: true,
+            rightText: {
+              text: $r('app.string.quec_login_register'),
+              color: $r('app.color.W2'),
+              onClick: () => {
+              },
+            }
+          })
+        }
+        .width('100%')
+        .height('100%')
       }
       .width('100%')
       .height('100%')
-      .backgroundColor($r('app.color.B1'))
+      .backgroundColor($r('app.color.B2'))
     }
     .hideTitleBar(true)
     .onBackPressed(() => {

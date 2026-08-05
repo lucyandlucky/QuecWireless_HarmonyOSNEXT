@@ -7,6 +7,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "quec_ui_config": "file:../quec_ui_config",
-    "quec_basic_ui": "file:../quec_basic_ui"
+    "quec_basic_ui": "file:../quec_basic_ui",
+    "quec_foundation": "file:../quec_foundation"
   }
 }
