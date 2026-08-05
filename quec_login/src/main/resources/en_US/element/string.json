@@ -3,6 +3,1254 @@
     {
       "name": "quec_login_title",
       "value": "Login"
+    },
+    {
+      "name": "quec_login_welcome",
+      "value": "Welcome to Use "
+    },
+    {
+      "name": "quec_login_china",
+      "value": "China"
+    },
+    {
+      "name": "quec_login_austria",
+      "value": "Austria"
+    },
+    {
+      "name": "quec_login_account",
+      "value": "Please enter your account"
+    },
+    {
+      "name": "quec_login_psd",
+      "value": "Password"
+    },
+    {
+      "name": "quec_login_code",
+      "value": "SMS Login"
+    },
+    {
+      "name": "quec_login_forget",
+      "value": "Forget password"
+    },
+    {
+      "name": "quec_login",
+      "value": "login"
+    },
+    {
+      "name": "quec_login_agree",
+      "value": "I have read and agreed the "
+    },
+    {
+      "name": "quec_login_add",
+      "value": "and"
+    },
+    {
+      "name": "quec_login_user_privacy",
+      "value": "Service Agreement"
+    },
+    {
+      "name": "quec_login_privacy",
+      "value": "Privacy Policy"
+    },
+    {
+      "name": "quec_login_noaccount",
+      "value": "Don\\'t have an account yet？"
+    },
+    {
+      "name": "quec_login_register",
+      "value": "Register"
+    },
+    {
+      "name": "quec_login_selected",
+      "value": "Please tick the Service Agreement and Privacy Policy."
+    },
+    {
+      "name": "quec_login_sub_log",
+      "value": "Enter the mobile number used for registration and fill in the SMS verification cod"
+    },
+    {
+      "name": "quec_login_sub_register",
+      "value": "Please enter the mobile phone number/email address used for registration and fill in the verification code."
+    },
+    {
+      "name": "quec_login_sub_register_international",
+      "value": "Please enter the email address used for registration and fill in the verification code"
+    },
+    {
+      "name": "quec_login_register_input_describe",
+      "value": "Please enter your mobile number and fill in SMS verification code."
+    },
+    {
+      "name": "quec_login_phone_email",
+      "value": "Mobile Number/Email "
+    },
+    {
+      "name": "quec_login_phone_email_en",
+      "value": "Email"
+    },
+    {
+      "name": "quec_code",
+      "value": "SMS"
+    },
+    {
+      "name": "quec_login_code_get",
+      "value": "Obtain"
+    },
+    {
+      "name": "quec_login_code_phone_success",
+      "value": "SMS verification code has been sent to the mobile number ending with:"
+    },
+    {
+      "name": "quec_login_code_email_success",
+      "value": "The verification code is sent to your mailbox:"
+    },
+    {
+      "name": "quec_login_code_receive",
+      "value": "SMS verification code has been sent to the mobile number ending with<font color=\"#666666\">%s</font>"
+    },
+    {
+      "name": "quec_login_welcome_register",
+      "value": "Welcome to Registration"
+    },
+    {
+      "name": "quec_login_retrieve_password",
+      "value": "Retrieve Password"
+    },
+    {
+      "name": "quec_login_password_reset",
+      "value": "Reset Password"
+    },
+    {
+      "name": "quec_login_password_set",
+      "value": "Set login password"
+    },
+    {
+      "name": "quec_login_set_password_tip",
+      "value": "Password must be 6–20 characters and contain both numbers and letters/special characters."
+    },
+    {
+      "name": "quec_user_password_lint",
+      "value": "Password must be 6–20 characters and contain both numbers and letters/special characters."
+    },
+    {
+      "name": "quec_login_sure",
+      "value": "Confirm"
+    },
+    {
+      "name": "quec_finish",
+      "value": "Complete"
+    },
+    {
+      "name": "quec_reminder",
+      "value": "Tips"
+    },
+    {
+      "name": "quec_country_selected",
+      "value": "Select your country or area"
+    },
+    {
+      "name": "quec_login_phone_error",
+      "value": "Please enter the correct phone number."
+    },
+    {
+      "name": "quec_login_email_error",
+      "value": "Please enter the correct email address."
+    },
+    {
+      "name": "quec_go_login",
+      "value": "Login"
+    },
+    {
+      "name": "quec_login_go_to_register",
+      "value": "Go to register"
+    },
+    {
+      "name": "quec_cancel",
+      "value": "Cancel"
+    },
+    {
+      "name": "quec_login_reminder_account_existence",
+      "value": "The account already exists. Do you want to directly log in to the account?"
+    },
+    {
+      "name": "quec_login_no_register",
+      "value": "The account is not registered."
+    },
+    {
+      "name": "quec_login_other",
+      "value": "Other login methods"
+    },
+    {
+      "name": "quec_login_no_sim",
+      "value": "No SIM card"
+    },
+    {
+      "name": "quec_login_error_sim_status",
+      "value": "The SIM card is locked or unknown. Procedure"
+    },
+    {
+      "name": "quec_login_no_network",
+      "value": "No network"
+    },
+    {
+      "name": "quec_login_no_cellular_intenet",
+      "value": "Cell not open or unstable"
+    },
+    {
+      "name": "quec_login_sure_password_two",
+      "value": "Confirm Password"
+    },
+    {
+      "name": "quec_login_sure_new_password",
+      "value": "Confirm password is inconsistent with new password."
+    },
+    {
+      "name": "quec_login_success",
+      "value": "Login Successfully"
+    },
+    {
+      "name": "quec_login_go_register",
+      "value": "Confirm"
+    },
+    {
+      "name": "quec_user_password",
+      "value": "Password"
+    },
+    {
+      "name": "quec_login_phone",
+      "value": "Mobile Number"
+    },
+    {
+      "name": "quec_login_sms",
+      "value": "SMS Verification Code"
+    },
+    {
+      "name": "quec_user_password_dif",
+      "value": "The two passwords are inconsistent."
+    },
+    {
+      "name": "quec_password_login",
+      "value": "Log in via Password"
+    },
+    {
+      "name": "quec_login_privacy_info_title",
+      "value": "Please read and agree to the following agreements"
+    },
+    {
+      "name": "quec_login_privacy_info_confirm",
+      "value": "Agree and Log in"
+    },
+    {
+      "name": "quec_smart_config_continue",
+      "value": "Continue"
+    },
+    {
+      "name": "quec_login_send_code",
+      "value": "Send Verification Code"
+    },
+    {
+      "name": "quec_code_input",
+      "value": "Please enter the value of code"
+    },
+    {
+      "name": "quec_login_code_get_again_by_time",
+      "value": " Resend a verification code after %s second(s)."
+    },
+    {
+      "name": "quec_login_code_get_again",
+      "value": "Resend"
+    },
+    {
+      "name": "quec_verify_code_has_been_sent",
+      "value": "The SMS verification code has been sent."
+    },
+    {
+      "name": "quec_login_agree_goon",
+      "value": "Agree and Continue"
+    },
+    {
+      "name": "quec_login_password_times_limit",
+      "value": "You have exceeded the maximum number of attempts. Please retry after 20 minutes or log in via other methods for your account security."
+    },
+    {
+      "name": "quec_login_error_last_chance",
+      "value": "If you enter an incorrect password for 5 times, your account will be frozen for 20 minutes. You only have one more chance."
+    },
+    {
+      "name": "quec_user_verify_reset_password",
+      "value": "Account Security Verification"
+    },
+    {
+      "name": "quec_user_verify_reset_password_tips",
+      "value": "You can reset your password after successful verification."
+    },
+    {
+      "name": "quec_user_logout_toast_custom_success",
+      "value": "Cancelled successfully"
+    },
+    {
+      "name": "quec_country_list_search_placeholder",
+      "value": "Please enter a country or region"
+    },
+    {
+      "name": "quec_country_86",
+      "value": "China"
+    },
+    {
+      "name": "quec_country_43",
+      "value": "Austria"
+    },
+    {
+      "name": "quec_country_32",
+      "value": "Belgium"
+    },
+    {
+      "name": "quec_country_359",
+      "value": "Bulgaria"
+    },
+    {
+      "name": "quec_country_357",
+      "value": "Cyprus"
+    },
+    {
+      "name": "quec_country_420",
+      "value": "Czechia"
+    },
+    {
+      "name": "quec_country_49",
+      "value": "Germany"
+    },
+    {
+      "name": "quec_country_45",
+      "value": "Denmark"
+    },
+    {
+      "name": "quec_country_372",
+      "value": "Estonia"
+    },
+    {
+      "name": "quec_country_34",
+      "value": "Spain"
+    },
+    {
+      "name": "quec_country_358",
+      "value": "Finland"
+    },
+    {
+      "name": "quec_country_33",
+      "value": "France"
+    },
+    {
+      "name": "quec_country_30",
+      "value": "Greece"
+    },
+    {
+      "name": "quec_country_385",
+      "value": "Croatia"
+    },
+    {
+      "name": "quec_country_36",
+      "value": "Hungary"
+    },
+    {
+      "name": "quec_country_353",
+      "value": "Ireland"
+    },
+    {
+      "name": "quec_country_39",
+      "value": "Italy"
+    },
+    {
+      "name": "quec_country_370",
+      "value": "Lithuania"
+    },
+    {
+      "name": "quec_country_352",
+      "value": "Luxembourg"
+    },
+    {
+      "name": "quec_country_371",
+      "value": "Latvia"
+    },
+    {
+      "name": "quec_country_356",
+      "value": "Malta"
+    },
+    {
+      "name": "quec_country_31",
+      "value": "Netherlands"
+    },
+    {
+      "name": "quec_country_48",
+      "value": "Poland"
+    },
+    {
+      "name": "quec_country_40",
+      "value": "Romania"
+    },
+    {
+      "name": "quec_country_46",
+      "value": "Sweden"
+    },
+    {
+      "name": "quec_country_386",
+      "value": "Slovenia"
+    },
+    {
+      "name": "quec_country_421",
+      "value": "Slovakia"
+    },
+    {
+      "name": "quec_country_351",
+      "value": "Portugal"
+    },
+    {
+      "name": "quec_country_1_242",
+      "value": "The Bahamas"
+    },
+    {
+      "name": "quec_country_1_246",
+      "value": "Barbados"
+    },
+    {
+      "name": "quec_country_1_264",
+      "value": "Anguilla"
+    },
+    {
+      "name": "quec_country_1_268",
+      "value": "Antigua & Barbuda"
+    },
+    {
+      "name": "quec_country_1_284",
+      "value": "British Virgin Islands"
+    },
+    {
+      "name": "quec_country_1_340",
+      "value": "United States Virgin Islands"
+    },
+    {
+      "name": "quec_country_1_345",
+      "value": "Cayman Islands"
+    },
+    {
+      "name": "quec_country_1_441",
+      "value": "Bermuda"
+    },
+    {
+      "name": "quec_country_1_473",
+      "value": "Grenada"
+    },
+    {
+      "name": "quec_country_1_649",
+      "value": "Turks & Caicos Islands"
+    },
+    {
+      "name": "quec_country_1_670",
+      "value": "Northern Mariana Islands"
+    },
+    {
+      "name": "quec_country_1_671",
+      "value": "Guam"
+    },
+    {
+      "name": "quec_country_1_684",
+      "value": "American Samoa"
+    },
+    {
+      "name": "quec_country_1_758",
+      "value": "St. Lucia"
+    },
+    {
+      "name": "quec_country_1_767",
+      "value": "Dominica"
+    },
+    {
+      "name": "quec_country_1_784",
+      "value": "St. Vincent & the Grenadines"
+    },
+    {
+      "name": "quec_country_1_868",
+      "value": "Trinidad & Tobago"
+    },
+    {
+      "name": "quec_country_1_869",
+      "value": "St. Kitts & Nevis"
+    },
+    {
+      "name": "quec_country_1_876_658",
+      "value": "Jamaica"
+    },
+    {
+      "name": "quec_country_20",
+      "value": "Egypt"
+    },
+    {
+      "name": "quec_country_212",
+      "value": "Morocco"
+    },
+    {
+      "name": "quec_country_213",
+      "value": "Algeria"
+    },
+    {
+      "name": "quec_country_216",
+      "value": "Tunisia"
+    },
+    {
+      "name": "quec_country_218",
+      "value": "Libya"
+    },
+    {
+      "name": "quec_country_220",
+      "value": "Gambia"
+    },
+    {
+      "name": "quec_country_221",
+      "value": "Senegal"
+    },
+    {
+      "name": "quec_country_222",
+      "value": "Mauritania"
+    },
+    {
+      "name": "quec_country_223",
+      "value": "Mali"
+    },
+    {
+      "name": "quec_country_224",
+      "value": "Guinea"
+    },
+    {
+      "name": "quec_country_225",
+      "value": "Côte d\\'Ivoire"
+    },
+    {
+      "name": "quec_country_226",
+      "value": "Burkina"
+    },
+    {
+      "name": "quec_country_227",
+      "value": "Niger"
+    },
+    {
+      "name": "quec_country_228",
+      "value": "Togo"
+    },
+    {
+      "name": "quec_country_229",
+      "value": "Benin"
+    },
+    {
+      "name": "quec_country_230",
+      "value": "Mauritius"
+    },
+    {
+      "name": "quec_country_231",
+      "value": "Liberia"
+    },
+    {
+      "name": "quec_country_232",
+      "value": "Sierra Leone"
+    },
+    {
+      "name": "quec_country_233",
+      "value": "Ghana"
+    },
+    {
+      "name": "quec_country_234",
+      "value": "Nigeria"
+    },
+    {
+      "name": "quec_country_235",
+      "value": "Chad"
+    },
+    {
+      "name": "quec_country_236",
+      "value": "Central African Republic"
+    },
+    {
+      "name": "quec_country_237",
+      "value": "Cameroon"
+    },
+    {
+      "name": "quec_country_238",
+      "value": "Cape Verde"
+    },
+    {
+      "name": "quec_country_240",
+      "value": "Equatorial Guinea"
+    },
+    {
+      "name": "quec_country_241",
+      "value": "Gabon"
+    },
+    {
+      "name": "quec_country_242",
+      "value": "Republic of the Congo"
+    },
+    {
+      "name": "quec_country_243",
+      "value": "Democratic Republic of the Congo"
+    },
+    {
+      "name": "quec_country_244",
+      "value": "Angola"
+    },
+    {
+      "name": "quec_country_248",
+      "value": "Seychelles"
+    },
+    {
+      "name": "quec_country_250",
+      "value": "Rwanda"
+    },
+    {
+      "name": "quec_country_251",
+      "value": "Ethiopia"
+    },
+    {
+      "name": "quec_country_252",
+      "value": "Somalia"
+    },
+    {
+      "name": "quec_country_253",
+      "value": "Djibouti"
+    },
+    {
+      "name": "quec_country_254",
+      "value": "Kenya"
+    },
+    {
+      "name": "quec_country_255",
+      "value": "Tanzania"
+    },
+    {
+      "name": "quec_country_256",
+      "value": "Uganda"
+    },
+    {
+      "name": "quec_country_257",
+      "value": "Burundi"
+    },
+    {
+      "name": "quec_country_258",
+      "value": "Mozambique"
+    },
+    {
+      "name": "quec_country_260",
+      "value": "Zambia"
+    },
+    {
+      "name": "quec_country_261",
+      "value": "Madagascar"
+    },
+    {
+      "name": "quec_country_262_1",
+      "value": "Réunion"
+    },
+    {
+      "name": "quec_country_263",
+      "value": "Zimbabwe"
+    },
+    {
+      "name": "quec_country_264",
+      "value": "Namibia"
+    },
+    {
+      "name": "quec_country_265",
+      "value": "Malawi"
+    },
+    {
+      "name": "quec_country_266",
+      "value": "Lesotho"
+    },
+    {
+      "name": "quec_country_267",
+      "value": "Botswana"
+    },
+    {
+      "name": "quec_country_268",
+      "value": "Swaziland"
+    },
+    {
+      "name": "quec_country_262_2",
+      "value": "Mayotte"
+    },
+    {
+      "name": "quec_country_27",
+      "value": "South Africa"
+    },
+    {
+      "name": "quec_country_291",
+      "value": "Eritrea"
+    },
+    {
+      "name": "quec_country_297",
+      "value": "Aruba"
+    },
+    {
+      "name": "quec_country_298",
+      "value": "Faroe Islands"
+    },
+    {
+      "name": "quec_country_299",
+      "value": "Greenland"
+    },
+    {
+      "name": "quec_country_350",
+      "value": "Gibraltar"
+    },
+    {
+      "name": "quec_country_354",
+      "value": "Iceland"
+    },
+    {
+      "name": "quec_country_355",
+      "value": "Albania"
+    },
+    {
+      "name": "quec_country_373",
+      "value": "Moldova"
+    },
+    {
+      "name": "quec_country_374",
+      "value": "Armenia"
+    },
+    {
+      "name": "quec_country_375",
+      "value": "Belarus"
+    },
+    {
+      "name": "quec_country_376",
+      "value": "Andorra"
+    },
+    {
+      "name": "quec_country_377",
+      "value": "Monaco"
+    },
+    {
+      "name": "quec_country_378",
+      "value": "San Marino"
+    },
+    {
+      "name": "quec_country_379",
+      "value": "Vatican City (The Holy See)"
+    },
+    {
+      "name": "quec_country_380",
+      "value": "Ukraine"
+    },
+    {
+      "name": "quec_country_381",
+      "value": "Serbia"
+    },
+    {
+      "name": "quec_country_382",
+      "value": "Montenegro"
+    },
+    {
+      "name": "quec_country_387",
+      "value": "Bosnia & Herzegovina"
+    },
+    {
+      "name": "quec_country_389",
+      "value": "North Macedonia"
+    },
+    {
+      "name": "quec_country_41",
+      "value": "Switzerland"
+    },
+    {
+      "name": "quec_country_423",
+      "value": "Liechtenstein"
+    },
+    {
+      "name": "quec_country_44",
+      "value": "United Kingdom"
+    },
+    {
+      "name": "quec_country_00",
+      "value": "Template:Country data SJM Svalbard"
+    },
+    {
+      "name": "quec_country_501",
+      "value": "Belize"
+    },
+    {
+      "name": "quec_country_503",
+      "value": "El Salvador"
+    },
+    {
+      "name": "quec_country_504",
+      "value": "Honduras"
+    },
+    {
+      "name": "quec_country_505",
+      "value": "Nicaragua"
+    },
+    {
+      "name": "quec_country_506",
+      "value": "Costa Rica"
+    },
+    {
+      "name": "quec_country_507",
+      "value": "Panama"
+    },
+    {
+      "name": "quec_country_508",
+      "value": "Saint-Pierre and Miquelon"
+    },
+    {
+      "name": "quec_country_509",
+      "value": "Haiti"
+    },
+    {
+      "name": "quec_country_590",
+      "value": "Guadeloupe"
+    },
+    {
+      "name": "quec_country_592",
+      "value": "Guyana"
+    },
+    {
+      "name": "quec_country_596",
+      "value": "Martinique"
+    },
+    {
+      "name": "quec_country_61",
+      "value": "Australia"
+    },
+    {
+      "name": "quec_country_65",
+      "value": "Singapore"
+    },
+    {
+      "name": "quec_country_673",
+      "value": "Brunei"
+    },
+    {
+      "name": "quec_country_676",
+      "value": "Tonga"
+    },
+    {
+      "name": "quec_country_679",
+      "value": "Fiji"
+    },
+    {
+      "name": "quec_country_680",
+      "value": "Palau"
+    },
+    {
+      "name": "quec_country_681",
+      "value": "Wallis and Futuna"
+    },
+    {
+      "name": "quec_country_685",
+      "value": "Samoa"
+    },
+    {
+      "name": "quec_country_687",
+      "value": "New Caledonia"
+    },
+    {
+      "name": "quec_country_688",
+      "value": "Tuvalu"
+    },
+    {
+      "name": "quec_country_689",
+      "value": "French polynesia"
+    },
+    {
+      "name": "quec_country_691",
+      "value": "Federated States of Micronesia"
+    },
+    {
+      "name": "quec_country_692",
+      "value": "Marshall islands"
+    },
+    {
+      "name": "quec_country_855",
+      "value": "Cambodia"
+    },
+    {
+      "name": "quec_country_856",
+      "value": "Laos"
+    },
+    {
+      "name": "quec_country_880",
+      "value": "Bangladesh"
+    },
+    {
+      "name": "quec_country_90",
+      "value": "Turkey"
+    },
+    {
+      "name": "quec_country_92",
+      "value": "Pakistan"
+    },
+    {
+      "name": "quec_country_94",
+      "value": "Sri Lanka"
+    },
+    {
+      "name": "quec_country_960",
+      "value": "Maldives"
+    },
+    {
+      "name": "quec_country_961",
+      "value": "Lebanon"
+    },
+    {
+      "name": "quec_country_962",
+      "value": "Jordan"
+    },
+    {
+      "name": "quec_country_965",
+      "value": "Kuwait"
+    },
+    {
+      "name": "quec_country_966",
+      "value": "Saudi Arabia"
+    },
+    {
+      "name": "quec_country_967",
+      "value": "Yemen"
+    },
+    {
+      "name": "quec_country_968",
+      "value": "Oman"
+    },
+    {
+      "name": "quec_country_971",
+      "value": "United Arab Emirates"
+    },
+    {
+      "name": "quec_country_972",
+      "value": "Israel"
+    },
+    {
+      "name": "quec_country_973",
+      "value": "Bahrain"
+    },
+    {
+      "name": "quec_country_974",
+      "value": "Qatar"
+    },
+    {
+      "name": "quec_country_975",
+      "value": "Bhutan"
+    },
+    {
+      "name": "quec_country_976",
+      "value": "Mongolia"
+    },
+    {
+      "name": "quec_country_977",
+      "value": "Nepal"
+    },
+    {
+      "name": "quec_country_992",
+      "value": "Tajikistan"
+    },
+    {
+      "name": "quec_country_993",
+      "value": "Turkmenistan"
+    },
+    {
+      "name": "quec_country_994",
+      "value": "Azerbaijan"
+    },
+    {
+      "name": "quec_country_995",
+      "value": "Georgia"
+    },
+    {
+      "name": "quec_country_996",
+      "value": "Kyrgyzstan"
+    },
+    {
+      "name": "quec_country_998",
+      "value": "Uzbekistan"
+    },
+    {
+      "name": "quec_country_852",
+      "value": "Hong Kong"
+    },
+    {
+      "name": "quec_country_81",
+      "value": "Japan"
+    },
+    {
+      "name": "quec_country_1_787_939",
+      "value": "Puerto Rico"
+    },
+    {
+      "name": "quec_country_1_809_829_849",
+      "value": "Dominican Republic"
+    },
+    {
+      "name": "quec_country_502",
+      "value": "Guatemala"
+    },
+    {
+      "name": "quec_country_51",
+      "value": "Peru"
+    },
+    {
+      "name": "quec_country_52",
+      "value": "Mexico"
+    },
+    {
+      "name": "quec_country_54",
+      "value": "Argentina"
+    },
+    {
+      "name": "quec_country_55",
+      "value": "Brazil"
+    },
+    {
+      "name": "quec_country_56",
+      "value": "Chile"
+    },
+    {
+      "name": "quec_country_57",
+      "value": "Colombia"
+    },
+    {
+      "name": "quec_country_58",
+      "value": "Venezuela"
+    },
+    {
+      "name": "quec_country_591",
+      "value": "Bolivia"
+    },
+    {
+      "name": "quec_country_593",
+      "value": "Ecuador"
+    },
+    {
+      "name": "quec_country_595",
+      "value": "Paraguay"
+    },
+    {
+      "name": "quec_country_597",
+      "value": "Suriname"
+    },
+    {
+      "name": "quec_country_598",
+      "value": "Uruguay"
+    },
+    {
+      "name": "quec_country_60",
+      "value": "Malaysia"
+    },
+    {
+      "name": "quec_country_62",
+      "value": "Indonesia"
+    },
+    {
+      "name": "quec_country_63",
+      "value": "The Philippines"
+    },
+    {
+      "name": "quec_country_64",
+      "value": "New Zealand"
+    },
+    {
+      "name": "quec_country_66",
+      "value": "Thailand"
+    },
+    {
+      "name": "quec_country_82",
+      "value": "South Korea"
+    },
+    {
+      "name": "quec_country_84",
+      "value": "Vietnam"
+    },
+    {
+      "name": "quec_country_91",
+      "value": "India"
+    },
+    {
+      "name": "quec_country_853",
+      "value": "Macao"
+    },
+    {
+      "name": "quec_country_886",
+      "value": "Taiwan"
+    },
+    {
+      "name": "quec_country_95",
+      "value": "Myanmar"
+    },
+    {
+      "name": "quec_country_1_1",
+      "value": "United States of America"
+    },
+    {
+      "name": "quec_country_1_2",
+      "value": "Canada"
+    },
+    {
+      "name": "quec_device_bind_success",
+      "value": "绑定成功"
+    },
+    {
+      "name": "quec_key_i_know",
+      "value": "我知道了"
+    },
+    {
+      "name": "quec_account_and_security",
+      "value": "账户与安全"
+    },
+    {
+      "name": "quec_safety",
+      "value": "安全"
+    },
+    {
+      "name": "quec_account_security",
+      "value": "账户安全"
+    },
+    {
+      "name": "quec_email",
+      "value": "邮箱"
+    },
+    {
+      "name": "quec_not_bound",
+      "value": "未绑定"
+    },
+    {
+      "name": "quec_already_bound",
+      "value": "已绑定"
+    },
+    {
+      "name": "quec_not_set",
+      "value": "未设置"
+    },
+    {
+      "name": "quec_already_set",
+      "value": "已设置"
+    },
+    {
+      "name": "quec_login_password",
+      "value": "登录密码"
+    },
+    {
+      "name": "quec_third_party_account",
+      "value": "第三方账号"
+    },
+    {
+      "name": "quec_write_off",
+      "value": "注销"
+    },
+    {
+      "name": "quec_google",
+      "value": "Google"
+    },
+    {
+      "name": "quec_facebook",
+      "value": "Facebook"
+    },
+    {
+      "name": "quec_twitter",
+      "value": "Twitter"
+    },
+    {
+      "name": "quec_bind_email",
+      "value": "绑定邮箱"
+    },
+    {
+      "name": "quec_bind_phone",
+      "value": "绑定手机号"
+    },
+    {
+      "name": "quec_not_bind_email",
+      "value": "未绑定邮箱"
+    },
+    {
+      "name": "quec_not_bind_phone",
+      "value": "未绑定手机号"
+    },
+    {
+      "name": "quec_unbind_email",
+      "value": "解绑邮箱"
+    },
+    {
+      "name": "quec_unbind_phone",
+      "value": "解绑手机号"
+    },
+    {
+      "name": "quec_enter_phone_number",
+      "value": "请输入手机号"
+    },
+    {
+      "name": "quec_login_get_code",
+      "value": "获取验证码"
+    },
+    {
+      "name": "quec_enter_email",
+      "value": "请输入邮箱"
+    },
+    {
+      "name": "quec_login_email_registered",
+      "value": "邮箱已注册"
+    },
+    {
+      "name": "quec_login_email_format_error",
+      "value": "邮箱格式不正确"
+    },
+    {
+      "name": "quec_login_email_verification_failed",
+      "value": "邮箱验证码验证失败"
+    },
+    {
+      "name": "quec_login_enter_verification_code",
+      "value": "请输入验证码"
+    },
+    {
+      "name": "quec_login_unbind",
+      "value": "解绑"
+    },
+    {
+      "name": "quec_login_only_login_not_delete",
+      "value": "此为唯一登录方式，不能删除"
+    },
+    {
+      "name": "quec_login_phone_verification_failed",
+      "value": "短信验证码验证失败"
+    },
+    {
+      "name": "quec_login_unbind_fail_content",
+      "value": "当前登录方式为唯一登录渠道，暂不支持解绑。如需解绑请先添加其他登录方式"
+    },
+    {
+      "name": "quec_login_current_phone",
+      "value": "当前手机号为"
+    },
+    {
+      "name": "quec_login_unbind_fail",
+      "value": "解绑失败"
+    },
+    {
+      "name": "quec_login_unbind_success",
+      "value": "解绑成功"
+    },
+    {
+      "name": "quec_login_current_email",
+      "value": "当前邮箱为"
+    },
+    {
+      "name": "quec_login_error",
+      "value": "暂不支持此服务"
+    },
+    {
+      "name": "quec_login_account_cancel",
+      "value": "已取消授权登录"
+    },
+    {
+      "name": "quec_login_account_has_been_registered",
+      "value": "该账号已注册，请更换未注册的账号进行绑定"
     }
   ]
 }

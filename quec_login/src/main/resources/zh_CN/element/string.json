@@ -3,6 +3,1254 @@
     {
       "name": "quec_login_title",
       "value": "登录"
+    },
+    {
+      "name": "quec_login_welcome",
+      "value": "欢迎使用"
+    },
+    {
+      "name": "quec_login_china",
+      "value": "中国"
+    },
+    {
+      "name": "quec_login_austria",
+      "value": "奥地利"
+    },
+    {
+      "name": "quec_login_account",
+      "value": "请输入手机号码或邮箱"
+    },
+    {
+      "name": "quec_login_psd",
+      "value": "密码"
+    },
+    {
+      "name": "quec_login_code",
+      "value": "验证码登录"
+    },
+    {
+      "name": "quec_login_forget",
+      "value": "忘记密码"
+    },
+    {
+      "name": "quec_login",
+      "value": "登录"
+    },
+    {
+      "name": "quec_login_success",
+      "value": "登录成功"
+    },
+    {
+      "name": "quec_login_agree",
+      "value": "我已阅读并同意"
+    },
+    {
+      "name": "quec_login_add",
+      "value": "及"
+    },
+    {
+      "name": "quec_login_user_privacy",
+      "value": "《服务协议》"
+    },
+    {
+      "name": "quec_login_privacy",
+      "value": "《隐私政策》"
+    },
+    {
+      "name": "quec_login_noaccount",
+      "value": "还没有账户?"
+    },
+    {
+      "name": "quec_login_register",
+      "value": "注册"
+    },
+    {
+      "name": "quec_login_selected",
+      "value": "请先勾选服务"
+    },
+    {
+      "name": "quec_login_sub_log",
+      "value": "请输入注册时使用的手机号并填写短信验证码"
+    },
+    {
+      "name": "quec_login_sub_register",
+      "value": "请输入注册时使用的手机号/邮箱并填写验证码"
+    },
+    {
+      "name": "quec_login_sub_register_international",
+      "value": "请输入注册时使用的邮箱并填写验证码"
+    },
+    {
+      "name": "quec_login_register_input_describe",
+      "value": "请输入常用手机号码并填写短信验证码"
+    },
+    {
+      "name": "quec_login_phone_email",
+      "value": "手机号/邮箱"
+    },
+    {
+      "name": "quec_login_phone_email_en",
+      "value": "邮箱"
+    },
+    {
+      "name": "quec_code",
+      "value": "验证码"
+    },
+    {
+      "name": "quec_login_code_get",
+      "value": "获取"
+    },
+    {
+      "name": "quec_login_code_phone_success",
+      "value": "验证码已发送到您的手机号"
+    },
+    {
+      "name": "quec_login_code_email_success",
+      "value": "验证码已发送到您的邮箱"
+    },
+    {
+      "name": "quec_login_code_receive",
+      "value": "短信验证码已发送至尾号为<font color=\"#666666\">%s</font>的手机上"
+    },
+    {
+      "name": "quec_login_welcome_register",
+      "value": "欢迎注册"
+    },
+    {
+      "name": "quec_login_retrieve_password",
+      "value": "找回密码"
+    },
+    {
+      "name": "quec_login_password_reset",
+      "value": "重置密码"
+    },
+    {
+      "name": "quec_login_password_set",
+      "value": "设置登录密码"
+    },
+    {
+      "name": "quec_login_set_password_tip",
+      "value": "密码由6-20位字母、数字或特殊字符组成"
+    },
+    {
+      "name": "quec_user_password_lint",
+      "value": "密码6-20位，必须包含数字、字母或特殊字符组合"
+    },
+    {
+      "name": "quec_login_sure",
+      "value": "确定"
+    },
+    {
+      "name": "quec_finish",
+      "value": "完成"
+    },
+    {
+      "name": "quec_reminder",
+      "value": "温馨提示"
+    },
+    {
+      "name": "quec_country_selected",
+      "value": "选择国家和地区"
+    },
+    {
+      "name": "quec_login_phone_error",
+      "value": "请输入正确的手机号码"
+    },
+    {
+      "name": "quec_login_email_error",
+      "value": "请输入正确的邮箱"
+    },
+    {
+      "name": "quec_go_login",
+      "value": "去登录"
+    },
+    {
+      "name": "quec_login_go_to_register",
+      "value": "去注册"
+    },
+    {
+      "name": "quec_cancel",
+      "value": "取消"
+    },
+    {
+      "name": "quec_login_reminder_account_existence",
+      "value": "账户已存在，是否直接登录该账户？"
+    },
+    {
+      "name": "quec_login_no_register",
+      "value": "账号未注册"
+    },
+    {
+      "name": "quec_login_other",
+      "value": "其他方式登录"
+    },
+    {
+      "name": "quec_login_no_sim",
+      "value": "无SIM卡"
+    },
+    {
+      "name": "quec_login_error_sim_status",
+      "value": "SIM卡被锁定或未知的状态"
+    },
+    {
+      "name": "quec_login_no_network",
+      "value": "无网络"
+    },
+    {
+      "name": "quec_login_no_cellular_intenet",
+      "value": "蜂窝未开启或不稳定"
+    },
+    {
+      "name": "quec_login_sure_password_two",
+      "value": "确认密码"
+    },
+    {
+      "name": "quec_login_sure_new_password",
+      "value": "确认密码和新密码不一致"
+    },
+    {
+      "name": "quec_login_go_register",
+      "value": "确定"
+    },
+    {
+      "name": "quec_user_password",
+      "value": "密码"
+    },
+    {
+      "name": "quec_login_phone",
+      "value": "手机号"
+    },
+    {
+      "name": "quec_login_sms",
+      "value": "短信验证码"
+    },
+    {
+      "name": "quec_user_password_dif",
+      "value": "两次输入的密码不一致"
+    },
+    {
+      "name": "quec_password_login",
+      "value": "密码登录"
+    },
+    {
+      "name": "quec_login_privacy_info_title",
+      "value": "请阅读并同意以下条款"
+    },
+    {
+      "name": "quec_login_privacy_info_confirm",
+      "value": "同意并登录"
+    },
+    {
+      "name": "quec_smart_config_continue",
+      "value": "继续"
+    },
+    {
+      "name": "quec_login_send_code",
+      "value": "发送验证码"
+    },
+    {
+      "name": "quec_code_input",
+      "value": "请输入验证码"
+    },
+    {
+      "name": "quec_login_code_get_again_by_time",
+      "value": "%s秒后可重新获取"
+    },
+    {
+      "name": "quec_login_code_get_again",
+      "value": "重新获取"
+    },
+    {
+      "name": "quec_verify_code_has_been_sent",
+      "value": "验证码已发送"
+    },
+    {
+      "name": "quec_login_agree_goon",
+      "value": "同意并继续"
+    },
+    {
+      "name": "quec_login_password_times_limit",
+      "value": "密码验证次数超限，为了您的账号安全请20 分钟后重试 或 使用其他登录方式"
+    },
+    {
+      "name": "quec_login_error_last_chance",
+      "value": "密码错误达到5次时账号将被冻结 20 分钟，您还有1次机会可使用"
+    },
+    {
+      "name": "quec_user_verify_reset_password",
+      "value": "账号安全验证"
+    },
+    {
+      "name": "quec_user_verify_reset_password_tips",
+      "value": "验证成功后即可进行密码重置"
+    },
+    {
+      "name": "quec_user_logout_toast_custom_success",
+      "value": "注销成功"
+    },
+    {
+      "name": "quec_country_list_search_placeholder",
+      "value": "请输入国家或地区"
+    },
+    {
+      "name": "quec_country_86",
+      "value": "中国"
+    },
+    {
+      "name": "quec_country_43",
+      "value": "澳大利亚"
+    },
+    {
+      "name": "quec_country_32",
+      "value": "比利时"
+    },
+    {
+      "name": "quec_country_359",
+      "value": "保加利亚"
+    },
+    {
+      "name": "quec_country_357",
+      "value": "塞浦路斯"
+    },
+    {
+      "name": "quec_country_420",
+      "value": "捷克"
+    },
+    {
+      "name": "quec_country_49",
+      "value": "德国"
+    },
+    {
+      "name": "quec_country_45",
+      "value": "丹麦"
+    },
+    {
+      "name": "quec_country_372",
+      "value": "爱沙尼亚"
+    },
+    {
+      "name": "quec_country_34",
+      "value": "西班牙"
+    },
+    {
+      "name": "quec_country_358",
+      "value": "芬兰"
+    },
+    {
+      "name": "quec_country_33",
+      "value": "法国"
+    },
+    {
+      "name": "quec_country_30",
+      "value": "希腊"
+    },
+    {
+      "name": "quec_country_385",
+      "value": "克罗地亚"
+    },
+    {
+      "name": "quec_country_36",
+      "value": "匈牙利"
+    },
+    {
+      "name": "quec_country_353",
+      "value": "爱尔兰"
+    },
+    {
+      "name": "quec_country_39",
+      "value": "意大利"
+    },
+    {
+      "name": "quec_country_370",
+      "value": "立陶宛"
+    },
+    {
+      "name": "quec_country_352",
+      "value": "卢森堡"
+    },
+    {
+      "name": "quec_country_371",
+      "value": "拉脱维亚"
+    },
+    {
+      "name": "quec_country_356",
+      "value": "马耳他"
+    },
+    {
+      "name": "quec_country_31",
+      "value": "荷兰"
+    },
+    {
+      "name": "quec_country_48",
+      "value": "波兰"
+    },
+    {
+      "name": "quec_country_40",
+      "value": "罗马尼亚"
+    },
+    {
+      "name": "quec_country_46",
+      "value": "瑞典"
+    },
+    {
+      "name": "quec_country_386",
+      "value": "斯洛文尼亚"
+    },
+    {
+      "name": "quec_country_421",
+      "value": "斯洛伐克"
+    },
+    {
+      "name": "quec_country_351",
+      "value": "葡萄牙"
+    },
+    {
+      "name": "quec_country_1_242",
+      "value": "巴哈马"
+    },
+    {
+      "name": "quec_country_1_246",
+      "value": "巴巴多斯"
+    },
+    {
+      "name": "quec_country_1_264",
+      "value": "安圭拉"
+    },
+    {
+      "name": "quec_country_1_268",
+      "value": "安提瓜和巴布达"
+    },
+    {
+      "name": "quec_country_1_284",
+      "value": "英属维尔京群岛"
+    },
+    {
+      "name": "quec_country_1_340",
+      "value": "美属维尔京群岛"
+    },
+    {
+      "name": "quec_country_1_345",
+      "value": "开曼群岛"
+    },
+    {
+      "name": "quec_country_1_441",
+      "value": "百慕大"
+    },
+    {
+      "name": "quec_country_1_473",
+      "value": "格林纳达"
+    },
+    {
+      "name": "quec_country_1_649",
+      "value": "特克斯和凯科斯群岛"
+    },
+    {
+      "name": "quec_country_1_670",
+      "value": "北马里亚纳群岛"
+    },
+    {
+      "name": "quec_country_1_671",
+      "value": "关岛"
+    },
+    {
+      "name": "quec_country_1_684",
+      "value": "美属萨摩亚"
+    },
+    {
+      "name": "quec_country_1_758",
+      "value": "圣卢西亚"
+    },
+    {
+      "name": "quec_country_1_767",
+      "value": "多米尼克"
+    },
+    {
+      "name": "quec_country_1_784",
+      "value": "圣文森特和格林纳丁斯"
+    },
+    {
+      "name": "quec_country_1_868",
+      "value": "特立尼达和多巴哥"
+    },
+    {
+      "name": "quec_country_1_869",
+      "value": "圣基茨和尼维斯"
+    },
+    {
+      "name": "quec_country_1_876_658",
+      "value": "牙买加"
+    },
+    {
+      "name": "quec_country_20",
+      "value": "埃及"
+    },
+    {
+      "name": "quec_country_212",
+      "value": "摩洛哥"
+    },
+    {
+      "name": "quec_country_213",
+      "value": "阿尔及利亚"
+    },
+    {
+      "name": "quec_country_216",
+      "value": "突尼斯"
+    },
+    {
+      "name": "quec_country_218",
+      "value": "利比亚"
+    },
+    {
+      "name": "quec_country_220",
+      "value": "冈比亚"
+    },
+    {
+      "name": "quec_country_221",
+      "value": "塞内加尔"
+    },
+    {
+      "name": "quec_country_222",
+      "value": "毛里塔尼亚"
+    },
+    {
+      "name": "quec_country_223",
+      "value": "马里"
+    },
+    {
+      "name": "quec_country_224",
+      "value": "几内亚"
+    },
+    {
+      "name": "quec_country_225",
+      "value": "科特迪瓦"
+    },
+    {
+      "name": "quec_country_226",
+      "value": "布基纳法索"
+    },
+    {
+      "name": "quec_country_227",
+      "value": "尼日尔"
+    },
+    {
+      "name": "quec_country_228",
+      "value": "多哥"
+    },
+    {
+      "name": "quec_country_229",
+      "value": "贝宁"
+    },
+    {
+      "name": "quec_country_230",
+      "value": "毛里求斯"
+    },
+    {
+      "name": "quec_country_231",
+      "value": "利比里亚"
+    },
+    {
+      "name": "quec_country_232",
+      "value": "塞拉利昂"
+    },
+    {
+      "name": "quec_country_233",
+      "value": "加纳"
+    },
+    {
+      "name": "quec_country_234",
+      "value": "尼日利亚"
+    },
+    {
+      "name": "quec_country_235",
+      "value": "乍得"
+    },
+    {
+      "name": "quec_country_236",
+      "value": "中非"
+    },
+    {
+      "name": "quec_country_237",
+      "value": "喀麦隆"
+    },
+    {
+      "name": "quec_country_238",
+      "value": "佛得角"
+    },
+    {
+      "name": "quec_country_240",
+      "value": "赤道几内亚"
+    },
+    {
+      "name": "quec_country_241",
+      "value": "加蓬"
+    },
+    {
+      "name": "quec_country_242",
+      "value": "刚果（布）"
+    },
+    {
+      "name": "quec_country_243",
+      "value": "刚果（金）"
+    },
+    {
+      "name": "quec_country_244",
+      "value": "安哥拉"
+    },
+    {
+      "name": "quec_country_248",
+      "value": "塞舌尔"
+    },
+    {
+      "name": "quec_country_250",
+      "value": "卢旺达"
+    },
+    {
+      "name": "quec_country_251",
+      "value": "埃塞俄比亚"
+    },
+    {
+      "name": "quec_country_252",
+      "value": "索马里"
+    },
+    {
+      "name": "quec_country_253",
+      "value": "吉布提"
+    },
+    {
+      "name": "quec_country_254",
+      "value": "肯尼亚"
+    },
+    {
+      "name": "quec_country_255",
+      "value": "坦桑尼亚"
+    },
+    {
+      "name": "quec_country_256",
+      "value": "乌干达"
+    },
+    {
+      "name": "quec_country_257",
+      "value": "布隆迪"
+    },
+    {
+      "name": "quec_country_258",
+      "value": "莫桑比克"
+    },
+    {
+      "name": "quec_country_260",
+      "value": "赞比亚"
+    },
+    {
+      "name": "quec_country_261",
+      "value": "马达加斯加"
+    },
+    {
+      "name": "quec_country_262_1",
+      "value": "留尼汪"
+    },
+    {
+      "name": "quec_country_263",
+      "value": "津巴布韦"
+    },
+    {
+      "name": "quec_country_264",
+      "value": "纳米比亚"
+    },
+    {
+      "name": "quec_country_265",
+      "value": "马拉维"
+    },
+    {
+      "name": "quec_country_266",
+      "value": "莱索托"
+    },
+    {
+      "name": "quec_country_267",
+      "value": "博茨瓦纳"
+    },
+    {
+      "name": "quec_country_268",
+      "value": "斯威士兰"
+    },
+    {
+      "name": "quec_country_262_2",
+      "value": "马约特"
+    },
+    {
+      "name": "quec_country_27",
+      "value": "南非"
+    },
+    {
+      "name": "quec_country_291",
+      "value": "厄立特里亚"
+    },
+    {
+      "name": "quec_country_297",
+      "value": "阿鲁巴"
+    },
+    {
+      "name": "quec_country_298",
+      "value": "法罗群岛"
+    },
+    {
+      "name": "quec_country_299",
+      "value": "格陵兰"
+    },
+    {
+      "name": "quec_country_350",
+      "value": "直布罗陀"
+    },
+    {
+      "name": "quec_country_354",
+      "value": "冰岛"
+    },
+    {
+      "name": "quec_country_355",
+      "value": "阿尔巴尼亚"
+    },
+    {
+      "name": "quec_country_373",
+      "value": "摩尔多瓦"
+    },
+    {
+      "name": "quec_country_374",
+      "value": "亚美尼亚"
+    },
+    {
+      "name": "quec_country_375",
+      "value": "白俄罗斯"
+    },
+    {
+      "name": "quec_country_376",
+      "value": "安道尔"
+    },
+    {
+      "name": "quec_country_377",
+      "value": "摩纳哥"
+    },
+    {
+      "name": "quec_country_378",
+      "value": "圣马力诺"
+    },
+    {
+      "name": "quec_country_379",
+      "value": "梵蒂冈"
+    },
+    {
+      "name": "quec_country_380",
+      "value": "乌克兰"
+    },
+    {
+      "name": "quec_country_381",
+      "value": "塞尔维亚"
+    },
+    {
+      "name": "quec_country_382",
+      "value": "黑山"
+    },
+    {
+      "name": "quec_country_387",
+      "value": "波黑"
+    },
+    {
+      "name": "quec_country_389",
+      "value": "北马其顿"
+    },
+    {
+      "name": "quec_country_41",
+      "value": "瑞士"
+    },
+    {
+      "name": "quec_country_423",
+      "value": "列支敦士登"
+    },
+    {
+      "name": "quec_country_44",
+      "value": "英国"
+    },
+    {
+      "name": "quec_country_00",
+      "value": "斯瓦尔巴群岛和扬马延岛"
+    },
+    {
+      "name": "quec_country_501",
+      "value": "伯利兹"
+    },
+    {
+      "name": "quec_country_503",
+      "value": "萨尔瓦多"
+    },
+    {
+      "name": "quec_country_504",
+      "value": "洪都拉斯"
+    },
+    {
+      "name": "quec_country_505",
+      "value": "尼加拉瓜"
+    },
+    {
+      "name": "quec_country_506",
+      "value": "哥斯达黎加"
+    },
+    {
+      "name": "quec_country_507",
+      "value": "巴拿马"
+    },
+    {
+      "name": "quec_country_508",
+      "value": "圣皮埃尔和密克隆"
+    },
+    {
+      "name": "quec_country_509",
+      "value": "海地"
+    },
+    {
+      "name": "quec_country_590",
+      "value": "瓜德罗普"
+    },
+    {
+      "name": "quec_country_592",
+      "value": "圭亚那"
+    },
+    {
+      "name": "quec_country_596",
+      "value": "马提尼克"
+    },
+    {
+      "name": "quec_country_61",
+      "value": "澳大利亚"
+    },
+    {
+      "name": "quec_country_65",
+      "value": "新加坡"
+    },
+    {
+      "name": "quec_country_673",
+      "value": "文莱"
+    },
+    {
+      "name": "quec_country_676",
+      "value": "汤加"
+    },
+    {
+      "name": "quec_country_679",
+      "value": "斐济群岛"
+    },
+    {
+      "name": "quec_country_680",
+      "value": "帕劳"
+    },
+    {
+      "name": "quec_country_681",
+      "value": "瓦利斯和富图纳"
+    },
+    {
+      "name": "quec_country_685",
+      "value": "萨摩亚"
+    },
+    {
+      "name": "quec_country_687",
+      "value": "新喀里多尼亚"
+    },
+    {
+      "name": "quec_country_688",
+      "value": "图瓦卢"
+    },
+    {
+      "name": "quec_country_689",
+      "value": "法属波利尼西亚"
+    },
+    {
+      "name": "quec_country_691",
+      "value": "密克罗尼西亚联邦"
+    },
+    {
+      "name": "quec_country_692",
+      "value": "马绍尔群岛"
+    },
+    {
+      "name": "quec_country_855",
+      "value": "柬埔寨"
+    },
+    {
+      "name": "quec_country_856",
+      "value": "老挝"
+    },
+    {
+      "name": "quec_country_880",
+      "value": "孟加拉"
+    },
+    {
+      "name": "quec_country_90",
+      "value": "土耳其"
+    },
+    {
+      "name": "quec_country_92",
+      "value": "巴基斯坦"
+    },
+    {
+      "name": "quec_country_94",
+      "value": "斯里兰卡"
+    },
+    {
+      "name": "quec_country_960",
+      "value": "马尔代夫"
+    },
+    {
+      "name": "quec_country_961",
+      "value": "黎巴嫩"
+    },
+    {
+      "name": "quec_country_962",
+      "value": "约旦"
+    },
+    {
+      "name": "quec_country_965",
+      "value": "科威特"
+    },
+    {
+      "name": "quec_country_966",
+      "value": "沙特阿拉伯"
+    },
+    {
+      "name": "quec_country_967",
+      "value": "也门"
+    },
+    {
+      "name": "quec_country_968",
+      "value": "阿曼"
+    },
+    {
+      "name": "quec_country_971",
+      "value": "阿联酋"
+    },
+    {
+      "name": "quec_country_972",
+      "value": "以色列"
+    },
+    {
+      "name": "quec_country_973",
+      "value": "巴林"
+    },
+    {
+      "name": "quec_country_974",
+      "value": "卡塔尔"
+    },
+    {
+      "name": "quec_country_975",
+      "value": "不丹"
+    },
+    {
+      "name": "quec_country_976",
+      "value": "蒙古国"
+    },
+    {
+      "name": "quec_country_977",
+      "value": "尼泊尔"
+    },
+    {
+      "name": "quec_country_992",
+      "value": "塔吉克斯坦"
+    },
+    {
+      "name": "quec_country_993",
+      "value": "土库曼斯坦"
+    },
+    {
+      "name": "quec_country_994",
+      "value": "阿塞拜疆"
+    },
+    {
+      "name": "quec_country_995",
+      "value": "格鲁吉亚"
+    },
+    {
+      "name": "quec_country_996",
+      "value": "吉尔吉斯斯坦"
+    },
+    {
+      "name": "quec_country_998",
+      "value": "乌兹别克斯坦"
+    },
+    {
+      "name": "quec_country_852",
+      "value": "中国香港"
+    },
+    {
+      "name": "quec_country_81",
+      "value": "日本"
+    },
+    {
+      "name": "quec_country_1_787_939",
+      "value": "波多黎各"
+    },
+    {
+      "name": "quec_country_1_809_829_849",
+      "value": "多米尼加"
+    },
+    {
+      "name": "quec_country_502",
+      "value": "危地马拉"
+    },
+    {
+      "name": "quec_country_51",
+      "value": "秘鲁"
+    },
+    {
+      "name": "quec_country_52",
+      "value": "墨西哥"
+    },
+    {
+      "name": "quec_country_54",
+      "value": "阿根廷"
+    },
+    {
+      "name": "quec_country_55",
+      "value": "巴西"
+    },
+    {
+      "name": "quec_country_56",
+      "value": "智利"
+    },
+    {
+      "name": "quec_country_57",
+      "value": "哥伦比亚"
+    },
+    {
+      "name": "quec_country_58",
+      "value": "委内瑞拉"
+    },
+    {
+      "name": "quec_country_591",
+      "value": "玻利维亚"
+    },
+    {
+      "name": "quec_country_593",
+      "value": "厄瓜多尔"
+    },
+    {
+      "name": "quec_country_595",
+      "value": "巴拉圭"
+    },
+    {
+      "name": "quec_country_597",
+      "value": "苏里南"
+    },
+    {
+      "name": "quec_country_598",
+      "value": "乌拉圭"
+    },
+    {
+      "name": "quec_country_60",
+      "value": "马来西亚"
+    },
+    {
+      "name": "quec_country_62",
+      "value": "印尼"
+    },
+    {
+      "name": "quec_country_63",
+      "value": "菲律宾"
+    },
+    {
+      "name": "quec_country_64",
+      "value": "新西兰"
+    },
+    {
+      "name": "quec_country_66",
+      "value": "泰国"
+    },
+    {
+      "name": "quec_country_82",
+      "value": "韩国 南朝鲜"
+    },
+    {
+      "name": "quec_country_84",
+      "value": "越南"
+    },
+    {
+      "name": "quec_country_91",
+      "value": "印度"
+    },
+    {
+      "name": "quec_country_853",
+      "value": "中国澳门"
+    },
+    {
+      "name": "quec_country_886",
+      "value": "中国台湾"
+    },
+    {
+      "name": "quec_country_95",
+      "value": "缅甸"
+    },
+    {
+      "name": "quec_country_1_1",
+      "value": "美国"
+    },
+    {
+      "name": "quec_country_1_2",
+      "value": "加拿大"
+    },
+    {
+      "name": "quec_device_bind_success",
+      "value": "绑定成功"
+    },
+    {
+      "name": "quec_key_i_know",
+      "value": "我知道了"
+    },
+    {
+      "name": "quec_account_and_security",
+      "value": "账户与安全"
+    },
+    {
+      "name": "quec_safety",
+      "value": "安全"
+    },
+    {
+      "name": "quec_account_security",
+      "value": "账户安全"
+    },
+    {
+      "name": "quec_email",
+      "value": "邮箱"
+    },
+    {
+      "name": "quec_not_bound",
+      "value": "未绑定"
+    },
+    {
+      "name": "quec_already_bound",
+      "value": "已绑定"
+    },
+    {
+      "name": "quec_not_set",
+      "value": "未设置"
+    },
+    {
+      "name": "quec_already_set",
+      "value": "已设置"
+    },
+    {
+      "name": "quec_login_password",
+      "value": "登录密码"
+    },
+    {
+      "name": "quec_third_party_account",
+      "value": "第三方账号"
+    },
+    {
+      "name": "quec_write_off",
+      "value": "注销"
+    },
+    {
+      "name": "quec_google",
+      "value": "Google"
+    },
+    {
+      "name": "quec_facebook",
+      "value": "Facebook"
+    },
+    {
+      "name": "quec_twitter",
+      "value": "Twitter"
+    },
+    {
+      "name": "quec_bind_email",
+      "value": "绑定邮箱"
+    },
+    {
+      "name": "quec_bind_phone",
+      "value": "绑定手机号"
+    },
+    {
+      "name": "quec_unbind_email",
+      "value": "解绑邮箱"
+    },
+    {
+      "name": "quec_unbind_phone",
+      "value": "解绑手机号"
+    },
+    {
+      "name": "quec_enter_phone_number",
+      "value": "请输入手机号"
+    },
+    {
+      "name": "quec_login_get_code",
+      "value": "获取验证码"
+    },
+    {
+      "name": "quec_enter_email",
+      "value": "请输入邮箱"
+    },
+    {
+      "name": "quec_login_email_registered",
+      "value": "邮箱已注册"
+    },
+    {
+      "name": "quec_login_email_format_error",
+      "value": "邮箱格式不正确"
+    },
+    {
+      "name": "quec_login_email_verification_failed",
+      "value": "邮箱验证码验证失败"
+    },
+    {
+      "name": "quec_login_enter_verification_code",
+      "value": "请输入验证码"
+    },
+    {
+      "name": "quec_login_unbind",
+      "value": "解绑"
+    },
+    {
+      "name": "quec_not_bind_email",
+      "value": "未绑定邮箱"
+    },
+    {
+      "name": "quec_not_bind_phone",
+      "value": "未绑定手机号"
+    },
+    {
+      "name": "quec_login_only_login_not_delete",
+      "value": "此为唯一登录方式，不能删除"
+    },
+    {
+      "name": "quec_login_phone_verification_failed",
+      "value": "短信验证码验证失败"
+    },
+    {
+      "name": "quec_login_unbind_fail",
+      "value": "解绑失败"
+    },
+    {
+      "name": "quec_login_unbind_success",
+      "value": "解绑成功"
+    },
+    {
+      "name": "quec_login_unbind_fail_content",
+      "value": "当前登录方式为唯一登录渠道，暂不支持解绑。如需解绑请先添加其他登录方式"
+    },
+    {
+      "name": "quec_login_current_phone",
+      "value": "当前手机号为"
+    },
+    {
+      "name": "quec_login_current_email",
+      "value": "当前邮箱为"
+    },
+    {
+      "name": "quec_login_error",
+      "value": "暂不支持此服务"
+    },
+    {
+      "name": "quec_login_account_cancel",
+      "value": "已取消授权登录"
+    },
+    {
+      "name": "quec_login_account_has_been_registered",
+      "value": "该账号已注册，请更换未注册的账号进行绑定"
     }
   ]
 }
