@@ -28,6 +28,7 @@ export class QuecMmkvManager {
   }
 
   static getInstance(scope?: string): QuecMmkvManager {
+    QuecMmkvManager.ensureInitialized()
     if (scope === undefined) {
       const instance = QuecMmkvManager.defaultInstance
       if (instance === undefined) {
@@ -164,7 +165,7 @@ export class QuecMmkvManager {
   }
 
   public static removeScope(scope: string): boolean {
-    QuecMmkvManager.ensureInitialzed()
+    QuecMmkvManager.ensureInitialized()
     const scopeId = scope.trim()
 
     if (scopeId.length === 0) {
@@ -182,7 +183,7 @@ export class QuecMmkvManager {
     }
   }
 
-  private static ensureInitialzed(): void {
+  private static ensureInitialized(): void {
     if (!QuecMmkvManager.initialized) {
       throw new Error('QuecMmkvManager.initialize() must be called before use')
     }

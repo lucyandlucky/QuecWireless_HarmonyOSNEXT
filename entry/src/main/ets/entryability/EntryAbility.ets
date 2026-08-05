@@ -3,6 +3,7 @@ import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
 import { getWindowInsetsState, WindowInsetsState } from 'quec_basic_ui';
 import { setupNetwork } from '../network/NetworkBootstrap';
+import { QuecMmkvManager } from 'quec_mmkv';
 
 const DOMAIN = 0x0000;
 
@@ -54,6 +55,8 @@ export default class EntryAbility extends UIAbility {
   }
 
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
+    const applicationContext = this.context.getApplicationContext()
+    QuecMmkvManager.initialize(applicationContext)
     setupNetwork()
   }
 
