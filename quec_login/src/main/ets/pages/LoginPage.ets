@@ -1,6 +1,7 @@
 import { common } from '@kit.AbilityKit'
 import { getWindowInsetsState, QuecTitleBar, WindowInsetsState } from 'quec_basic_ui'
 import { QuecColorUtils } from 'quec_foundation'
+import { QuecUnderlineTextInput } from '../components/QuecUnderlineTextInput'
 
 @Builder
 export function LoginPageBuilder() {
@@ -36,6 +37,7 @@ export struct LoginPage {
         Column() {
           QuecTitleBar({
             transparent: true,
+            leftIconVisible: false,
             rightText: {
               text: $r('app.string.quec_login_register'),
               color: $r('app.color.W2'),
@@ -43,6 +45,25 @@ export struct LoginPage {
               },
             }
           })
+
+          Column() {
+            Text($r('app.string.quec_password_login'))
+              .fontColor($r('app.color.W1'))
+              .fontSize(24)
+              .fontWeight(FontWeight.Medium)
+            Column({ space: 45 }) {
+              QuecUnderlineTextInput({
+                placeholder: $r('app.string.quec_login_account')
+              })
+              QuecUnderlineTextInput({
+                placeholder: $r('app.string.quec_login_psd')
+              })
+            }.margin({ top: 52 })
+
+          }
+          .padding({ top: 12, left: 28, right: 28 })
+          .alignItems(HorizontalAlign.Start)
+
         }
         .width('100%')
         .height('100%')
