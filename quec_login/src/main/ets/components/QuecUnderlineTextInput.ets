@@ -1,3 +1,5 @@
+import { curves } from '@kit.ArkUI'
+
 @ComponentV2
 export struct QuecUnderlineTextInput {
   @Param value: string = ''
@@ -33,11 +35,33 @@ export struct QuecUnderlineTextInput {
           this.focused = false
         })
 
-      Divider()
+      Stack({ alignContent: Alignment.Center }) {
+        Divider()
+          .width('100%')
+          .color($r('app.color.quec_login_edit_line_nor'))
+          .strokeWidth(1)
+
+        Divider()
+          .width('100%')
+          .color($r('app.color.quec_login_edit_line_pre'))
+          .strokeWidth(1)
+          .scale({
+            x: this.focused ? 1 : 0,
+            y: 1,
+            centerX: '50%',
+            centerY: '50%'
+          })
+          .opacity(this.focused ? 1 : 0)
+          .animation({
+            duration: this.focused ? 280 : 140,
+            curve: this.focused
+              ? curves.cubicBezierCurve(0.22, 1, 0.36, 1)
+              : curves.cubicBezierCurve(0.64, 0, 0.78, 0)
+          })
+      }
         .width('100%')
+        .height(1)
         .margin({ top: 10 })
-        .color(this.focused ? $r('app.color.W3') : '#E7E7E7')
-        .strokeWidth(1)
 
     }.width('100%')
   }

@@ -1,0 +1,12 @@
+{
+  "color": [
+    {
+      "name": "quec_login_edit_line_nor",
+      "value": "#E7E7E7"
+    },
+    {
+      "name": "quec_login_edit_line_pre",
+      "value": "#9C9FA3"
+    }
+  ]
+}
