@@ -57,6 +57,10 @@
     {
       "name": "quec_network",
       "srcPath": "./quec_network",
+    },
+    {
+      "name": "quec_mmkv",
+      "srcPath": "./quec_mmkv",
     }
   ]
 }

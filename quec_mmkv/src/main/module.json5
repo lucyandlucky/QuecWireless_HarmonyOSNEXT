@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "quec_mmkv",
+    "type": "har",
+    "deviceTypes": [
+      "default"
+    ]
+  }
+}

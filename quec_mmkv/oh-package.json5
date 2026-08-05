@@ -1,0 +1,11 @@
+{
+  "name": "quec_mmkv",
+  "version": "1.0.0",
+  "description": "Quectel shared MMKV storage library for HarmonyOS.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@tencent/mmkv": "2.4.1"
+  }
+}
