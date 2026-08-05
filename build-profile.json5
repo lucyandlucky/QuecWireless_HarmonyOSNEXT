@@ -61,6 +61,10 @@
     {
       "name": "quec_mmkv",
       "srcPath": "./quec_mmkv",
+    },
+    {
+      "name": "quec_login",
+      "srcPath": "./quec_login",
     }
   ]
 }
