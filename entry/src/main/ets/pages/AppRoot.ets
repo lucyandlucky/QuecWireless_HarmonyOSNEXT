@@ -1,9 +1,5 @@
-enum AppStage {
-  LOADING,
-  WELCOME,
-  LOGIN,
-  MAIN
-}
+import { LOGIN_ROUTE } from 'quec_login';
+import { QuecAgreementStorage, WELCOME_ROUTE } from 'quec_main';
 
 @Entry
 @ComponentV2
@@ -27,12 +23,12 @@ struct AppRoot {
       return
     }
     this.hasInitialized = true
-    const hasAgreePolicy: boolean = false
 
-    if (!hasAgreePolicy) {
-      this.resetToRoute('QuecWelcomePage')
-    }
+    const initialRoute: string = QuecAgreementStorage.hasAgreed()
+      ? LOGIN_ROUTE
+      : WELCOME_ROUTE
 
+    this.resetToRoute(initialRoute)
   }
 
   build() {

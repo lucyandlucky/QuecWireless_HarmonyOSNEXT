@@ -1,6 +1,8 @@
 import { AgreementDialog } from '../components/AgreementDialog';
 import common from '@ohos.app.ability.common';
 import { PolicyRouteParams, PolicySource, PolicyType, PRIVACY_WEBVIEW_ROUTE } from 'quec_privacy_policy';
+import { LOGIN_ROUTE } from 'quec_login';
+import { QuecAgreementStorage } from '../storage/QuecAgreementStorage';
 
 
 @Builder
@@ -11,9 +13,16 @@ export function WelcomePageBuilder() {
 @ComponentV2
 export struct WelcomePage {
   @Consumer('AppNavigation') navigation: NavPathStack = new NavPathStack()
-  agreementDialogController: CustomDialogController | null = new CustomDialogController({
+  private agreementDialogController: CustomDialogController | null = new CustomDialogController({
     builder: AgreementDialog({
       onAgree: () => {
+        const saved: boolean = QuecAgreementStorage.setHasAgreed(true)
+        if (!saved) {
+          console.error('Failed to persist the agreement state')
+          return
+        }
+        this.agreementDialogController?.close()
+        this.resetToLogin()
       },
       onCancel: () => {
         this.exitApp()
@@ -42,8 +51,17 @@ export struct WelcomePage {
         this.exitApp()
       }
     }
-
   })
+
+  private resetToLogin(): void {
+    const loginPage = new NavPathInfo(
+      LOGIN_ROUTE,
+      undefined,
+      undefined,
+      true
+    )
+    this.navigation.setPathStack([loginPage], false)
+  }
 
   aboutToDisappear(): void {
     this.agreementDialogController = null

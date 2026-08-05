@@ -1,3 +1,5 @@
+import { common } from '@kit.AbilityKit'
+
 @Builder
 export function LoginPageBuilder() {
   LoginPage()
@@ -5,6 +7,14 @@ export function LoginPageBuilder() {
 
 @ComponentV2
 export struct LoginPage {
+  @Consumer('AppNavigation')
+  private navigation: NavPathStack = new NavPathStack()
+
+  private moveAppToBackground(): void {
+    const context = this.getUIContext().getHostContext() as common.UIAbilityContext
+    context.moveAbilityToBackground().catch()
+  }
+
   build() {
     NavDestination() {
       Column() {
@@ -18,5 +28,12 @@ export struct LoginPage {
       .backgroundColor($r('app.color.B2'))
     }
     .hideTitleBar(true)
+    .onBackPressed(() => {
+      if (this.navigation.size() > 1) {
+        return false
+      }
+      this.moveAppToBackground()
+      return true
+    })
   }
 }
