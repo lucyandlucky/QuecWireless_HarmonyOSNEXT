@@ -8,5 +8,6 @@
   "dependencies": {
     "quec_ui_config": "file:../quec_ui_config",
     "quec_privacy_policy": "file:../quec_privacy_policy",
+    "quec_mmkv": "file:../quec_mmkv"
   }
 }
