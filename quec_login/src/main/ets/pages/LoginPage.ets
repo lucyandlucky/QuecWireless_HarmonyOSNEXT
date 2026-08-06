@@ -16,10 +16,22 @@ export struct LoginPage {
   private navigation: NavPathStack = new NavPathStack()
   @Local private windowInsets: WindowInsetsState = getWindowInsetsState()
   @Local private hasAgreedPolicy: boolean = false
+  @Local private account: string = ''
+  @Local private password: string = ''
+
+  @Computed
+  get loginVerify(): boolean {
+    return this.account.length >= 1 && this.password.length >= 6
+  }
 
   private moveAppToBackground(): void {
     const context = this.getUIContext().getHostContext() as common.UIAbilityContext
     context.moveAbilityToBackground().catch()
+  }
+
+  private onLogin(): void {
+
+
   }
 
   build() {
@@ -56,10 +68,19 @@ export struct LoginPage {
               .fontWeight(FontWeight.Medium)
             Column({ space: 45 }) {
               QuecUnderlineTextInput({
-                placeholder: $r('app.string.quec_login_account')
+                value: this.account,
+                placeholder: $r('app.string.quec_login_account'),
+                onValueChange: (val) => {
+                  this.account = val
+                }
               })
               QuecUnderlineTextInput({
-                placeholder: $r('app.string.quec_login_psd')
+                inputType: InputType.Password,
+                value: this.password,
+                placeholder: $r('app.string.quec_login_psd'),
+                onValueChange: (val) => {
+                  this.password = val
+                }
               })
             }.margin({ top: 52 })
 
@@ -81,7 +102,11 @@ export struct LoginPage {
             })
               .margin({ top: 16 })
 
-            QuecLoginButton()
+            QuecLoginButton({
+              text: $r('app.string.quec_login'),
+              verify: this.loginVerify,
+              onLogin: this.onLogin
+            })
 
             Text($r('app.string.quec_login_code'))
               .width('100%')
