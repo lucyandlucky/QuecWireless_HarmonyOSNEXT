@@ -56,10 +56,10 @@ export default class EntryAbility extends UIAbility {
   }
 
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
-    const applicationContext = this.context.getApplicationContext()
     HMRouterMgr.init({
       context: this.context
     })
+    const applicationContext = this.context.getApplicationContext()
     QuecMmkvManager.initialize(applicationContext)
     setupNetwork()
   }
