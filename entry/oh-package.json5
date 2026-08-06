@@ -13,6 +13,7 @@
     "quec_basic_ui": "file:../quec_basic_ui",
     "quec_network": "file:../quec_network",
     "quec_mmkv": "file:../quec_mmkv",
-    "quec_login": "file:../quec_login"
+    "quec_login": "file:../quec_login",
+    "quec_encrypt": "file:../quec_encrypt"
   }
 }

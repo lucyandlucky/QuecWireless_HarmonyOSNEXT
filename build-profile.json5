@@ -69,6 +69,10 @@
     {
       "name": "quec_foundation",
       "srcPath": "./quec_foundation",
+    },
+    {
+      "name": "quec_encrypt",
+      "srcPath": "./quec_encrypt",
     }
   ]
 }

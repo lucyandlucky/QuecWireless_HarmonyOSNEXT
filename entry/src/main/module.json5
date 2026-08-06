@@ -32,6 +32,15 @@
             ]
           }
         ]
+      },
+      {
+        "name": "EncryptDemoAbility",
+        "srcEntry": "./ets/entryability/EncryptDemoAbility.ets",
+        "description": "QuecEncrypt utility demo",
+        "label": "$string:EntryAbility_label",
+        "startWindowIcon": "$media:startIcon",
+        "startWindowBackground": "$color:start_window_background",
+        "exported": false
       }
     ],
     "extensionAbilities": [

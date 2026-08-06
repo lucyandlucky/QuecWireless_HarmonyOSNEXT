@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "quec_encrypt",
+    "type": "har",
+    "deviceTypes": [
+      "default"
+    ]
+  }
+}
