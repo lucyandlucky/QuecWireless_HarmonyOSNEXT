@@ -1,8 +1,9 @@
-import { AgreementDialog } from '../components/AgreementDialog';
 import common from '@ohos.app.ability.common';
 import { PolicyRouteParams, PolicySource, PolicyType, PRIVACY_WEBVIEW_ROUTE } from 'quec_privacy_policy';
+
 import { LOGIN_ROUTE } from 'quec_login';
 import { QuecAgreementStorage } from '../storage/QuecAgreementStorage';
+import { AgreementDialog } from '../components/AgreementDialog';
 
 
 @Builder
@@ -13,15 +14,18 @@ export function WelcomePageBuilder() {
 @ComponentV2
 export struct WelcomePage {
   @Consumer('AppNavigation') navigation: NavPathStack = new NavPathStack()
-  private agreementDialogController: CustomDialogController | null = new CustomDialogController({
-    builder: AgreementDialog({
+  private dialogId: number = -1
+
+  @Builder
+  agreementDialogBuilder() {
+    AgreementDialog({
       onAgree: () => {
         const saved: boolean = QuecAgreementStorage.setHasAgreed(true)
         if (!saved) {
           console.error('Failed to persist the agreement state')
           return
         }
-        this.agreementDialogController?.close()
+        this.closeAgreementDialog()
         this.resetToLogin()
       },
       onCancel: () => {
@@ -35,23 +39,36 @@ export struct WelcomePage {
         }
         this.navigation.pushPathByName(PRIVACY_WEBVIEW_ROUTE, params)
       }
-    }),
-    cancel: this.exitApp,
-    autoCancel: false,
-    width: '80%',
-    backgroundColor: $r('app.color.B3'),
-    cornerRadius: '16vp',
-    alignment: DialogAlignment.Center,
-    onWillDismiss: (action) => {
-      action.dismiss()
-      if (
-        action.reason === DismissReason.PRESS_BACK ||
-          action.reason === DismissReason.TOUCH_OUTSIDE
-      ) {
+    })
+  }
+
+  private async openAgreementDialog(): Promise<void> {
+    if (this.dialogId > 0) {
+      return
+    }
+    const prompt = this.getUIContext().getPromptAction()
+    this.dialogId = await prompt.openCustomDialog({
+      builder: () => {
+        this.agreementDialogBuilder()
+      },
+      autoCancel: false,
+      width: '80%',
+      backgroundColor: $r('app.color.B3'),
+      cornerRadius: '16vp',
+      alignment: DialogAlignment.Center,
+      onWillDismiss: () => {
         this.exitApp()
       }
+    })
+  }
+
+  private closeAgreementDialog(): void {
+    if (this.dialogId < 0) {
+      return
     }
-  })
+    this.getUIContext().getPromptAction().closeCustomDialog(this.dialogId)
+    this.dialogId = -1
+  }
 
   private resetToLogin(): void {
     const loginPage = new NavPathInfo(
@@ -64,7 +81,7 @@ export struct WelcomePage {
   }
 
   aboutToDisappear(): void {
-    this.agreementDialogController = null
+    this.dialogId = -1
   }
 
   exitApp() {
@@ -87,11 +104,14 @@ export struct WelcomePage {
     }
     .hideTitleBar(true)
     .onShown(() => {
-      this.agreementDialogController?.open()
+      // this.agreementDialogController?.open()
+      this.openAgreementDialog()
+
     })
     .onHidden(
       () => {
-        this.agreementDialogController?.close()
+        // this.agreementDialogController?.close()
+        this.closeAgreementDialog()
       }
     )
   }

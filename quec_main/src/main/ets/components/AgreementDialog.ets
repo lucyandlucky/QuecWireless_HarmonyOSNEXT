@@ -15,16 +15,15 @@ function dialogActionText(color: ResourceColor) {
 }
 
 
-@CustomDialog
+@ComponentV2
 export struct AgreementDialog {
-  controller?: CustomDialogController
-  onAgree = () => {
+  @Event onAgree: () => void = () => {
   }
-  onCancel = () => {
+  @Event onCancel: () => void = () => {
   }
-  onOpenPolicy: (type: PolicyType, title: ResourceStr) => void = (_type: PolicyType, _title: ResourceStr) => {
+  @Event onOpenPolicy: (type: PolicyType, title: ResourceStr) => void = (_type: PolicyType, _title: ResourceStr) => {
   }
-  navigationWebView = () => {
+  @Event navigationWebView: () => void = () => {
   }
 
   build() {
