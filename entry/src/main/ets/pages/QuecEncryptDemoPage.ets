@@ -95,6 +95,23 @@ struct QuecEncryptDemoPage {
       AES_CONTENT,
       (): string => QuecAesUtils.decrypt(AES_RESULT, AES_KEY, AES_IV)
     )
+    this.runCase(
+      'AES Android Base64 wrapping',
+      '64 ASCII characters',
+      '76,32,0',
+      (): string => {
+        const longContent: string =
+          'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' +
+          'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+        const encrypted: string = QuecAesUtils.encrypt(
+          longContent,
+          AES_KEY,
+          AES_IV
+        )
+        const lines: Array<string> = encrypted.split('\n')
+        return `${lines[0].length},${lines[1].length},${lines[2].length}`
+      }
+    )
 
     const utf8Content: string = '移联万物 QuecWireless'
     this.runCase(
