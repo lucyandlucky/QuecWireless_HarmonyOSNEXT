@@ -1,20 +1,43 @@
 import common from '@ohos.app.ability.common';
 import { PolicyRouteParams, PolicySource, PolicyType, PRIVACY_WEBVIEW_ROUTE } from 'quec_privacy_policy';
+import { HMLifecycleState, HMRouter, HMRouterMgr, IHMLifecycleOwner } from '@hadss/hmrouter';
 
 import { LOGIN_ROUTE } from 'quec_login';
 import { QuecAgreementStorage } from '../storage/QuecAgreementStorage';
 import { AgreementDialog } from '../components/AgreementDialog';
+import { WELCOME_ROUTE } from '../model/QuecMainRoute';
 
 
-@Builder
-export function WelcomePageBuilder() {
-  WelcomePage()
-}
-
+@HMRouter({ pageUrl: WELCOME_ROUTE })
 @ComponentV2
 export struct WelcomePage {
-  @Consumer('AppNavigation') navigation: NavPathStack = new NavPathStack()
+  private lifecycleOwner: IHMLifecycleOwner | null = null
   private dialogId: number = -1
+
+  aboutToAppear(): void {
+    this.lifecycleOwner = HMRouterMgr.getCurrentLifecycleOwner()
+    this.lifecycleOwner?.addObserver(
+      HMLifecycleState.onShown,
+      this.onPageShown
+    )
+    this.lifecycleOwner?.addObserver(
+      HMLifecycleState.onHidden,
+      this.onPageHidden
+    )
+  }
+
+  aboutToDisappear(): void {
+    this.lifecycleOwner?.removeObserver(
+      HMLifecycleState.onShown,
+      this.onPageShown
+    )
+    this.lifecycleOwner?.removeObserver(
+      HMLifecycleState.onHidden,
+      this.onPageHidden
+    )
+    this.closeAgreementDialog()
+    this.lifecycleOwner = null
+  }
 
   @Builder
   agreementDialogBuilder() {
@@ -37,9 +60,26 @@ export struct WelcomePage {
           type,
           title
         }
-        this.navigation.pushPathByName(PRIVACY_WEBVIEW_ROUTE, params)
+        HMRouterMgr.push({
+          pageUrl: PRIVACY_WEBVIEW_ROUTE,
+          param: params
+        })
       }
     })
+  }
+
+  private exitApp() {
+    const context = this.getUIContext().getHostContext() as common.UIAbilityContext
+    context.terminateSelf().catch((err: Error) => {
+      console.error(`terminateSelf failed: ${JSON.stringify(err)}`)
+    })
+  }
+
+  private onPageShown = (): void => {
+    this.openAgreementDialog()
+  }
+  private onPageHidden = (): void => {
+    this.closeAgreementDialog()
   }
 
   private async openAgreementDialog(): Promise<void> {
@@ -71,48 +111,17 @@ export struct WelcomePage {
   }
 
   private resetToLogin(): void {
-    const loginPage = new NavPathInfo(
-      LOGIN_ROUTE,
-      undefined,
-      undefined,
-      true
-    )
-    this.navigation.setPathStack([loginPage], false)
-  }
-
-  aboutToDisappear(): void {
-    this.dialogId = -1
-  }
-
-  exitApp() {
-    const context = this.getUIContext().getHostContext() as common.UIAbilityContext
-    context.terminateSelf().catch((err: Error) => {
-      console.error(`terminateSelf failed: ${JSON.stringify(err)}`)
-    })
+    HMRouterMgr.replace({ pageUrl: LOGIN_ROUTE })
   }
 
   build() {
-    NavDestination() {
-      Stack() {
-        Image($r('app.media.quec_app_welcome_page'))
-          .width('100%')
-          .height('100%')
-          .objectFit(ImageFit.Cover)
-      }
-      .width('100%')
-      .height('100%')
+    Stack() {
+      Image($r('app.media.quec_app_welcome_page'))
+        .width('100%')
+        .height('100%')
+        .objectFit(ImageFit.Cover)
     }
-    .hideTitleBar(true)
-    .onShown(() => {
-      // this.agreementDialogController?.open()
-      this.openAgreementDialog()
-
-    })
-    .onHidden(
-      () => {
-        // this.agreementDialogController?.close()
-        this.closeAgreementDialog()
-      }
-    )
+    .width('100%')
+    .height('100%')
   }
 }

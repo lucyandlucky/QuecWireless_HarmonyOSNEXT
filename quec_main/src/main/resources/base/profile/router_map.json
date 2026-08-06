@@ -1,9 +1,0 @@
-{
-  "routerMap": [
-    {
-      "name": "QuecWelcomePage",
-      "pageSourceFile": "src/main/ets/pages/WelcomePage.ets",
-      "buildFunction": "WelcomePageBuilder"
-    }
-  ]
-}

@@ -4,4 +4,4 @@ export { QuecAgreementStorage } from './src/main/ets/storage/QuecAgreementStorag
 
 export { WELCOME_ROUTE } from './src/main/ets/model/QuecMainRoute'
 
-export { WelcomePage, WelcomePageBuilder } from './src/main/ets/pages/WelcomePage'
+export { WelcomePage } from './src/main/ets/pages/WelcomePage'

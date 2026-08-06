@@ -1,9 +1,0 @@
-{
-  "routerMap": [
-    {
-      "name": "QuecPrivacyWebViewPage",
-      "pageSourceFile": "src/main/ets/components/PolicyWebViewPage.ets",
-      "buildFunction": "PolicyWebViewPageBuilder"
-    }
-  ]
-}
