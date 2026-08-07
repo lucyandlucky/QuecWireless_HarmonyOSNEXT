@@ -28,3 +28,5 @@ export { QuecResponseParser } from "./src/main/ets/parser/QuecResponseParser";
 export { QuecHttpClient } from "./src/main/ets/core/QuecHttpClient";
 
 export { QuecNetwork } from "./src/main/ets/core/QuecNetwork";
+
+export { QuecTokenManager } from "./src/main/ets/token/QuecTokenManager";

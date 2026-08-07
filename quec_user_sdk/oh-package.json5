@@ -6,6 +6,7 @@
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
-    "quec_mmkv": "file:../quec_mmkv"
+    "quec_mmkv": "file:../quec_mmkv",
+    "quec_encrypt": "file:../quec_encrypt"
   }
 }

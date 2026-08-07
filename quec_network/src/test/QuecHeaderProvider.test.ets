@@ -19,10 +19,14 @@ function createConfig(defaultHeaders?: QuecHeaders): QuecNetworkConfig {
   }
 }
 
+function createProvider(config: QuecNetworkConfig, token: string = ''): QuecHeaderProvider {
+  return new QuecHeaderProvider(config, () => uuid, () => token)
+}
+
 export default function quecHeaderProviderTest(): void {
   describe('QuecHeaderProvider', () => {
     it("should create all public headers", 0, () => {
-      const provider = new QuecHeaderProvider(createConfig(), () => uuid)
+      const provider = createProvider(createConfig())
       const header = provider.createHeaders()
 
       expect(header[QuecNetworkConstants.HEADER_APP_ID]).assertEqual('271')
@@ -43,7 +47,7 @@ export default function quecHeaderProviderTest(): void {
       requestHeaders[QuecNetworkConstants.HEADER_APP_ID] = 'request-app'
       requestHeaders[QuecNetworkConstants.HEADER_LANGUAGE] = 'EN'
 
-      const headers = new QuecHeaderProvider(createConfig(defaults)).createHeaders(requestHeaders)
+      const headers = createProvider(createConfig(defaults)).createHeaders(requestHeaders)
 
       expect(headers['X-Custom']).assertEqual('global')
       expect(headers[QuecNetworkConstants.HEADER_APP_VERSION]).assertEqual('1.0.0')
@@ -57,7 +61,7 @@ export default function quecHeaderProviderTest(): void {
       let language: string = 'CN'
       const config = createConfig()
       config.languageProvider = () => language
-      const provider = new QuecHeaderProvider(config)
+      const provider = createProvider(config)
 
       const first = provider.createHeaders()
       language = 'EN'
@@ -65,6 +69,21 @@ export default function quecHeaderProviderTest(): void {
 
       expect(first[QuecNetworkConstants.HEADER_LANGUAGE]).assertEqual('CN')
       expect(second[QuecNetworkConstants.HEADER_LANGUAGE]).assertEqual('EN')
+    })
+
+    it('should add authorization when access token exists', 0, () => {
+      const headers = createProvider(createConfig(), 'access-token').createHeaders()
+
+      expect(headers[QuecNetworkConstants.HEADER_AUTHORIZATION]).assertEqual('access-token')
+    })
+
+    it('should allow request authorization to override stored token', 0, () => {
+      const requestHeaders: QuecHeaders = {}
+      requestHeaders[QuecNetworkConstants.HEADER_AUTHORIZATION] = 'request-token'
+
+      const headers = createProvider(createConfig(), 'stored-token').createHeaders(requestHeaders)
+
+      expect(headers[QuecNetworkConstants.HEADER_AUTHORIZATION]).assertEqual('request-token')
     })
   })
 
