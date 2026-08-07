@@ -73,6 +73,10 @@
     {
       "name": "quec_encrypt",
       "srcPath": "./quec_encrypt",
+    },
+    {
+      "name": "quec_user_sdk",
+      "srcPath": "./quec_user_sdk",
     }
   ]
 }

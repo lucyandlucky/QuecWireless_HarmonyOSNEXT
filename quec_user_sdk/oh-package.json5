@@ -1,0 +1,9 @@
+{
+  "name": "quec_user_sdk",
+  "version": "1.0.0",
+  "description": "Quectel shared user service SDK for HarmonyOS.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {}
+}
