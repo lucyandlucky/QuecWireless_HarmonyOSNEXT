@@ -7,9 +7,17 @@ export interface QuecUserDataSource {
   loginByPhone(formBody: QuecFormBody): Promise<QuecLoginTokenData>
 
   getUserInfo(): Promise<QuecUserModel>
+
+  logout(): Promise<void>
 }
 
 export class QuecUserApi implements QuecUserDataSource {
+  logout(): Promise<void> {
+    return QuecNetwork
+      .getClient()
+      .delete('/v2/enduser/enduserapi/userLogout')
+  }
+
   getUserInfo(): Promise<QuecUserModel> {
     return QuecNetwork
       .getClient()
@@ -19,18 +27,22 @@ export class QuecUserApi implements QuecUserDataSource {
   }
 
   public loginByEmail(formBody: QuecFormBody): Promise<QuecLoginTokenData> {
-    return QuecNetwork.getClient().post<QuecLoginTokenData>(
-      '/v2/enduser/enduserapi/emailPwdLogin',
-      undefined,
-      { formBody: formBody }
-    )
+    return QuecNetwork
+      .getClient()
+      .post<QuecLoginTokenData>(
+        '/v2/enduser/enduserapi/emailPwdLogin',
+        undefined,
+        { formBody: formBody }
+      )
   }
 
   public loginByPhone(formBody: QuecFormBody): Promise<QuecLoginTokenData> {
-    return QuecNetwork.getClient().post<QuecLoginTokenData>(
-      '/v2/enduser/enduserapi/phonePwdLogin',
-      undefined,
-      { formBody: formBody }
-    )
+    return QuecNetwork
+      .getClient()
+      .post<QuecLoginTokenData>(
+        '/v2/enduser/enduserapi/phonePwdLogin',
+        undefined,
+        { formBody: formBody }
+      )
   }
 }

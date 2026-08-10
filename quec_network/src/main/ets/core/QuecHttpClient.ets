@@ -25,6 +25,15 @@ export class QuecHttpClient {
     return this.request<T>(url, QuecRequestMethod.GET, undefined, options)
   }
 
+  public async delete(url: string, body?: QuecRequestBody, options?: QuecRequestOptions) {
+    return this.requestWithoutData(
+      url,
+      QuecRequestMethod.DELETE,
+      body,
+      options
+    )
+  }
+
   public async post<T>(url: string, body?: QuecRequestBody, options?: QuecRequestOptions) {
     return this.request<T>(url, QuecRequestMethod.POST, body, options)
   }

@@ -90,6 +90,22 @@ export class QuecUserService {
     }
   }
 
+  private clearLoginInfo(): void {
+    QuecTokenManager.clearToken()
+    QuecMmkvManager.getInstance()
+      .removeValues([
+        QuecUserConstants.KEY_USER_UID,
+        QuecUserConstants.KEY_USER_MODEL
+      ])
+    this.currentUser = undefined
+  }
+
+  public static async logout(): Promise<void> {
+    const service: QuecUserService = QuecUserService.getInstance()
+    await service.dataSource.logout()
+    service.clearLoginInfo()
+  }
+
   public static initialize(config: QuecUserSdkConfig): void {
     QuecUserService.instance = new QuecUserService(config)
   }
