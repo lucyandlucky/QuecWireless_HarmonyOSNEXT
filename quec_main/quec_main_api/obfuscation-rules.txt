@@ -1,0 +1,1 @@
+# Project-specific obfuscation rules for quec_main_api.

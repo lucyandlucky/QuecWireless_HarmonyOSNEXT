@@ -1,0 +1,9 @@
+{
+  "name": "quec_login_api",
+  "version": "1.0.0",
+  "description": "Public route contracts for the QuecLogin feature.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {}
+}

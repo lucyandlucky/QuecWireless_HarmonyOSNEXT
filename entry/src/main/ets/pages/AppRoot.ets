@@ -1,5 +1,6 @@
-import { LOGIN_ROUTE } from 'quec_login';
-import { QuecAgreementStorage, WELCOME_ROUTE } from 'quec_main';
+import { LOGIN_ROUTE } from 'quec_login_api';
+import { WELCOME_ROUTE } from 'quec_main_api';
+import { QuecAgreementStorage } from 'quec_main';
 import { AttributeUpdater } from '@kit.ArkUI';
 import { HMNavigation, HMNavigationOption } from '@hadss/hmrouter';
 
