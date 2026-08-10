@@ -1,8 +1,11 @@
+import { QuecMmkvManager } from 'quec_mmkv'
 import { QuecFormBody, QuecTokenManager } from 'quec_network'
 import { QuecUserSdkConfig } from '../config/QuecUserSdkConfig'
+import { QuecUserConstants } from '../constants/QuecUserConstants'
 import { QuecLoginTokenData, QuecUserModel } from '../model/QuecUserModel'
 import { QuecLoginRequestBuilder } from '../utils/QuecLoginRequestBuilder'
 import { QuecUserApi, QuecUserDataSource } from './QuecUserApi'
+import { JSON } from '@kit.ArkTS'
 
 export class QuecUserService {
   private static instance: QuecUserService | undefined
@@ -37,6 +40,21 @@ export class QuecUserService {
 
   private async fetchUserInfo(): Promise<QuecUserModel> {
     const user: QuecUserModel = await this.dataSource.getUserInfo()
+    const uidSaved: boolean = QuecMmkvManager
+      .getInstance()
+      .putString(
+        QuecUserConstants.KEY_USER_UID,
+        user.uid ?? ''
+      )
+    const modelSaved: boolean = QuecMmkvManager
+      .getInstance()
+      .putString(
+        QuecUserConstants.KEY_USER_MODEL,
+        JSON.stringify(user)
+      )
+    if (!uidSaved || !modelSaved) {
+      throw new Error('Failed to save user information')
+    }
     this.currentUser = user
     return user
   }
@@ -45,6 +63,31 @@ export class QuecUserService {
     this.saveToken(data)
     this.currentUser = undefined
     await this.fetchUserInfo()
+  }
+
+  private loadCachedUser(): QuecUserModel | undefined {
+    const cached: string = QuecMmkvManager
+      .getInstance()
+      .getString(QuecUserConstants.KEY_USER_MODEL)
+
+    if (cached.length === 0) {
+      return undefined
+    }
+
+    try {
+      const parsed: Object | null = JSON.parse(cached)
+      if (parsed === null) {
+        return undefined
+      }
+      const user: QuecUserModel = parsed as QuecUserModel
+      this.currentUser = user
+      return user
+    } catch (error) {
+      QuecMmkvManager
+        .getInstance()
+        .remove(QuecUserConstants.KEY_USER_MODEL)
+      return undefined
+    }
   }
 
   public static initialize(config: QuecUserSdkConfig): void {
@@ -83,7 +126,12 @@ export class QuecUserService {
   }
 
   public static getUserModel(): QuecUserModel | undefined {
-    return QuecUserService.getInstance().currentUser
+    const service = QuecUserService.getInstance()
+
+    if (service.currentUser !== undefined) {
+      return service.currentUser
+    }
+    return service.loadCachedUser()
   }
 
   public static getUserInfo(): Promise<QuecUserModel> {
