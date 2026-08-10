@@ -43,7 +43,7 @@ export class QuecLoginRequestBuilder {
     if (phone.trim().length === 0) {
       throw new Error('Phone must not be empty')
     }
-    const normalizedCode: string = this.normalizedInternationalCode(internationalCode)
+    const normalizedCode: string = this.normalizeInternationalCode(internationalCode)
     const encrypted: QuecEncryptedPassword = QuecPasswordEncryptor.encrypt(password)
     const signatureSource: string =
       normalizedCode + phone + encrypted.encryptedPassword + encrypted.random + this.config.userDomainSecret
@@ -67,7 +67,7 @@ export class QuecLoginRequestBuilder {
 
   }
 
-  private normalizedInternationalCode(value?: string): string {
+  private normalizeInternationalCode(value?: string): string {
     return value?.split('+').join('') ?? ''
   }
 }

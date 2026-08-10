@@ -1,13 +1,19 @@
 import { QuecFormBody, QuecNetwork } from 'quec_network';
-import { QuecLoginTokenData } from '../model/QuecUserModel';
+import { QuecLoginTokenData, QuecUserModel } from '../model/QuecUserModel';
 
 export interface QuecUserDataSource {
   loginByEmail(formBody: QuecFormBody): Promise<QuecLoginTokenData>
 
   loginByPhone(formBody: QuecFormBody): Promise<QuecLoginTokenData>
+
+  getUserInfo(): Promise<QuecUserModel>
 }
 
 export class QuecUserApi implements QuecUserDataSource {
+  getUserInfo(): Promise<QuecUserModel> {
+    throw new Error('Method not implemented.');
+  }
+
   public loginByEmail(formBody: QuecFormBody): Promise<QuecLoginTokenData> {
     return QuecNetwork.getClient().post<QuecLoginTokenData>(
       '/v2/enduser/enduserapi/emailPwdLogin',

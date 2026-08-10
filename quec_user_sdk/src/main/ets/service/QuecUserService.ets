@@ -1,7 +1,7 @@
 import { QuecFormBody, QuecTokenManager } from 'quec_network'
 import { QuecUserSdkConfig } from '../config/QuecUserSdkConfig'
 import { QuecLoginTokenData } from '../model/QuecUserModel'
-import { QuecLoginRequestBuilder } from '../request/QuecLoginRequestBuilder'
+import { QuecLoginRequestBuilder } from '../utils/QuecLoginRequestBuilder'
 import { QuecUserApi, QuecUserDataSource } from './QuecUserApi'
 
 export class QuecUserService {
