@@ -1,6 +1,6 @@
 import { QuecFormBody, QuecTokenManager } from 'quec_network'
 import { QuecUserSdkConfig } from '../config/QuecUserSdkConfig'
-import { QuecLoginTokenData } from '../model/QuecUserModel'
+import { QuecLoginTokenData, QuecUserModel } from '../model/QuecUserModel'
 import { QuecLoginRequestBuilder } from '../utils/QuecLoginRequestBuilder'
 import { QuecUserApi, QuecUserDataSource } from './QuecUserApi'
 
@@ -8,6 +8,7 @@ export class QuecUserService {
   private static instance: QuecUserService | undefined
   private readonly loginBuilder: QuecLoginRequestBuilder
   private readonly dataSource: QuecUserDataSource
+  private currentUser: QuecUserModel | undefined
 
   private constructor(config: QuecUserSdkConfig) {
     this.loginBuilder = new QuecLoginRequestBuilder(config)
@@ -34,6 +35,18 @@ export class QuecUserService {
     }
   }
 
+  private async fetchUserInfo(): Promise<QuecUserModel> {
+    const user: QuecUserModel = await this.dataSource.getUserInfo()
+    this.currentUser = user
+    return user
+  }
+
+  private async finishLogin(data: QuecLoginTokenData): Promise<void> {
+    this.saveToken(data)
+    this.currentUser = undefined
+    await this.fetchUserInfo()
+  }
+
   public static initialize(config: QuecUserSdkConfig): void {
     QuecUserService.instance = new QuecUserService(config)
   }
@@ -51,7 +64,7 @@ export class QuecUserService {
     const formBody: QuecFormBody =
       service.loginBuilder.buildEmailPasswordLogin(email, password)
     const tokenData: QuecLoginTokenData = await service.dataSource.loginByEmail(formBody)
-    service.saveToken(tokenData)
+    await service.finishLogin(tokenData)
   }
 
   public static async loginByPhone(
@@ -66,6 +79,14 @@ export class QuecUserService {
       internationalCode
     )
     const tokenData: QuecLoginTokenData = await service.dataSource.loginByPhone(formBody)
-    service.saveToken(tokenData)
+    await service.finishLogin(tokenData)
+  }
+
+  public static getUserModel(): QuecUserModel | undefined {
+    return QuecUserService.getInstance().currentUser
+  }
+
+  public static getUserInfo(): Promise<QuecUserModel> {
+    return QuecUserService.getInstance().fetchUserInfo()
   }
 }

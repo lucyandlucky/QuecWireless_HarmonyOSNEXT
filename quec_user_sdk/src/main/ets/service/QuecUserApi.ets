@@ -11,7 +11,11 @@ export interface QuecUserDataSource {
 
 export class QuecUserApi implements QuecUserDataSource {
   getUserInfo(): Promise<QuecUserModel> {
-    throw new Error('Method not implemented.');
+    return QuecNetwork
+      .getClient()
+      .get(
+        '/v2/enduser/enduserapi/userInfo'
+      )
   }
 
   public loginByEmail(formBody: QuecFormBody): Promise<QuecLoginTokenData> {
