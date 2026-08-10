@@ -9,14 +9,36 @@ export interface QuecLoginTokenData {
 }
 
 export interface QuecUserModel {
-  uid?: string
-  nikeName?: string
-  phone?: string
-  email?: string
-  headimg?: string
-  sex?: string
-  timezone?: string
-  nationality?: string
-  isOnlyLogin?: boolean
-  isSetPwd?: boolean
+  nikeName?: string | null
+  phone?: string | null
+  registerTime?: string | null
+  sex?: string | null
+  sexValue?: string | null
+  timezone?: string | null
+  uid?: string | null
+  wchartId?: string | null
+  wchartName?: string | null
+  address?: string | null
+  email?: string | null
+  headimg?: string | null
+  lang?: string | null
+  lastLoginTime?: string | null
+  nationality?: string | null
+  alipayUserId?: string | null
+  appleUserId?: string | null
+  city?: string | null
+  facebookUserId?: string | null
+  logonMode?: number | null
+  province?: string | null
+  qqUserId?: string | null
+  remark?: string | null
+  signature?: string | null
+  status?: number | null
+  twitterUserId?: string | null
+  wechatMiniprogramUserId?: string | null
+  wechatOffiaccountUserId?: string | null
+  wechatUnionId?: string | null
+  isOnlyLogin?: boolean | null
+  isSetPwd?: boolean | null
+  googleUserId?: string | null
 }
