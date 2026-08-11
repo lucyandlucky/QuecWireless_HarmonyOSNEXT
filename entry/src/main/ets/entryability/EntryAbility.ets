@@ -2,9 +2,10 @@ import { AbilityConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
 import { getWindowInsetsState, WindowInsetsState } from 'quec_basic_ui';
-import { setupNetwork } from '../network/NetworkBootstrap';
+import { setupNetwork } from '../setup/network';
 import { QuecMmkvManager } from 'quec_mmkv';
 import { HMRouterMgr } from '@hadss/hmrouter';
+import { setupUserSdk } from '../setup/user';
 
 const DOMAIN = 0x0000;
 
@@ -62,6 +63,7 @@ export default class EntryAbility extends UIAbility {
     const applicationContext = this.context.getApplicationContext()
     QuecMmkvManager.initialize(applicationContext)
     setupNetwork()
+    setupUserSdk()
   }
 
   onDestroy(): void {
