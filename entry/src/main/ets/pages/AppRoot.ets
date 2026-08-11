@@ -19,7 +19,7 @@ function createNavigationOptions(): HMNavigationOption {
   return options
 }
 
-function resolveHomePageUrl(): string {
+function resolveRootUrl(): string {
   if (!QuecAgreementStorage.hasAgreed()) {
     return WELCOME_ROUTE
   }
@@ -29,7 +29,7 @@ function resolveHomePageUrl(): string {
 @Entry
 @ComponentV2
 struct AppRoot {
-  private homePageUrl: string = resolveHomePageUrl()
+  private rootUrl: string = resolveRootUrl()
   private navigationOptions: HMNavigationOption = createNavigationOptions()
 
   build() {
@@ -40,7 +40,7 @@ struct AppRoot {
         .objectFit(ImageFit.Cover)
       HMNavigation({
         navigationId: APP_NAVIGATION_ID,
-        homePageUrl: this.homePageUrl,
+        homePageUrl: this.rootUrl,
         options: this.navigationOptions
       })
     }

@@ -6,7 +6,7 @@ import { QuecUserModel, QuecUserService } from 'quec_user_sdk';
 
 @HMRouter({ pageUrl: MAIN_DEMO_ROUTE })
 @ComponentV2
-export struct mainDemoPage {
+export struct MainDemoPage {
   @Local private user: QuecUserModel | undefined = QuecUserService.getUserModel()
   @Local private isLoggingOut: boolean = false
 
