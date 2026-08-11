@@ -1,8 +1,9 @@
 import { LOGIN_ROUTE } from 'quec_login_api';
-import { WELCOME_ROUTE } from 'quec_main_api';
+import { MAIN_DEMO_ROUTE, WELCOME_ROUTE } from 'quec_main_api';
 import { QuecAgreementStorage } from 'quec_main';
 import { AttributeUpdater } from '@kit.ArkUI';
 import { HMNavigation, HMNavigationOption } from '@hadss/hmrouter';
+import { QuecUserService } from 'quec_user_sdk';
 
 const APP_NAVIGATION_ID: string = 'QuecAppNavigation'
 
@@ -18,12 +19,17 @@ function createNavigationOptions(): HMNavigationOption {
   return options
 }
 
+function resolveHomePageUrl(): string {
+  if (!QuecAgreementStorage.hasAgreed()) {
+    return WELCOME_ROUTE
+  }
+  return QuecUserService.isLogin() ? MAIN_DEMO_ROUTE : LOGIN_ROUTE
+}
+
 @Entry
 @ComponentV2
 struct AppRoot {
-  private homePageUrl: string = QuecAgreementStorage.hasAgreed()
-    ? LOGIN_ROUTE
-    : WELCOME_ROUTE
+  private homePageUrl: string = resolveHomePageUrl()
   private navigationOptions: HMNavigationOption = createNavigationOptions()
 
   build() {

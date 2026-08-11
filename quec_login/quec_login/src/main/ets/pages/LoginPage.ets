@@ -7,12 +7,15 @@ import { QuecLoginButton } from '../components/QuecLoginButton';
 import { QuecLoginPolicy } from '../components/QuecLoginPolicy';
 import { QuecUnderlineTextInput } from '../components/QuecUnderlineTextInput';
 import { LOGIN_ROUTE } from 'quec_login_api';
+import { QuecUserService } from 'quec_user_sdk';
+import { MAIN_DEMO_ROUTE } from 'quec_main_api';
 
 @HMRouter({ pageUrl: LOGIN_ROUTE })
 @ComponentV2
 export struct LoginPage {
   private lifecycleOwner: IHMLifecycleOwner | null = null
   @Local private windowInsets: WindowInsetsState = getWindowInsetsState()
+  @Local private isLoggingIn: boolean = false
   @Local private hasAgreedPolicy: boolean = false
   @Local private account: string = ''
   @Local private password: string = ''
@@ -39,7 +42,7 @@ export struct LoginPage {
 
   @Computed
   get loginVerify(): boolean {
-    return this.account.length >= 1 && this.password.length >= 6
+    return this.account.length >= 1 && this.password.length >= 6 && !this.isLoggingIn
   }
 
   private moveAppToBackground(): void {
@@ -47,9 +50,30 @@ export struct LoginPage {
     context.moveAbilityToBackground().catch()
   }
 
-  private onLogin(): void {
+  private async onLogin(): Promise<void> {
+    if (!this.hasAgreedPolicy) {
+      this.getUIContext().getPromptAction().showToast({
+        message: $r('app.string.quec_login_selected')
+      })
+      return
+    }
+    this.isLoggingIn = true
+    try {
+      const account: string = this.account.trim()
+      if (account.includes('@')) {
+        await QuecUserService.loginByEmail(account, this.password)
+      } else {
+        await QuecUserService.loginByPhone(account, this.password, '86')
+      }
+      HMRouterMgr.replace({ pageUrl: MAIN_DEMO_ROUTE })
 
-
+    } catch (error) {
+      this.getUIContext().getPromptAction().showToast({
+        message: (error as Error).message
+      })
+    } finally {
+      this.isLoggingIn = false
+    }
   }
 
   build() {
@@ -122,7 +146,7 @@ export struct LoginPage {
           QuecLoginButton({
             text: $r('app.string.quec_login'),
             verify: this.loginVerify,
-            onLogin: this.onLogin
+            onLogin: () => this.onLogin()
           })
 
           Text($r('app.string.quec_login_code'))
