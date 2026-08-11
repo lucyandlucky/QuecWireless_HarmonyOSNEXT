@@ -11,6 +11,7 @@
     "quec_basic_ui": "file:../../quec_basic_ui",
     "quec_foundation": "file:../../quec_foundation",
     "quec_login_api": "file:../quec_login_api",
-    "quec_main_api": "file:../../quec_main/quec_main_api"
+    "quec_main_api": "file:../../quec_main/quec_main_api",
+    "quec_user_sdk": "file:../../quec_user_sdk"
   }
 }

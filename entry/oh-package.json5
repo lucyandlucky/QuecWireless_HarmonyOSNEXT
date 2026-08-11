@@ -16,6 +16,7 @@
     "quec_mmkv": "file:../quec_mmkv",
     "quec_login": "file:../quec_login/quec_login",
     "quec_login_api": "file:../quec_login/quec_login_api",
-    "quec_encrypt": "file:../quec_encrypt"
+    "quec_encrypt": "file:../quec_encrypt",
+    "quec_user_sdk": "file:../quec_user_sdk"
   }
 }

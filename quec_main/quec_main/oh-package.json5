@@ -11,6 +11,8 @@
     "quec_privacy_policy_api": "file:../../quec_privacy_policy/quec_privacy_policy_api",
     "quec_mmkv": "file:../../quec_mmkv",
     "quec_main_api": "file:../quec_main_api",
-    "quec_login_api": "file:../../quec_login/quec_login_api"
+    "quec_login_api": "file:../../quec_login/quec_login_api",
+    "quec_user_sdk": "file:../../quec_user_sdk",
+    "quec_basic_ui": "file:../../quec_basic_ui"
   }
 }
