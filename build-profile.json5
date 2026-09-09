@@ -1,12 +1,26 @@
 {
   "app": {
-    "signingConfigs": [],
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "/Users/lucy/.ohos/config/default_QuecWireless_c57QvpiFV9ZQ8E_R8rJ6hyzad-UuteaUwkud2qmC2zs=.cer",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001B267032633C097576811CE4C0D2D6B0887EADF51F22FF22E62042982A64FFCB3CAFAA9E28DFED42",
+          "profile": "/Users/lucy/.ohos/config/default_QuecWireless_c57QvpiFV9ZQ8E_R8rJ6hyzad-UuteaUwkud2qmC2zs=.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "/Users/lucy/.ohos/config/default_QuecWireless_c57QvpiFV9ZQ8E_R8rJ6hyzad-UuteaUwkud2qmC2zs=.p12",
+          "storePassword": "0000001BED27B46B85728940050A74C7DD059BEF4D9D8984680C3F70C3A994EB265CCAF618B34666957573"
+        }
+      }
+    ],
     "products": [
       {
         "name": "default",
         "signingConfig": "default",
-        "targetSdkVersion": "26.0.0",
-        "compatibleSdkVersion": "26.0.0",
+        "targetSdkVersion": "6.1.1(24)",
+        "compatibleSdkVersion": "6.1.1(24)",
         "runtimeOS": "HarmonyOS",
         "buildOption": {
           "strictMode": {
@@ -65,6 +79,10 @@
     {
       "name": "quec_network",
       "srcPath": "./quec_network",
+    },
+    {
+      "name": "quec_network_v2",
+      "srcPath": "./quec_network_v2",
     },
     {
       "name": "quec_mmkv",

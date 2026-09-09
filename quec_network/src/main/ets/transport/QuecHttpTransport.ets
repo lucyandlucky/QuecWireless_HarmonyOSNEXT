@@ -16,8 +16,6 @@ export class QuecHttpTransport {
         return http.RequestMethod.PUT
       case QuecRequestMethod.DELETE:
         return http.RequestMethod.DELETE
-      case QuecRequestMethod.PATCH:
-        return http.RequestMethod.PATCH
     }
   }
 
