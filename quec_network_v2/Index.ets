@@ -12,8 +12,15 @@ export {
 } from './src/main/ets/model/QuecRequestConfig'
 
 export {
-  QuecRawResponse, QuecResponse
+  QuecRawResponse,
+  QuecResponse,
+  QuecResponseHeader,
+  QuecResponseHeaderValue
 } from './src/main/ets/model/QuecResponse'
+
+export {
+  QuecResponseContext, QuecResponseData
+} from './src/main/ets/model/QuecResponseContext'
 
 export {
   QuecClientConfig
@@ -24,3 +31,14 @@ export {
   QuecNetworkErrorOptions,
   QuecNetworkErrorType
 } from './src/main/ets/error/QuecNetworkError'
+
+export {
+  QuecInterceptorFulfilled,
+  QuecInterceptorHandler,
+  QuecInterceptorRejected,
+  QuecInterceptorResult
+} from './src/main/ets/interceptor/IQuecInterceptor'
+
+export {
+  QuecInterceptorManager
+} from './src/main/ets/interceptor/QuecInterceptorManager'
