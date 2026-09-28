@@ -2,9 +2,12 @@ export {
   QuecHeaders,
   QuecQueryParams,
   QuecQueryValue,
+  QuecFormBody,
   QuecRawBody,
   QuecRequestBody,
-  QuecRequestMethod
+  QuecRequestMethod,
+  QuecBodyFormat,
+  QuecResponseType
 } from './src/main/ets/model/QuecHttpTypes'
 
 export {
@@ -42,3 +45,11 @@ export {
 export {
   QuecInterceptorManager
 } from './src/main/ets/interceptor/QuecInterceptorManager'
+
+export {
+  IQuecHttpAdapter
+} from './src/main/ets/adapter/IQuecHttpAdapter'
+
+export {
+  QuecHttpAdapter
+} from './src/main/ets/adapter/QuecHttpAdapter'

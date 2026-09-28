@@ -1,11 +1,20 @@
-import { QuecHeaders, QuecQueryParams, QuecRequestBody, QuecRequestMethod } from './QuecHttpTypes'
+import {
+  QuecBodyFormat,
+  QuecHeaders,
+  QuecQueryParams,
+  QuecRequestBody,
+  QuecRequestMethod,
+  QuecResponseType
+} from './QuecHttpTypes'
 
 export interface QuecRequestOptions {
   url: string
-  params?: QuecQueryParams,
+  params?: QuecQueryParams
   body?: QuecRequestBody
-  headers?: QuecHeaders,
-  connectTimeout?: number,
+  bodyFormat?: QuecBodyFormat
+  responseType?: QuecResponseType
+  headers?: QuecHeaders
+  connectTimeout?: number
   readTimeout?: number
 }
 
