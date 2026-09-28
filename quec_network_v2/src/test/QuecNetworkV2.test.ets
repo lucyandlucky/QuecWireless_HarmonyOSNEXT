@@ -11,7 +11,7 @@ import { QuecNetworkV2 } from '../main/ets/core/QuecNetworkV2'
 
 export default function quecNetworkV2Test(): void {
   describe('QuecNetworkV2', () => {
-    it('creates an isolated axios instance with native interceptors', 0, async () => {
+    it('creates an isolated axios instance', 0, async () => {
       let captured: InternalAxiosRequestConfig | undefined
       const adapter: AxiosAdapter = (config: InternalAxiosRequestConfig): Promise<AxiosResponse> => {
         captured = config
@@ -106,10 +106,13 @@ export default function quecNetworkV2Test(): void {
         return Promise.resolve(response)
       }
       const client: AxiosInstance = QuecNetworkV2.createClient({ baseURL: 'https://example.com', adapter })
+      const headers: AxiosHeaders = new AxiosHeaders()
+      headers.setContentType('text/plain')
       const response: AxiosResponse<string> = await client.post<string, AxiosResponse<string>, string>(
-        '/raw', 'already encoded', { responseType: 'string' }
+        '/raw', 'already encoded', { responseType: 'string', headers }
       )
       expect((captured as InternalAxiosRequestConfig).data as string).assertEqual('already encoded')
+      expect((captured as InternalAxiosRequestConfig).headers.getContentType()).assertEqual('text/plain')
       expect(response.data).assertEqual('plain text')
     })
   })
