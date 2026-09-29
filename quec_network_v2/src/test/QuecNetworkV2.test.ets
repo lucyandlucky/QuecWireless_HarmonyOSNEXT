@@ -1,8 +1,6 @@
 import {
   AxiosAdapter,
   AxiosHeaders,
-  AxiosInstance,
-  AxiosRequestConfig,
   AxiosResponse,
   InternalAxiosRequestConfig
 } from '@ohos/axios'
@@ -11,7 +9,7 @@ import { QuecNetworkV2 } from '../main/ets/core/QuecNetworkV2'
 
 export default function quecNetworkV2Test(): void {
   describe('QuecNetworkV2', () => {
-    it('creates an isolated axios instance', 0, async () => {
+    it('uses initialization defaults and request overrides', 0, async () => {
       let captured: InternalAxiosRequestConfig | undefined
       const adapter: AxiosAdapter = (config: InternalAxiosRequestConfig): Promise<AxiosResponse> => {
         captured = config
@@ -24,45 +22,41 @@ export default function quecNetworkV2Test(): void {
         }
         return Promise.resolve(response)
       }
-      const client: AxiosInstance = QuecNetworkV2.createClient({
+      const defaultHeaders: AxiosHeaders = new AxiosHeaders()
+      defaultHeaders.set('appVersion', '1.2.3')
+      defaultHeaders.set('appSystemType', 'harmony')
+      defaultHeaders.set('X-Q-language', 'en_US')
+      QuecNetworkV2.init({
         baseURL: 'https://example.com/api',
         timeout: 1000,
+        headers: defaultHeaders,
         adapter
       })
-      const otherClient: AxiosInstance = QuecNetworkV2.createClient({
-        baseURL: 'https://other.example.com',
-        timeout: 2500
-      })
-      const order: string[] = []
-      client.interceptors.request.use((config: InternalAxiosRequestConfig) => {
-        order.push('request')
-        config.headers.set('X-App', 'wireless')
-        return config
-      })
-      client.interceptors.response.use((response: AxiosResponse) => {
-        order.push('response')
-        return response
-      })
-
       const params: Record<string, number> = {}
       params.page = 2
-      const response: AxiosResponse<Record<string, boolean>> = await client.get<Record<string, boolean>>(
-        '/items', { params }
-      )
+      const response: AxiosResponse<Record<string, boolean>> = await QuecNetworkV2.getClient()
+        .get<Record<string, boolean>>({ url: '/items', params })
       const sent: InternalAxiosRequestConfig = captured as InternalAxiosRequestConfig
-      expect(order.join(',')).assertEqual('request,response')
       expect(sent.baseURL).assertEqual('https://example.com/api')
       expect(sent.url).assertEqual('/items')
       expect(sent.timeout).assertEqual(1000)
-      expect(client.defaults.timeout).assertEqual(1000)
-      expect(otherClient.defaults.timeout).assertEqual(2500)
-      expect(sent.headers.get('X-App')).assertEqual('wireless')
+      expect(sent.headers.get('appVersion')).assertEqual('1.2.3')
+      expect(sent.headers.get('appSystemType')).assertEqual('harmony')
+      expect(sent.headers.get('X-Q-language')).assertEqual('en_US')
       expect(response.data.ok).assertTrue()
+
+      const headers: AxiosHeaders = new AxiosHeaders()
+      headers.set('appVersion', '2.0.0')
+      headers.set('X-App', 'wireless')
+      await QuecNetworkV2.getClient().get({ url: '/items', timeout: 2500, headers })
+      expect((captured as InternalAxiosRequestConfig).timeout).assertEqual(2500)
+      expect((captured as InternalAxiosRequestConfig).headers.get('appVersion')).assertEqual('2.0.0')
+      expect((captured as InternalAxiosRequestConfig).headers.get('appSystemType')).assertEqual('harmony')
+      expect((captured as InternalAxiosRequestConfig).headers.get('X-App')).assertEqual('wireless')
     })
 
     it('selects form encoding explicitly', 0, async () => {
       let captured: InternalAxiosRequestConfig | undefined
-      let inputEmail: string = ''
       const adapter: AxiosAdapter = (config: InternalAxiosRequestConfig): Promise<AxiosResponse> => {
         captured = config
         const response: AxiosResponse<string> = {
@@ -70,29 +64,19 @@ export default function quecNetworkV2Test(): void {
         }
         return Promise.resolve(response)
       }
-      const client: AxiosInstance = QuecNetworkV2.createClient({ baseURL: 'https://example.com', adapter })
+      QuecNetworkV2.init({ baseURL: 'https://example.com', adapter })
       const headers: AxiosHeaders = new AxiosHeaders()
       headers.setContentType('application/x-www-form-urlencoded')
       const body: Record<string, string> = {}
       body.email = 'a@b.com'
       body.pwd = 'x y'
-      const options: AxiosRequestConfig<Record<string, string>> = { headers }
-      const interceptorId: number = client.interceptors.request.use((config: InternalAxiosRequestConfig) => {
-        inputEmail = (config.data as Record<string, string>).email
-        return config
-      })
 
-      await client.post<string, AxiosResponse<string>, Record<string, string>>('/login', body, options)
-      expect(inputEmail).assertEqual('a@b.com')
+      await QuecNetworkV2.getClient().post({ url: '/login', body, headers })
       expect(typeof (captured as InternalAxiosRequestConfig).data).assertEqual('string')
       expect((captured as InternalAxiosRequestConfig).headers.getContentType())
         .assertEqual('application/x-www-form-urlencoded')
 
-      client.interceptors.request.eject(interceptorId)
-      const encodedOptions: AxiosRequestConfig<string> = { headers }
-      await client.post<string, AxiosResponse<string>, string>(
-        '/login', 'email=a%40b.com&pwd=x%20y', encodedOptions
-      )
+      await QuecNetworkV2.getClient().post({ url: '/login', body: 'email=a%40b.com&pwd=x%20y', headers })
       expect((captured as InternalAxiosRequestConfig).data as string).assertEqual('email=a%40b.com&pwd=x%20y')
     })
 
@@ -105,12 +89,12 @@ export default function quecNetworkV2Test(): void {
         }
         return Promise.resolve(response)
       }
-      const client: AxiosInstance = QuecNetworkV2.createClient({ baseURL: 'https://example.com', adapter })
+      QuecNetworkV2.init({ baseURL: 'https://example.com', adapter })
       const headers: AxiosHeaders = new AxiosHeaders()
       headers.setContentType('text/plain')
-      const response: AxiosResponse<string> = await client.post<string, AxiosResponse<string>, string>(
-        '/raw', 'already encoded', { responseType: 'string', headers }
-      )
+      const response: AxiosResponse<string> = await QuecNetworkV2.getClient().post<string>({
+        url: '/raw', body: 'already encoded', headers
+      })
       expect((captured as InternalAxiosRequestConfig).data as string).assertEqual('already encoded')
       expect((captured as InternalAxiosRequestConfig).headers.getContentType()).assertEqual('text/plain')
       expect(response.data).assertEqual('plain text')

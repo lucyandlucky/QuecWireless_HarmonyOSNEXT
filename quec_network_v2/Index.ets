@@ -1,4 +1,10 @@
-export { QuecNetworkV2 } from './src/main/ets/core/QuecNetworkV2'
+export {
+  QuecNetworkV2,
+  QuecNetworkV2 as QuecNetwork,
+  QuecRequestBody,
+  QuecRequestOptions,
+  QuecRequestParams
+} from './src/main/ets/core/QuecNetworkV2'
 
 export {
   AxiosAdapter,
