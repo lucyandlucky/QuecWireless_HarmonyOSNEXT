@@ -1,5 +1,6 @@
 import { QuecMmkvManager } from 'quec_mmkv'
-import { QuecFormBody, QuecTokenManager } from 'quec_network'
+import { QuecTokenManager } from 'quec_network'
+import { QuecApiResponse, QuecFormBody } from 'quec_network_v2'
 import { QuecUserSdkConfig } from '../config/QuecUserSdkConfig'
 import { QuecUserConstants } from '../constants/QuecUserConstants'
 import { QuecLoginTokenData, QuecUserModel } from '../model/QuecUserModel'
@@ -39,7 +40,11 @@ export class QuecUserService {
   }
 
   private async fetchUserInfo(): Promise<QuecUserModel> {
-    const user: QuecUserModel = await this.dataSource.getUserInfo()
+    const response: QuecApiResponse<QuecUserModel> = await this.dataSource.getUserInfo()
+    const user: QuecUserModel | null | undefined = response.data
+    if (user === null || user === undefined) {
+      throw new Error('Response data is empty')
+    }
     const uidSaved: boolean = QuecMmkvManager
       .getInstance()
       .putString(
@@ -122,7 +127,11 @@ export class QuecUserService {
     const service: QuecUserService = QuecUserService.getInstance()
     const formBody: QuecFormBody =
       service.loginBuilder.buildEmailPasswordLogin(email, password)
-    const tokenData: QuecLoginTokenData = await service.dataSource.loginByEmail(formBody)
+    const response: QuecApiResponse<QuecLoginTokenData> = await service.dataSource.loginByEmail(formBody)
+    const tokenData: QuecLoginTokenData | null | undefined = response.data
+    if (tokenData === null || tokenData === undefined) {
+      throw new Error('Response data is empty')
+    }
     await service.finishLogin(tokenData)
   }
 
@@ -137,7 +146,11 @@ export class QuecUserService {
       password,
       internationalCode
     )
-    const tokenData: QuecLoginTokenData = await service.dataSource.loginByPhone(formBody)
+    const response: QuecApiResponse<QuecLoginTokenData> = await service.dataSource.loginByPhone(formBody)
+    const tokenData: QuecLoginTokenData | null | undefined = response.data
+    if (tokenData === null || tokenData === undefined) {
+      throw new Error('Response data is empty')
+    }
     await service.finishLogin(tokenData)
   }
 

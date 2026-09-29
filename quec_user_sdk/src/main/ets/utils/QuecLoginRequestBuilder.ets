@@ -1,5 +1,5 @@
 import { QuecDigestUtils } from 'quec_encrypt';
-import { QuecFormBody } from 'quec_network';
+import { QuecFormBody } from 'quec_network_v2';
 import { QuecUserSdkConfig } from '../config/QuecUserSdkConfig';
 import { QuecEncryptedPassword, QuecPasswordEncryptor } from '../crypto/QuecPasswordEncryptor';
 

@@ -160,8 +160,10 @@ export class QuecHttpLog {
         true)
       return
     }
-    this.flush(axiosError.config,
+    this.flush(
+      axiosError.config,
       `${this.getRequestLine(axiosError.config)}\nERROR${this.getDuration(axiosError.config)}\n` +
-        `Code: ${axiosError.code ?? '(none)'}\nError: ${error.message}`, true)
+        `Code: ${axiosError.code ?? '(none)'}\nError: ${error.message}`
+      , true)
   }
 }

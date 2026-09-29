@@ -1,11 +1,12 @@
 import { AxiosResponse } from '@ohos/axios'
 import { QuecBusinessError } from '../error/QuecBusinessError'
 import { QuecApiResponse } from '../model/QuecApiResponse'
-import { QuecRawResponseConfig, QuecResponseInterceptor } from './QuecResponseInterceptor'
+import { QuecAxiosRequestConfig } from '../model/QuecRequestConfig'
+import { QuecResponseInterceptor } from './QuecResponseInterceptor'
 
 export class QuecResponseDataInterceptor extends QuecResponseInterceptor {
   public handler(response: AxiosResponse): AxiosResponse {
-    if ((response.config as QuecRawResponseConfig).quecRawResponse === true) {
+    if ((response.config as QuecAxiosRequestConfig).quecRawResponse === true) {
       return response
     }
     const payload: Object = response.data as Object

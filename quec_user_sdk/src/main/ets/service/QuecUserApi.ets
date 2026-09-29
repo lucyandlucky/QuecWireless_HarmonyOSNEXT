@@ -1,48 +1,38 @@
-import { QuecFormBody, QuecNetwork } from 'quec_network';
-import { QuecLoginTokenData, QuecUserModel } from '../model/QuecUserModel';
+import { QuecApiResponse, QuecFormBody, QuecNetworkV2 } from 'quec_network_v2'
+import { QuecLoginTokenData, QuecUserModel } from '../model/QuecUserModel'
 
 export interface QuecUserDataSource {
-  loginByEmail(formBody: QuecFormBody): Promise<QuecLoginTokenData>
+  loginByEmail(formBody: QuecFormBody): Promise<QuecApiResponse<QuecLoginTokenData>>
 
-  loginByPhone(formBody: QuecFormBody): Promise<QuecLoginTokenData>
+  loginByPhone(formBody: QuecFormBody): Promise<QuecApiResponse<QuecLoginTokenData>>
 
-  getUserInfo(): Promise<QuecUserModel>
+  getUserInfo(): Promise<QuecApiResponse<QuecUserModel>>
 
-  logout(): Promise<void>
+  logout(): Promise<QuecApiResponse<void>>
 }
 
 export class QuecUserApi implements QuecUserDataSource {
-  logout(): Promise<void> {
-    return QuecNetwork
-      .getClient()
-      .delete('/v2/enduser/enduserapi/userLogout')
+  public loginByEmail(formBody: QuecFormBody): Promise<QuecApiResponse<QuecLoginTokenData>> {
+    return QuecNetworkV2.getClient().post<QuecLoginTokenData>({
+      url: '/v2/enduser/enduserapi/emailPwdLogin', formBody
+    })
   }
 
-  getUserInfo(): Promise<QuecUserModel> {
-    return QuecNetwork
-      .getClient()
-      .get(
-        '/v2/enduser/enduserapi/userInfo'
-      )
+  public loginByPhone(formBody: QuecFormBody): Promise<QuecApiResponse<QuecLoginTokenData>> {
+    return QuecNetworkV2.getClient().post<QuecLoginTokenData>({
+      url: '/v2/enduser/enduserapi/phonePwdLogin', formBody
+    })
   }
 
-  public loginByEmail(formBody: QuecFormBody): Promise<QuecLoginTokenData> {
-    return QuecNetwork
-      .getClient()
-      .post<QuecLoginTokenData>(
-        '/v2/enduser/enduserapi/emailPwdLogin',
-        undefined,
-        { formBody: formBody }
-      )
+  public getUserInfo(): Promise<QuecApiResponse<QuecUserModel>> {
+    return QuecNetworkV2.getClient().get<QuecUserModel>({
+      url: '/v2/enduser/enduserapi/userInfo'
+    })
   }
 
-  public loginByPhone(formBody: QuecFormBody): Promise<QuecLoginTokenData> {
-    return QuecNetwork
-      .getClient()
-      .post<QuecLoginTokenData>(
-        '/v2/enduser/enduserapi/phonePwdLogin',
-        undefined,
-        { formBody: formBody }
-      )
+  public logout(): Promise<QuecApiResponse<void>> {
+    return QuecNetworkV2.getClient().delete<void>({
+      url: '/v2/enduser/enduserapi/userLogout'
+    })
   }
 }

@@ -1,6 +1,6 @@
 import { AxiosAdapter, AxiosHeaders, AxiosResponse, InternalAxiosRequestConfig } from '@ohos/axios'
 import { describe, expect, it } from '@ohos/hypium'
-import { QuecApiResponse, QuecNetwork } from '../../Index'
+import { QuecApiResponse, QuecFormBody, QuecNetwork } from '../../Index'
 import { QuecNetworkV2 } from '../main/ets/core/QuecNetworkV2'
 
 interface ItemResponse {
@@ -99,6 +99,65 @@ export default function quecNetworkV2RequestTest(): void {
       await QuecNetworkV2.getClient().put({ url: '/items', body: {} })
       await QuecNetworkV2.getClient().delete({ url: '/items', body: {} })
       expect(methods.join(',')).assertEqual('post,put,delete')
+    })
+
+    it('selects form encoding from formBody and rejects two request bodies', 0, async () => {
+      const captured: InternalAxiosRequestConfig[] = []
+      const adapter: AxiosAdapter = (config: InternalAxiosRequestConfig): Promise<AxiosResponse> => {
+        captured.push(config)
+        const response: AxiosResponse<string> = {
+          data: '{"code":200,"data":null}', status: 200, statusText: 'OK', headers: {}, config
+        }
+        return Promise.resolve(response)
+      }
+      const defaultHeaders: AxiosHeaders = new AxiosHeaders()
+      defaultHeaders.setContentType('application/json')
+      QuecNetworkV2.init({
+        baseURL: 'https://example.com', headers: defaultHeaders, adapter,
+        transformRequest: [(data: Object): Object => data]
+      })
+      const formBody: QuecFormBody = {}
+      formBody['email'] = 'a+b@example.com'
+      formBody['pwd'] = 'x y'
+
+      await QuecNetworkV2.getClient().post({ url: '/login', formBody })
+      expect(captured[0].headers.getContentType()).assertEqual('application/x-www-form-urlencoded')
+      expect((captured[0].data as QuecFormBody)['email']).assertEqual('a+b@example.com')
+      expect((captured[0].data as QuecFormBody)['pwd']).assertEqual('x y')
+
+      const body: ItemFilter = { status: 'active' }
+      await QuecNetworkV2.getClient().post({ url: '/items', body })
+      expect(captured[1].headers.getContentType()).assertEqual('application/json')
+      expect((captured[1].data as ItemFilter).status).assertEqual('active')
+
+      let errorMessage: string = ''
+      try {
+        await QuecNetworkV2.getClient().post({ url: '/invalid', body, formBody })
+      } catch (error) {
+        errorMessage = (error as Error).message
+      }
+      expect(errorMessage).assertEqual('Specify either body or formBody')
+      expect(captured.length).assertEqual(2)
+    })
+
+    it('keeps Authorization explicit and skips missing local tokens', 0, async () => {
+      const captured: InternalAxiosRequestConfig[] = []
+      const adapter: AxiosAdapter = (config: InternalAxiosRequestConfig): Promise<AxiosResponse> => {
+        captured.push(config)
+        const response: AxiosResponse<string> = {
+          data: '{"code":200,"data":null}', status: 200, statusText: 'OK', headers: {}, config
+        }
+        return Promise.resolve(response)
+      }
+      QuecNetworkV2.init({ baseURL: 'https://example.com', adapter })
+
+      await QuecNetworkV2.getClient().get({ url: '/without-token' })
+      expect(captured[0].headers.has('Authorization')).assertFalse()
+
+      const headers: AxiosHeaders = new AxiosHeaders()
+      headers.set('Authorization', 'request-token')
+      await QuecNetworkV2.getClient().get({ url: '/explicit-token', headers })
+      expect(captured[1].headers.get('Authorization')).assertEqual('request-token')
     })
   })
 }

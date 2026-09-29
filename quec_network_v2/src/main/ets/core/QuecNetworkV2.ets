@@ -1,7 +1,6 @@
 import axios, {
   AxiosHeaders,
   AxiosInstance,
-  AxiosRequestConfig,
   AxiosResponse,
   CreateAxiosDefaults,
   InternalAxiosRequestConfig
@@ -10,10 +9,12 @@ import { QuecRequestHeaderInterceptor } from '../interceptor/QuecRequestHeaderIn
 import { QuecHttpLog } from '../interceptor/QuecHttpLog'
 import { IQuecRequestInterceptor } from '../interceptor/QuecRequestInterceptor'
 import { QuecRequestLogInterceptor } from '../interceptor/QuecRequestLogInterceptor'
+import { QuecRequestTokenInterceptor } from '../interceptor/QuecRequestTokenInterceptor'
 import { QuecResponseDataInterceptor } from '../interceptor/QuecResponseDataInterceptor'
-import { IQuecResponseInterceptor, QuecRawResponseConfig } from '../interceptor/QuecResponseInterceptor'
+import { IQuecResponseInterceptor } from '../interceptor/QuecResponseInterceptor'
 import { QuecResponseLogInterceptor } from '../interceptor/QuecResponseLogInterceptor'
 import { QuecApiResponse } from '../model/QuecApiResponse'
+import { QuecAxiosRequestConfig, QuecFormBody } from '../model/QuecRequestConfig'
 
 // ArkTS accepts inline {} through declared interfaces; populated objects need concrete caller types.
 export interface QuecRequestParams {}
@@ -24,6 +25,7 @@ export interface QuecRequestOptions {
   url: string
   params?: QuecRequestParams
   body?: QuecRequestBody | string | ArrayBuffer
+  formBody?: QuecFormBody
   headers?: AxiosHeaders
   timeout?: number
 }
@@ -45,6 +47,7 @@ export class QuecNetworkV2 {
     const log: QuecHttpLog = new QuecHttpLog()
     const requestInterceptors: IQuecRequestInterceptor[] = [
       new QuecRequestHeaderInterceptor(),
+      new QuecRequestTokenInterceptor(),
       new QuecRequestLogInterceptor(client, log)
     ]
     const responseInterceptors: IQuecResponseInterceptor[] = [
@@ -66,12 +69,16 @@ export class QuecNetworkV2 {
     return client
   }
 
-  private createRequestConfig(method: string, options: QuecRequestOptions): AxiosRequestConfig {
+  private createRequestConfig(method: string, options: QuecRequestOptions): QuecAxiosRequestConfig {
+    if (options.body !== undefined && options.formBody !== undefined) {
+      throw new Error('Specify either body or formBody')
+    }
     return {
       method,
       url: options.url,
       params: options.params,
-      data: options.body,
+      data: options.formBody !== undefined ? options.formBody : options.body,
+      quecFormBody: options.formBody !== undefined,
       headers: options.headers,
       timeout: options.timeout
     }
@@ -119,7 +126,7 @@ export class QuecNetworkV2 {
   }
 
   public requestRaw<T = Object>(options: QuecRawRequestOptions): Promise<AxiosResponse<T>> {
-    const config: QuecRawResponseConfig = this.createRequestConfig(options.method, options)
+    const config: QuecAxiosRequestConfig = this.createRequestConfig(options.method, options)
     config.quecRawResponse = true
     return this.client.request<T>(config)
   }
