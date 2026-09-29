@@ -1,6 +1,7 @@
 import { AxiosAdapter, AxiosResponse, InternalAxiosRequestConfig } from '@ohos/axios'
 import { describe, expect, it } from '@ohos/hypium'
 import { QuecApiResponse, QuecBusinessError, QuecNetworkV2 } from '../../Index'
+import { QuecResponseDataInterceptor } from '../main/ets/interceptor/QuecResponseDataInterceptor'
 
 interface ItemResponse {
   id: number
@@ -15,6 +16,17 @@ function createAdapter(data: string): AxiosAdapter {
 
 export default function quecResponseDataInterceptorTest(): void {
   describe('QuecResponseDataInterceptor', () => {
+    it('passes the original error through the default onError', 0, async () => {
+      const error: Error = new Error('network unavailable')
+      let caught: Error | undefined
+      try {
+        await new QuecResponseDataInterceptor().onError(error)
+      } catch (reason) {
+        caught = reason as Error
+      }
+      expect(caught === error).assertTrue()
+    })
+
     it('returns the complete successful business response', 0, async () => {
       QuecNetworkV2.init({ baseURL: 'https://example.com', adapter: createAdapter('{"code":200,"msg":"","data":{"id":7}}') })
 

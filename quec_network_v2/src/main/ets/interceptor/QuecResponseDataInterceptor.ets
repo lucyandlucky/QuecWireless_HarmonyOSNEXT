@@ -1,9 +1,9 @@
 import { AxiosResponse } from '@ohos/axios'
 import { QuecBusinessError } from '../error/QuecBusinessError'
 import { QuecApiResponse } from '../model/QuecApiResponse'
-import { IQuecResponseInterceptor, QuecRawResponseConfig } from './QuecResponseInterceptor'
+import { QuecRawResponseConfig, QuecResponseInterceptor } from './QuecResponseInterceptor'
 
-export class QuecResponseDataInterceptor implements IQuecResponseInterceptor {
+export class QuecResponseDataInterceptor extends QuecResponseInterceptor {
   public handler(response: AxiosResponse): AxiosResponse {
     if ((response.config as QuecRawResponseConfig).quecRawResponse === true) {
       return response

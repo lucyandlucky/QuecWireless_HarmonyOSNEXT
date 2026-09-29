@@ -7,9 +7,12 @@ import axios, {
   InternalAxiosRequestConfig
 } from '@ohos/axios'
 import { QuecRequestHeaderInterceptor } from '../interceptor/QuecRequestHeaderInterceptor'
+import { QuecHttpLog } from '../interceptor/QuecHttpLog'
 import { IQuecRequestInterceptor } from '../interceptor/QuecRequestInterceptor'
+import { QuecRequestLogInterceptor } from '../interceptor/QuecRequestLogInterceptor'
 import { QuecResponseDataInterceptor } from '../interceptor/QuecResponseDataInterceptor'
 import { IQuecResponseInterceptor, QuecRawResponseConfig } from '../interceptor/QuecResponseInterceptor'
+import { QuecResponseLogInterceptor } from '../interceptor/QuecResponseLogInterceptor'
 import { QuecApiResponse } from '../model/QuecApiResponse'
 
 // ArkTS accepts inline {} through declared interfaces; populated objects need concrete caller types.
@@ -32,12 +35,6 @@ export interface QuecRawRequestOptions extends QuecRequestOptions {
 export class QuecNetworkV2 {
   private static sharedClient?: QuecNetworkV2
   private client: AxiosInstance
-  private static readonly requestInterceptors: IQuecRequestInterceptor[] = [
-    new QuecRequestHeaderInterceptor()
-  ]
-  private static readonly responseInterceptors: IQuecResponseInterceptor[] = [
-    new QuecResponseDataInterceptor()
-  ]
 
   private constructor(client: AxiosInstance) {
     this.client = client
@@ -45,14 +42,26 @@ export class QuecNetworkV2 {
 
   private static createClient(config: CreateAxiosDefaults): AxiosInstance {
     const client: AxiosInstance = axios.create(config)
+    const log: QuecHttpLog = new QuecHttpLog()
+    const requestInterceptors: IQuecRequestInterceptor[] = [
+      new QuecRequestHeaderInterceptor(),
+      new QuecRequestLogInterceptor(client, log)
+    ]
+    const responseInterceptors: IQuecResponseInterceptor[] = [
+      new QuecResponseLogInterceptor(log),
+      new QuecResponseDataInterceptor()
+    ]
     // Axios runs request interceptors in reverse registration order.
-    for (let i: number = QuecNetworkV2.requestInterceptors.length - 1; i >= 0; i--) {
-      const interceptor: IQuecRequestInterceptor = QuecNetworkV2.requestInterceptors[i]
+    for (let i: number = requestInterceptors.length - 1; i >= 0; i--) {
+      const interceptor: IQuecRequestInterceptor = requestInterceptors[i]
       client.interceptors.request.use((request: InternalAxiosRequestConfig) => interceptor.handler(request))
     }
-    for (let i: number = 0; i < QuecNetworkV2.responseInterceptors.length; i++) {
-      const interceptor: IQuecResponseInterceptor = QuecNetworkV2.responseInterceptors[i]
-      client.interceptors.response.use((response: AxiosResponse) => interceptor.handler(response))
+    for (let i: number = 0; i < responseInterceptors.length; i++) {
+      const interceptor: IQuecResponseInterceptor = responseInterceptors[i]
+      client.interceptors.response.use(
+        (response: AxiosResponse) => interceptor.handler(response),
+        (error: Error) => interceptor.onError(error)
+      )
     }
     return client
   }
