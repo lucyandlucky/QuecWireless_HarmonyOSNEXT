@@ -12,7 +12,6 @@
     "quec_main_api": "file:../quec_main/quec_main_api",
     "quec_ui_config": "file:../quec_ui_config",
     "quec_basic_ui": "file:../quec_basic_ui",
-    "quec_network": "file:../quec_network",
     "quec_network_v2": "file:../quec_network_v2",
     "quec_mmkv": "file:../quec_mmkv",
     "quec_login": "file:../quec_login/quec_login",

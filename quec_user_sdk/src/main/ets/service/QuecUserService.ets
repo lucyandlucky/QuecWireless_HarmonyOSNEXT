@@ -1,6 +1,5 @@
 import { QuecMmkvManager } from 'quec_mmkv'
-import { QuecTokenManager } from 'quec_network'
-import { QuecApiResponse, QuecFormBody } from 'quec_network_v2'
+import { QuecApiResponse, QuecFormBody, QuecTokenManager } from 'quec_network_v2'
 import { QuecUserSdkConfig } from '../config/QuecUserSdkConfig'
 import { QuecUserConstants } from '../constants/QuecUserConstants'
 import { QuecLoginTokenData, QuecUserModel } from '../model/QuecUserModel'

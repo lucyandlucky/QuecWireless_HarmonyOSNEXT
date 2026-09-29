@@ -10,6 +10,7 @@ export {
 export { QuecBusinessError } from './src/main/ets/error/QuecBusinessError'
 export { QuecApiResponse } from './src/main/ets/model/QuecApiResponse'
 export { QuecFormBody } from './src/main/ets/model/QuecRequestConfig'
+export { QuecTokenManager } from './src/main/ets/token/QuecTokenManager'
 
 export {
   AxiosAdapter,

@@ -77,10 +77,6 @@
       "srcPath": "./quec_basic_ui",
     },
     {
-      "name": "quec_network",
-      "srcPath": "./quec_network",
-    },
-    {
       "name": "quec_network_v2",
       "srcPath": "./quec_network_v2",
     },
