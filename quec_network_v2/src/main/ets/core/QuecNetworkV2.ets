@@ -8,6 +8,9 @@ import axios, {
 } from '@ohos/axios'
 import { QuecRequestHeaderInterceptor } from '../interceptor/QuecRequestHeaderInterceptor'
 import { IQuecRequestInterceptor } from '../interceptor/QuecRequestInterceptor'
+import { QuecResponseDataInterceptor } from '../interceptor/QuecResponseDataInterceptor'
+import { IQuecResponseInterceptor, QuecRawResponseConfig } from '../interceptor/QuecResponseInterceptor'
+import { QuecApiResponse } from '../model/QuecApiResponse'
 
 // ArkTS accepts inline {} through declared interfaces; populated objects need concrete caller types.
 export interface QuecRequestParams {}
@@ -22,11 +25,18 @@ export interface QuecRequestOptions {
   timeout?: number
 }
 
+export interface QuecRawRequestOptions extends QuecRequestOptions {
+  method: 'GET' | 'POST' | 'PUT' | 'DELETE'
+}
+
 export class QuecNetworkV2 {
   private static sharedClient?: QuecNetworkV2
   private client: AxiosInstance
   private static readonly requestInterceptors: IQuecRequestInterceptor[] = [
     new QuecRequestHeaderInterceptor()
+  ]
+  private static readonly responseInterceptors: IQuecResponseInterceptor[] = [
+    new QuecResponseDataInterceptor()
   ]
 
   private constructor(client: AxiosInstance) {
@@ -40,11 +50,15 @@ export class QuecNetworkV2 {
       const interceptor: IQuecRequestInterceptor = QuecNetworkV2.requestInterceptors[i]
       client.interceptors.request.use((request: InternalAxiosRequestConfig) => interceptor.handler(request))
     }
+    for (let i: number = 0; i < QuecNetworkV2.responseInterceptors.length; i++) {
+      const interceptor: IQuecResponseInterceptor = QuecNetworkV2.responseInterceptors[i]
+      client.interceptors.response.use((response: AxiosResponse) => interceptor.handler(response))
+    }
     return client
   }
 
-  private request<T>(method: string, options: QuecRequestOptions): Promise<AxiosResponse<T>> {
-    const config: AxiosRequestConfig = {
+  private createRequestConfig(method: string, options: QuecRequestOptions): AxiosRequestConfig {
+    return {
       method,
       url: options.url,
       params: options.params,
@@ -52,7 +66,13 @@ export class QuecNetworkV2 {
       headers: options.headers,
       timeout: options.timeout
     }
-    return this.client.request<T>(config)
+  }
+
+  private async request<T>(method: string, options: QuecRequestOptions): Promise<QuecApiResponse<T>> {
+    const response: AxiosResponse<QuecApiResponse<T>> = await this.client.request<QuecApiResponse<T>>(
+      this.createRequestConfig(method, options)
+    )
+    return response.data
   }
 
   public static init(config: CreateAxiosDefaults): void {
@@ -73,19 +93,25 @@ export class QuecNetworkV2 {
     return client
   }
 
-  public get<T = Object>(options: QuecRequestOptions): Promise<AxiosResponse<T>> {
+  public get<T = Object>(options: QuecRequestOptions): Promise<QuecApiResponse<T>> {
     return this.request<T>('GET', options)
   }
 
-  public post<T = Object>(options: QuecRequestOptions): Promise<AxiosResponse<T>> {
+  public post<T = Object>(options: QuecRequestOptions): Promise<QuecApiResponse<T>> {
     return this.request<T>('POST', options)
   }
 
-  public put<T = Object>(options: QuecRequestOptions): Promise<AxiosResponse<T>> {
+  public put<T = Object>(options: QuecRequestOptions): Promise<QuecApiResponse<T>> {
     return this.request<T>('PUT', options)
   }
 
-  public delete<T = Object>(options: QuecRequestOptions): Promise<AxiosResponse<T>> {
+  public delete<T = Object>(options: QuecRequestOptions): Promise<QuecApiResponse<T>> {
     return this.request<T>('DELETE', options)
+  }
+
+  public requestRaw<T = Object>(options: QuecRawRequestOptions): Promise<AxiosResponse<T>> {
+    const config: QuecRawResponseConfig = this.createRequestConfig(options.method, options)
+    config.quecRawResponse = true
+    return this.client.request<T>(config)
   }
 }

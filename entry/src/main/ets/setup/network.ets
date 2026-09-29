@@ -2,6 +2,7 @@ import { bundleManager } from '@kit.AbilityKit'
 import { deviceInfo } from '@kit.BasicServicesKit'
 import { i18n } from '@kit.LocalizationKit'
 import { QuecNetwork, QuecNetworkConfig, QuecNetworkConstants } from 'quec_network'
+import { QuecNetworkV2 } from 'quec_network_v2'
 
 const BASE_URL: string = 'https://iot-api.quectelcn.com'
 const APP_ID: string = '271'
@@ -50,4 +51,5 @@ export function setupNetwork(): void {
   }
 
   QuecNetwork.initialize(config)
+  QuecNetworkV2.init({ baseURL: BASE_URL })
 }

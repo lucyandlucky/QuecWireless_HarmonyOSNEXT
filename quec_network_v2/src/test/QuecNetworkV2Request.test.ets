@@ -1,6 +1,6 @@
 import { AxiosAdapter, AxiosHeaders, AxiosResponse, InternalAxiosRequestConfig } from '@ohos/axios'
 import { describe, expect, it } from '@ohos/hypium'
-import { QuecNetwork } from '../../Index'
+import { QuecApiResponse, QuecNetwork } from '../../Index'
 import { QuecNetworkV2 } from '../main/ets/core/QuecNetworkV2'
 
 interface ItemResponse {
@@ -31,13 +31,16 @@ export default function quecNetworkV2RequestTest(): void {
       let captured: InternalAxiosRequestConfig | undefined
       const adapter: AxiosAdapter = (config: InternalAxiosRequestConfig): Promise<AxiosResponse> => {
         captured = config
-        const response: AxiosResponse<string> = { data: 'ok', status: 200, statusText: 'OK', headers: {}, config }
+        const response: AxiosResponse<string> = {
+          data: '{"code":200,"msg":"","data":null}', status: 200, statusText: 'OK', headers: {}, config
+        }
         return Promise.resolve(response)
       }
       QuecNetworkV2.init({ baseURL: 'https://example.com', adapter })
       const sharedClient: QuecNetworkV2 = QuecNetworkV2.getClient()
 
-      await QuecNetwork.getClient().get({ url: '/items' })
+      const result: QuecApiResponse<Object> = await QuecNetwork.getClient().get({ url: '/items' })
+      expect(result.code).assertEqual(200)
       expect(QuecNetworkV2.getClient() === sharedClient).assertTrue()
       expect((captured as InternalAxiosRequestConfig).baseURL).assertEqual('https://example.com')
       expect((captured as InternalAxiosRequestConfig).headers.get('X-Q-language')).assertEqual('zh_CN')
@@ -52,18 +55,20 @@ export default function quecNetworkV2RequestTest(): void {
       let captured: InternalAxiosRequestConfig | undefined
       const adapter: AxiosAdapter = (config: InternalAxiosRequestConfig): Promise<AxiosResponse> => {
         captured = config
-        const data: ItemResponse = { id: 7 }
-        const response: AxiosResponse<ItemResponse> = { data, status: 200, statusText: 'OK', headers: {}, config }
+        const response: AxiosResponse<string> = {
+          data: '{"code":200,"msg":"","data":{"id":7}}', status: 200, statusText: 'OK', headers: {}, config
+        }
         return Promise.resolve(response)
       }
       QuecNetworkV2.init({ baseURL: 'https://example.com', adapter })
       const params: ItemParams = { page: 2 }
       const body: ItemFilter = { status: 'active' }
-      const response: AxiosResponse<ItemResponse> = await QuecNetworkV2.getClient().get<ItemResponse>({
+      const response: QuecApiResponse<ItemResponse> = await QuecNetworkV2.getClient().get<ItemResponse>({
         url: '/items', params, body
       })
 
-      expect(response.data.id).assertEqual(7)
+      expect(response.code).assertEqual(200)
+      expect((response.data as ItemResponse).id).assertEqual(7)
       expect((captured as InternalAxiosRequestConfig).method).assertEqual('get')
       expect((captured as InternalAxiosRequestConfig).url).assertEqual('/items')
       expect(((captured as InternalAxiosRequestConfig).params as Record<string, number>).page).assertEqual(2)
@@ -79,7 +84,9 @@ export default function quecNetworkV2RequestTest(): void {
       const adapter: AxiosAdapter = (config: InternalAxiosRequestConfig): Promise<AxiosResponse> => {
         captured = config
         methods.push(config.method ?? '')
-        const response: AxiosResponse<string> = { data: 'ok', status: 200, statusText: 'OK', headers: {}, config }
+        const response: AxiosResponse<string> = {
+          data: '{"code":200,"msg":"","data":null}', status: 200, statusText: 'OK', headers: {}, config
+        }
         return Promise.resolve(response)
       }
       QuecNetworkV2.init({ baseURL: 'https://example.com', adapter })

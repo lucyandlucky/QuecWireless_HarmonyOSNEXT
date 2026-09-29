@@ -16,13 +16,13 @@ export default function quecRequestHeaderInterceptorTest(): void {
       headers.set('X-Q-language', 'en_US')
       headers.set('X-App', 'wireless')
 
-      await QuecNetworkV2.getClient().get<string>({ url: '/items', headers })
+      await QuecNetworkV2.getClient().requestRaw<string>({ method: 'GET', url: '/items', headers })
       const sent: AxiosHeaders = (captured as InternalAxiosRequestConfig).headers
       expect(sent.get('X-Q-language')).assertEqual('en_US')
       expect(sent.get('X-App')).assertEqual('wireless')
       expect(sent.getContentType()).assertEqual('application/json')
 
-      await QuecNetworkV2.getClient().get<string>({ url: '/items' })
+      await QuecNetworkV2.getClient().requestRaw<string>({ method: 'GET', url: '/items' })
       expect((captured as InternalAxiosRequestConfig).headers.get('X-Q-language')).assertEqual('zh_CN')
     })
   })

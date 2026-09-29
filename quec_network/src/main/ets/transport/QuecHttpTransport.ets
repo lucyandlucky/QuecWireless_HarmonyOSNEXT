@@ -17,6 +17,7 @@ export class QuecHttpTransport {
       case QuecRequestMethod.DELETE:
         return http.RequestMethod.DELETE
     }
+    throw new QuecNetworkError(QuecNetworkErrorType.REQUEST_ILLEGAL, -1, `Unsupported request method: ${method}`)
   }
 
   private encodeForm(formBody: QuecFormBody): string {
