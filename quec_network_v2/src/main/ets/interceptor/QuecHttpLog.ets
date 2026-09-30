@@ -1,7 +1,6 @@
 import { AxiosError, AxiosRequestConfig, AxiosResponse, FormData, InternalAxiosRequestConfig } from '@ohos/axios'
-import { hilog } from '@kit.PerformanceAnalysisKit'
+import { QLog } from 'quec_log'
 
-const DOMAIN: number = 0x0000
 const TAG: string = 'QuecHttpLog'
 const CHUNK_LENGTH: number = 256
 const FRAME_WIDTH: number = 80
@@ -15,11 +14,11 @@ interface QuecLogRequestConfig extends AxiosRequestConfig {
 
 export type QuecHttpLogWriter = (tag: string, message: string, isError: boolean) => void
 
-function writeToHiLog(tag: string, message: string, isError: boolean): void {
+function writeToQLog(tag: string, message: string, isError: boolean): void {
   if (isError) {
-    hilog.error(DOMAIN, tag, '%{public}s', message)
+    QLog.e(tag, message)
   } else {
-    hilog.info(DOMAIN, tag, '%{public}s', message)
+    QLog.i(tag, message)
   }
 }
 
@@ -27,7 +26,7 @@ export class QuecHttpLog {
   private nextId: number = 0
   private readonly writer: QuecHttpLogWriter
 
-  constructor(writer: QuecHttpLogWriter = writeToHiLog) {
+  constructor(writer: QuecHttpLogWriter = writeToQLog) {
     this.writer = writer
   }
 

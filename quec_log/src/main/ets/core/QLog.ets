@@ -8,7 +8,7 @@ enum LogLevel {
 }
 
 export class QLog {
-  private static domain: number = 0x0000
+  public static readonly DOMAIN: number = 0x514C
   private static defaultTag: string = 'Quec'
 
   private static write(level: LogLevel, tagOrMessage: string | Error, message?: string | Error): void {
@@ -18,22 +18,21 @@ export class QLog {
 
     switch (level) {
       case LogLevel.DEBUG:
-        hilog.debug(QLog.domain, tag, '%{public}s', content)
+        hilog.debug(QLog.DOMAIN, tag, '%{public}s', content)
         break
       case LogLevel.INFO:
-        hilog.info(QLog.domain, tag, '%{public}s', content)
+        hilog.info(QLog.DOMAIN, tag, '%{public}s', content)
         break
       case LogLevel.WARN:
-        hilog.warn(QLog.domain, tag, '%{public}s', content)
+        hilog.warn(QLog.DOMAIN, tag, '%{public}s', content)
         break
       case LogLevel.ERROR:
-        hilog.error(QLog.domain, tag, '%{public}s', content)
+        hilog.error(QLog.DOMAIN, tag, '%{public}s', content)
         break
     }
   }
 
-  public static init(domain: number = 0x0000, defaultTag: string = 'Quec'): void {
-    QLog.domain = domain
+  public static init(defaultTag: string = 'Quec'): void {
     QLog.defaultTag = defaultTag
   }
 

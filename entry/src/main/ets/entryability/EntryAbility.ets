@@ -59,7 +59,7 @@ export default class EntryAbility extends UIAbility {
   }
 
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
-    QLog.init(DOMAIN)
+    QLog.init()
     QLog.i('EntryAbility', 'Application started')
     const applicationContext = this.context.getApplicationContext()
     HMRouterMgr.init({

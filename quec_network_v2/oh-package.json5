@@ -7,6 +7,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@ohos/axios": "2.2.15",
+    "quec_log": "file:../quec_log",
     "quec_mmkv": "file:../quec_mmkv"
   }
 }
