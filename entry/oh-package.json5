@@ -18,6 +18,7 @@
     "quec_login_api": "file:../quec_login/quec_login_api",
     "quec_encrypt": "file:../quec_encrypt",
     "quec_user_sdk": "file:../quec_user_sdk",
-    "quec-oem-app-config": "file:../quec_oem_app_config"
+    "quec-oem-app-config": "file:../quec_oem_app_config",
+    "quec_log": "file:../quec_log"
   }
 }

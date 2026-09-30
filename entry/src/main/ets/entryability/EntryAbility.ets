@@ -7,6 +7,7 @@ import { QuecMmkvManager } from 'quec_mmkv';
 import { HMRouterMgr } from '@hadss/hmrouter';
 import { setupUserSdk } from '../setup/user';
 import { QuecOemAppConfig } from 'quec-oem-app-config';
+import { QLog } from 'quec_log';
 
 const DOMAIN = 0x0000;
 
@@ -58,6 +59,8 @@ export default class EntryAbility extends UIAbility {
   }
 
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
+    QLog.init(DOMAIN)
+    QLog.i('EntryAbility', 'Application started')
     const applicationContext = this.context.getApplicationContext()
     HMRouterMgr.init({
       context: this.context

@@ -107,6 +107,10 @@
     {
       "name": "quec_oem_app_config",
       "srcPath": "./quec_oem_app_config",
+    },
+    {
+      "name": "quec_log",
+      "srcPath": "./quec_log",
     }
   ]
 }
