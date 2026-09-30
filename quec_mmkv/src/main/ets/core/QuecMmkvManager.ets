@@ -12,7 +12,7 @@ export class QuecMmkvManager {
     this.mmkv = mmkv
   }
 
-  static initialize(context: common.ApplicationContext): string {
+  static init(context: common.ApplicationContext): string {
     if (QuecMmkvManager.initialized) {
       return MMKV.rootDir
     }

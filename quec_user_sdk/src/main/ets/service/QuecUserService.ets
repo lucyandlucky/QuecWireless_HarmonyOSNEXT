@@ -110,7 +110,7 @@ export class QuecUserService {
     service.clearLoginInfo()
   }
 
-  public static initialize(config: QuecUserSdkConfig): void {
+  public static init(config: QuecUserSdkConfig): void {
     QuecUserService.instance = new QuecUserService(config)
   }
 

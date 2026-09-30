@@ -62,8 +62,8 @@ export default class EntryAbility extends UIAbility {
     HMRouterMgr.init({
       context: this.context
     })
-    QuecMmkvManager.initialize(applicationContext)
-    QuecOemAppConfig.initialize(applicationContext.resourceManager)
+    QuecMmkvManager.init(applicationContext)
+    QuecOemAppConfig.init(applicationContext.resourceManager)
     setupNetwork()
     setupUserSdk()
   }

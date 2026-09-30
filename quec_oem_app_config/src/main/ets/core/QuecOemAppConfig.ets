@@ -6,7 +6,7 @@ import { QuecAppConfigData } from '../model/QuecAppConfigData'
 export class QuecOemAppConfig {
   private static config?: QuecAppConfigData
 
-  public static initialize(manager: resourceManager.ResourceManager): void {
+  public static init(manager: resourceManager.ResourceManager): void {
     QuecOemAppConfig.config = undefined
     let bytes: Uint8Array
     try {
