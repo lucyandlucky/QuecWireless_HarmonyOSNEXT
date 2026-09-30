@@ -1,3 +1,4 @@
+import { bundleManager } from '@kit.AbilityKit'
 import { hilog } from '@kit.PerformanceAnalysisKit'
 
 const DOMAIN: number = 0x514C
@@ -6,6 +7,7 @@ const CHUNK_LENGTH: number = 320
 
 export interface QuecInspectorEvent {
   phase: 'request' | 'response' | 'error'
+  bundleName?: string
   id: number
   time: number
   startedAt: number
@@ -32,12 +34,29 @@ export class QuecInspectorReporter {
   private readonly sessionId: string = `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}`
   private readonly writer: QuecInspectorWriter
   private nextEventId: number = 0
+  private bundleName: string | undefined
+
+  private getBundleName(): string {
+    if (this.bundleName !== undefined) {
+      return this.bundleName
+    }
+    try {
+      this.bundleName = bundleManager.getBundleInfoForSelfSync(bundleManager.BundleFlag.GET_BUNDLE_INFO_DEFAULT).name
+      return this.bundleName
+    } catch (error) {
+      return ''
+    }
+  }
 
   constructor(writer: QuecInspectorWriter = writeToHiLog) {
     this.writer = writer
   }
 
   public emit(event: QuecInspectorEvent): void {
+    const bundleName: string = this.getBundleName()
+    if (bundleName.length > 0) {
+      event.bundleName = bundleName
+    }
     const json: string | undefined = JSON.stringify(event)
     if (json === undefined) {
       return
