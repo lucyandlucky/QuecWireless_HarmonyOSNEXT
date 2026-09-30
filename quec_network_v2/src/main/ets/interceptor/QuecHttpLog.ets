@@ -1,5 +1,6 @@
 import { AxiosError, AxiosRequestConfig, AxiosResponse, FormData, InternalAxiosRequestConfig } from '@ohos/axios'
 import { QLog } from 'quec_log'
+import { QuecInspectorEvent, QuecInspectorReporter } from './QuecInspectorReporter'
 
 const TAG: string = 'QuecHttpLog'
 const CHUNK_LENGTH: number = 256
@@ -8,6 +9,7 @@ const FRAME_WIDTH: number = 80
 interface QuecLogRequestConfig extends AxiosRequestConfig {
   quecLogId?: number
   quecLogStartedAt?: number
+  quecLogUrl?: string
   quecLogRequestLine?: string
   quecLogRequest?: string
 }
@@ -25,9 +27,73 @@ function writeToQLog(tag: string, message: string, isError: boolean): void {
 export class QuecHttpLog {
   private nextId: number = 0
   private readonly writer: QuecHttpLogWriter
+  private readonly inspector: QuecInspectorReporter
 
-  constructor(writer: QuecHttpLogWriter = writeToQLog) {
+  constructor(
+    writer: QuecHttpLogWriter = writeToQLog,
+    inspector: QuecInspectorReporter = new QuecInspectorReporter()
+  ) {
     this.writer = writer
+    this.inspector = inspector
+  }
+
+  private inspectorBody(value: Object | null | undefined): string | undefined {
+    if (value === undefined) {
+      return undefined
+    }
+    if (value === null) {
+      return 'null'
+    }
+    if (typeof value === 'string') {
+      return value
+    }
+    return this.formatValue(value)
+  }
+
+  private inspectorBodyType(value: Object | null | undefined): string {
+    if (value instanceof ArrayBuffer) {
+      return 'hex'
+    }
+    if (value instanceof FormData) {
+      return 'form-data'
+    }
+    return typeof value === 'string' ? 'text' : 'json'
+  }
+
+  private publishInspector(phase: 'request' | 'response' | 'error', config: InternalAxiosRequestConfig | undefined,
+    response?: AxiosResponse, error?: Error): void {
+    if (config === undefined) {
+      return
+    }
+    const context: QuecLogRequestConfig = config as QuecLogRequestConfig
+    if (context.quecLogId === undefined) {
+      return
+    }
+    const now: number = Date.now()
+    const event: QuecInspectorEvent = {
+      phase,
+      id: context.quecLogId,
+      time: now,
+      startedAt: context.quecLogStartedAt ?? now,
+      method: (config.method ?? 'GET').toUpperCase(),
+      url: context.quecLogUrl ?? config.url ?? '',
+      requestHeaders: config.headers.toJSON(),
+      requestBody: this.inspectorBody(config.data as Object | null | undefined),
+      requestBodyType: this.inspectorBodyType(config.data as Object | null | undefined)
+    }
+    if (phase !== 'request') {
+      event.durationMs = now - event.startedAt
+    }
+    if (response !== undefined) {
+      event.status = response.status
+      event.responseHeaders = response.headers as Object
+      event.responseBody = this.inspectorBody(response.data as Object | null | undefined)
+      event.responseBodyType = this.inspectorBodyType(response.data as Object | null | undefined)
+    }
+    if (error !== undefined) {
+      event.error = error.message
+    }
+    this.inspector.emit(event)
   }
 
   private write(id: number, value: string, isError: boolean = false, prefix: string = ''): void {
@@ -131,6 +197,7 @@ export class QuecHttpLog {
     const request: string = context.quecLogRequest ?? '(request details unavailable)'
     context.quecLogRequest = undefined
     context.quecLogRequestLine = undefined
+    context.quecLogUrl = undefined
     return request
   }
 
@@ -152,25 +219,30 @@ export class QuecHttpLog {
     const context: QuecLogRequestConfig = config as QuecLogRequestConfig
     context.quecLogId = ++this.nextId
     context.quecLogStartedAt = Date.now()
+    context.quecLogUrl = url
     context.quecLogRequestLine = `${(config.method ?? 'GET').toUpperCase()} ${url}`
     context.quecLogRequest = `${context.quecLogRequestLine}\n` +
       `Start Time: ${this.formatStartTime(context.quecLogStartedAt)}\n` +
       `Headers: ${this.formatValue(config.headers.toJSON())}\n` +
       `Params: ${this.formatValue(config.params as Object | undefined)}\n` +
       `Body: ${this.formatValue(config.data as Object | undefined)}`
+    this.publishInspector('request', config)
   }
 
   public response(response: AxiosResponse): void {
+    this.publishInspector('response', response.config, response)
     this.flush(response.config, this.formatResponse(response), false)
   }
 
   public error(error: Error): void {
     const axiosError: AxiosError = error as AxiosError
     if (axiosError.response !== undefined) {
+      this.publishInspector('error', axiosError.response.config, axiosError.response, error)
       this.flush(axiosError.response.config, `${this.formatResponse(axiosError.response)}\nError: ${error.message}`,
         true)
       return
     }
+    this.publishInspector('error', axiosError.config, undefined, error)
     this.flush(
       axiosError.config,
       `${this.getRequestLine(axiosError.config)}\nERROR${this.getDuration(axiosError.config)}\n` +
