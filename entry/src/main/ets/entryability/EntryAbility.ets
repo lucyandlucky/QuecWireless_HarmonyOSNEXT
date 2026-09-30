@@ -6,6 +6,7 @@ import { setupNetwork } from '../setup/network';
 import { QuecMmkvManager } from 'quec_mmkv';
 import { HMRouterMgr } from '@hadss/hmrouter';
 import { setupUserSdk } from '../setup/user';
+import { QuecOemAppConfig } from 'quec-oem-app-config';
 
 const DOMAIN = 0x0000;
 
@@ -62,6 +63,7 @@ export default class EntryAbility extends UIAbility {
       context: this.context
     })
     QuecMmkvManager.initialize(applicationContext)
+    QuecOemAppConfig.initialize(applicationContext.resourceManager)
     setupNetwork()
     setupUserSdk()
   }

@@ -1,0 +1,198 @@
+configId: '271'
+version: 1.0.0
+platform: android
+basic:
+  bundleId: com.quectel.ioe
+  appName:
+    cn: 移联万物
+    en: QuecOne
+  appVersion: 3.0.0
+  appVersionCode: 1
+  area: china
+  appTypeId: 1
+network:
+  china:
+    environment: product
+    baseUrl: https://iot-api.quectelcn.com
+    webSocketUrl: wss://iot-ws.quectel.com/ws/v1
+    webSocketV2Url: wss://iot-south.quectelcn.com:8443/ws/v2
+    userDomain: C.DM.5903.1
+    userDomainSecret: EufftRJSuWuVY7c6txzGifV9bJcfXHAFa7hXY5doXSn7
+    ssid: C1
+    resetPswStid: C1
+    loginStid: C2
+    registerStid: C3
+    cancelStid: C7
+    eaid: C1
+    resetPswEtid: C2
+    registerEtid: C1
+    cancelEtid: C5
+    bootstrapUrl: https://aiot-bootstrap.quectel.com
+    bootstrapPath: /v1/bootstrap/mcc/addr
+    bootstrapToken: s1PH9Lhq
+  europe:
+    environment: product
+    baseUrl: https://iot-api.acceleronix.io
+    webSocketUrl: wss://iot-ws.acceleronix.io/ws/v1
+    webSocketV2Url: wss://iot-south.acceleronix.io:8443/ws/v2
+    userDomain: E.SP.4294967410
+    userDomainSecret: 3aRNUwWahjyANa7WfBK2wCCkxCexB6nXxKJwXxfePvzf
+    ssid: E1
+    resetPswStid: E6
+    loginStid: E5
+    registerStid: E4
+    cancelStid: E8
+    eaid: E1
+    resetPswEtid: E2
+    registerEtid: E1
+    cancelEtid: E5
+    bootstrapUrl: https://aiot-bootstrap.quectel.com
+    bootstrapPath: /v1/bootstrap/mcc/addr
+    bootstrapToken: s1PH9Lhq
+  northAmerica:
+    environment: product
+    baseUrl: https://iot-api.netprisma.us
+    webSocketUrl: wss://ws.netprisma.us/ws/v1
+    webSocketV2Url: wss://iot-south.netprisma.us:8443/ws/v2
+    userDomain: U.SP.8589934603
+    userDomainSecret: pUTp5goB1bLinprRQMmK3EPiiuPiGrJtKUNptWRXVmP
+    ssid: U1
+    resetPswStid: U6
+    loginStid: U5
+    registerStid: U4
+    cancelStid: U8
+    eaid: U1
+    resetPswEtid: U2
+    registerEtid: U1
+    cancelEtid: U5
+    bootstrapUrl: https://iot-bootstrap.netprisma.us
+    bootstrapPath: /v1/bootstrap/mcc/addr
+    bootstrapToken: s1PH9Lhq
+thirdPlatform:
+  sentryDsn: https://b09d2199933c4676afd71cbffa2871bf@sentry-cn.iotomp.com/11
+  sentryEnv: production
+  push:
+    aliyunAppId: '333606151'
+    aliyunSecret: 7db567ddf4874be28530aedd7c892d6c
+    huaweiAppId: '105347743'
+    oppoAppId: 4865d2dc4a2845c2a592397213f0c052
+    oppoAppKey: 39d97335633f47d89c53ccb8c479f707
+    vivoAppId: '105536711'
+    vivoAppKey: ad3711cb8ced04d61f181208bedd8ad9
+    miAppId: '2882303761520156027'
+    miAppKey: '5142015695027'
+    googleCertificateFile: ''
+  onekeyLoginAppId: '300012136466'
+  onekeyLoginAppKey: FA3C524CD8DA4F64ABA8D85279A31130
+  onekeyLoginAppSC: 042116AFE90448199B044AE90D5256F8
+  onekeyLoginAppIdAndroid: '300012141976'
+  onekeyLoginAppKeyAndroid: F6CFAC1D225DEB6C4945E544EBEDA730
+  aliyunAppId: '333606152'
+  aliyunSecret: c8bfbdce54174447925adf507be78834
+  baiduMapKey: ''
+  baiduMapLocationKey: ''
+  gaodeMapKey: 57a0ec016442d0cbc458ddcb5d2f6a2c
+  googleMapKey: ''
+  googleMapPlaceKey: ''
+  googlePlaceKey: ''
+  wxAppId: 'wx470372effff62f92'
+business:
+  isChina: 'true'
+  isShowFeedback: 'true'
+  isSupportMap: true
+  androidDebugLogo: >-
+    https://iot-oss.quectelcn.com/enduser/null/B703CA19509211EEA8E3CF64657DC3E8debug1024x1024.png
+  androidLaunch: >-
+    https://iot-oss.quectelcn.com/enduser/null/BDCE874B509211EEA8E37B04DFAC8CB2.png
+  androidLogo: >-
+    https://iot-oss.quectelcn.com/enduser/null/BC075BDA509211EEA8E3C954330B0527.png
+  appHelper: https://iot-oss.quectelcn.com/wxsdk_img/guide/introduct_zh_v2.html
+  appPrivacy: >-
+    https://iot-oss.quectelcn.com/privacyservices/QuecOne_app_privacy_agreement_china_v2_zh.html
+  appPrivacyDownloadUrl: quectelcn
+  appStoreURL: itms-apps://itunes.apple.com/app/id1586439559
+  appTab: >-
+    {"tabs":[{"allowBizPanel":false,"bizLabel":"fail_safe","bizPanelMetaDataField":null,"i18nKey":"quec_tab1_title","normalMetaDataField":"quecTab1Normal","selectedMetaDataField":"quecTab1Selected","tabKey":"home_page","tabOrder":1,"title":"quec_tab1_title","normalUrl":"quec_tab1_title_normal.png","selectUrl":"quec_tab1_title_select.png"},{"allowBizPanel":false,"bizLabel":null,"bizPanelMetaDataField":null,"i18nKey":"quec_tab2_title_scene","normalMetaDataField":"quecTab2Normal","selectedMetaDataField":"quecTab2Selected","tabKey":"smart_scene","tabOrder":2,"title":"quec_tab2_title_scene","normalUrl":"quec_tab2_title_scene_normal.png","selectUrl":"quec_tab2_title_scene_select.png"},{"allowBizPanel":false,"bizLabel":null,"bizPanelMetaDataField":null,"i18nKey":"quec_tab3_title","normalMetaDataField":"quecTab3Normal","selectedMetaDataField":"quecTab3Selected","tabKey":"about_me","tabOrder":3,"title":"quec_tab3_title","normalUrl":"quec_tab3_title_normal.png","selectUrl":"quec_tab3_title_select.png"}]}
+  area: china
+  familyHelper: https://iot-oss.quectelcn.com/wxsdk_img/guide/house_zh_v2.html
+  iOSLaunch: >-
+    {"iosLogo":null,"iosStartup":{"p375x812":"https://iot-oss.quectelcn.com/enduser/null/B8E385C5509211EE9CDF896813DA62FF375x812.png","p750x1624":"https://iot-oss.quectelcn.com/enduser/null/B8E385C5509211EE9CDF896813DA62FF750x1624.png","p1125x2436":"https://iot-oss.quectelcn.com/enduser/null/B8E385C5509211EE9CDF896813DA62FF1125x2436.png"},"originalImage":"https://iot-oss.quectelcn.com/enduser/null/B8E385C5509211EE9CDF896813DA62FF.png"}
+  iOSLogo: >-
+    {"iosLogo":{"p20x20":"https://iot-oss.quectelcn.com/enduser/null/B703CA19509211EEA8E3CF64657DC3E820x20.png","p29x29":"https://iot-oss.quectelcn.com/enduser/null/B703CA19509211EEA8E3CF64657DC3E829x29.png","p40x40":"https://iot-oss.quectelcn.com/enduser/null/B703CA19509211EEA8E3CF64657DC3E840x40.png","p58x58":"https://iot-oss.quectelcn.com/enduser/null/B703CA19509211EEA8E3CF64657DC3E858x58.png","p60x60":"https://iot-oss.quectelcn.com/enduser/null/B703CA19509211EEA8E3CF64657DC3E860x60.png","p80x80":"https://iot-oss.quectelcn.com/enduser/null/B703CA19509211EEA8E3CF64657DC3E880x80.png","p87x87":"https://iot-oss.quectelcn.com/enduser/null/B703CA19509211EEA8E3CF64657DC3E887x87.png","p120x120":"https://iot-oss.quectelcn.com/enduser/null/B703CA19509211EEA8E3CF64657DC3E8120x120.png","p180x180":"https://iot-oss.quectelcn.com/enduser/null/B703CA19509211EEA8E3CF64657DC3E8180x180.png","debugp1024x1024":"https://iot-oss.quectelcn.com/enduser/null/B703CA19509211EEA8E3CF64657DC3E8debug1024x1024.png"},"iosStartup":null,"originalImage":"https://iot-oss.quectelcn.com/enduser/null/B703CA19509211EEA8E3CF64657DC3E8.png"}
+  isHomeMode: true
+  isMatterSupport: false
+  isMusicModule: true
+  isQuecApp: true
+  isQuectel: true
+  isShowHomeSetting: true
+  isShowSiri: true
+  isSupportGooglePush: false
+  isShowDeviceManager: false
+  isSupportIPC: true
+  displayMode: 2
+  quecTab1Normal: >-
+    https://iot-oss.quectelcn.com/enduser/null/C31E8A88509211EE9CDFAB074DFC71C2.png
+  quecTab1Selected: >-
+    https://iot-oss.quectelcn.com/enduser/null/C182DBE7509211EE9CDF03EDDEC3B6CE.png
+  quecTab2Normal: >-
+    https://iot-oss.quectelcn.com/enduser/null/C797DE7C509211EEA8E37DBB6250D5CC.png
+  quecTab2Selected: >-
+    https://iot-oss.quectelcn.com/enduser/null/C6107A59509211EE9CDF7B7067E0DCCF.png
+  quecTab3Normal: >-
+    https://iot-oss.quectelcn.com/enduser/null/CB452E3A509211EE9CDF25ECB2E1F90F.png
+  quecTab3Selected: >-
+    https://iot-oss.quectelcn.com/enduser/null/C9B3928D509211EEA8E3075D29F7C4F1.png
+  quecThemeConfig: ''
+  registerLogo: >-
+    https://iot-oss.quectelcn.com/enduser/null/BA4CD9C6509211EE9CDFC5729986F3C0.png
+  telphone: +86 0551-65869386
+  userPrivacy: https://iot-oss.quectelcn.com/QuecOne_app_service_agreement_china_v1_zh.html
+  quecFeedbackPanel: '0'
+  bssClientAppId: 'TAPPD6pOBu573m'
+  isAddValuesPushSupport: true
+  isShowPhonePush: true
+  isShowSmsPush: true
+  merchantNo: '44osHtgLF8m'
+  merchantSecret: '1660eea4426e883fc3b95f95410cd71047530d9315ecadd0a145351485f25a4b'
+  addValuesPushPanel: 384
+  isUseDynamicTabIconColor: true
+  userCenterConfig: >-
+    [{"identifier":"user_center_header","title":"","configs":[]},{"identifier":"user_center_function","title":"","configs":[{"identifier":"user_center_device","title":"quec_custom_usercenter_device","icon":"","panelId":0,"params":{}},{"identifier":"user_center_message","title":"quec_custom_usercenter_message","icon":"","panelId":0,"params":{}}]},{"identifier":"user_center_other","title":"","configs":[{"identifier":"user_center_setting","title":"quec_custom_key_setting","icon":"","panelId":0,"params":{}},{"identifier":"user_center_about","title":"quec_custom_user_aboutme","icon":"","panelId":0,"params":{}},{"identifier":"user_center_help","title":"quec_custom_user_help","icon":"","panelId":0,"params":{}},{"identifier":"user_center_feedback","title":"quec_custom_user_issue","icon":"","panelId":204,"params":{}}]},{"identifier":"user_center_setting_service","title":"quec_exquisitely_service","configs":[{"identifier":"user_center_call","title":"quec_custom_call_push","icon":"","panelId":384,"params":{"routerName":"PhonePushService","routerNameSecond":"PhonePushSetting"}},{"identifier":"user_center_sms","title":"quec_custom_sms_push","icon":"","panelId":384,"params":{"routerName":"SmsPushService","routerNameSecond":"SmsPushSetting"}}]},{"identifier":"user_center_thirdVoice_service","title":"quec_custom_thirdVoice_service","configs":[{"identifier":"quec_alexa_assistant","title":"quec_custom_alexa_assistant","icon":"","panelId":0,"params":{}}]}]
+  avatarsConfig: >-
+    "["https://iot-oss.quectelcn.com/head_1.png","https://iot-oss.quectelcn.com/head_2.png","https://iot-oss.quectelcn.com/head_3.png","https://iot-oss.quectelcn.com/head_4.png","https://iot-oss.quectelcn.com/head_5.png","https://iot-oss.quectelcn.com/head_6.png","https://iot-oss.quectelcn.com/head_7.png","https://iot-oss.quectelcn.com/head_8.png"]"
+  isHomeList: true
+  isSupportPaypal: true
+appTabBarConfig:
+  - allowBizPanel: false
+    bizLabel: fail_safe
+    bizPanelMetaDataField: null
+    i18nKey: quec_tab1_title
+    normalMetaDataField: quecTab1Normal
+    selectedMetaDataField: quecTab1Selected
+    tabKey: home_page
+    tabOrder: 1
+    title: quec_tab1_title
+    normalUrl: quec_tab1_title_normal.png
+    selectUrl: quec_tab1_title_select.png
+  - allowBizPanel: false
+    bizLabel: null
+    bizPanelMetaDataField: null
+    i18nKey: quec_tab2_title_scene
+    normalMetaDataField: quecTab2Normal
+    selectedMetaDataField: quecTab2Selected
+    tabKey: smart_scene
+    tabOrder: 2
+    title: quec_tab2_title_scene
+    normalUrl: quec_tab2_title_scene_normal.png
+    selectUrl: quec_tab2_title_scene_select.png
+  - allowBizPanel: false
+    bizLabel: null
+    bizPanelMetaDataField: null
+    i18nKey: quec_tab3_title
+    normalMetaDataField: quecTab3Normal
+    selectedMetaDataField: quecTab3Selected
+    tabKey: about_me
+    tabOrder: 3
+    title: quec_tab3_title
+    normalUrl: quec_tab3_title_normal.png
+    selectUrl: quec_tab3_title_select.png

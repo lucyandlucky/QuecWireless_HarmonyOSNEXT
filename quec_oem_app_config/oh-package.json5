@@ -1,0 +1,11 @@
+{
+  "name": "quec-oem-app-config",
+  "version": "1.0.0",
+  "description": "Quectel OEM application configuration for HarmonyOS.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "yaml": "2.8.0"
+  }
+}

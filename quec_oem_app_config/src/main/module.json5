@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "quec_oem_app_config",
+    "type": "har",
+    "deviceTypes": [
+      "default"
+    ]
+  }
+}
