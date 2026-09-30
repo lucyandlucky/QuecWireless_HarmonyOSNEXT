@@ -21,7 +21,9 @@ export default function quecHttpLogInterceptorTest(): void {
         axios.create({ baseURL: 'https://example.com' }), log
       )
       const responseInterceptor: QuecResponseLogInterceptor = new QuecResponseLogInterceptor(log)
+      const beforeRequest: number = Date.now()
       const sent: InternalAxiosRequestConfig = requestInterceptor.handler(config)
+      const afterRequest: number = Date.now()
       expect(lines.length).assertEqual(0)
       const response: AxiosResponse = {
         data: { code: 200, msg: '', data: { id: 7 } }, status: 200, statusText: 'OK',
@@ -34,6 +36,13 @@ export default function quecHttpLogInterceptorTest(): void {
       expect(received === response).assertTrue()
       expect(output.indexOf('[1] ┌────── Request') >= 0).assertTrue()
       expect(output.indexOf('[1] │ POST https://example.com/items?page=2') >= 0).assertTrue()
+      const startTimeLine: string | undefined = lines.find((line: string) => line.startsWith('[1] │ Start Time: '))
+      expect(startTimeLine !== undefined).assertTrue()
+      expect(/^\[1\] │ Start Time: \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3} [+-]\d{2}:\d{2}$/.test(
+        startTimeLine ?? '')).assertTrue()
+      const startTimeParts: string[] = (startTimeLine ?? '').replace('[1] │ Start Time: ', '').split(' ')
+      const recordedAt: number = Date.parse(`${startTimeParts[0]}T${startTimeParts[1]}${startTimeParts[2]}`)
+      expect(recordedAt >= beforeRequest && recordedAt <= afterRequest).assertTrue()
       expect(output.indexOf('Bearer test-token') >= 0).assertTrue()
       expect(output.indexOf('test-password') >= 0).assertTrue()
       const responseStart: number = output.indexOf('[1] ┌────── Response')

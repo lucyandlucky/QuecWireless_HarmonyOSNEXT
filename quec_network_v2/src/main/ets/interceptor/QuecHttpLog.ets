@@ -97,6 +97,17 @@ export class QuecHttpLog {
     }
   }
 
+  private formatStartTime(timestamp: number): string {
+    const date: Date = new Date(timestamp)
+    const pad = (value: number, length: number): string => value.toString().padStart(length, '0')
+    const offset: number = -date.getTimezoneOffset()
+    const sign: string = offset >= 0 ? '+' : '-'
+    return `${date.getFullYear()}-${pad(date.getMonth() + 1, 2)}-${pad(date.getDate(), 2)} ` +
+      `${pad(date.getHours(), 2)}:${pad(date.getMinutes(), 2)}:${pad(date.getSeconds(), 2)}.` +
+      `${pad(date.getMilliseconds(), 3)} ${sign}${pad(Math.floor(Math.abs(offset) / 60), 2)}:` +
+      `${pad(Math.abs(offset) % 60, 2)}`
+  }
+
   private getRequestId(config: InternalAxiosRequestConfig | undefined): number {
     return config === undefined ? 0 : ((config as QuecLogRequestConfig).quecLogId ?? 0)
   }
@@ -143,6 +154,7 @@ export class QuecHttpLog {
     context.quecLogStartedAt = Date.now()
     context.quecLogRequestLine = `${(config.method ?? 'GET').toUpperCase()} ${url}`
     context.quecLogRequest = `${context.quecLogRequestLine}\n` +
+      `Start Time: ${this.formatStartTime(context.quecLogStartedAt)}\n` +
       `Headers: ${this.formatValue(config.headers.toJSON())}\n` +
       `Params: ${this.formatValue(config.params as Object | undefined)}\n` +
       `Body: ${this.formatValue(config.data as Object | undefined)}`

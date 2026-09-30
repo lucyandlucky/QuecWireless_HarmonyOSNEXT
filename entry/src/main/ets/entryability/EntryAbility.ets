@@ -59,9 +59,9 @@ export default class EntryAbility extends UIAbility {
   }
 
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
-    QLog.init()
-    QLog.i('EntryAbility', 'Application started')
     const applicationContext = this.context.getApplicationContext()
+    QLog.init(applicationContext)
+    QLog.i('EntryAbility', 'Application started')
     HMRouterMgr.init({
       context: this.context
     })
@@ -72,6 +72,7 @@ export default class EntryAbility extends UIAbility {
   }
 
   onDestroy(): void {
+    QLog.flush()
   }
 
   onWindowStageCreate(windowStage: window.WindowStage): void {
@@ -87,6 +88,6 @@ export default class EntryAbility extends UIAbility {
   }
 
   onBackground(): void {
-    // Ability has back to background
+    QLog.flush()
   }
 }
