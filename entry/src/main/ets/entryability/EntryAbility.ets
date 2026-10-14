@@ -72,7 +72,7 @@ export default class EntryAbility extends UIAbility {
   }
 
   onDestroy(): void {
-    QLog.flush()
+    QLog.close()
   }
 
   onWindowStageCreate(windowStage: window.WindowStage): void {

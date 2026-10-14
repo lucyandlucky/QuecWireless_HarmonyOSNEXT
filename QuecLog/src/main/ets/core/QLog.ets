@@ -116,6 +116,17 @@ export class QLog {
     }
   }
 
+  public static close(): void {
+    QLog.flush()
+    try {
+      Log.closeLogInstance(LOG_PREFIX)
+    } catch (error) {
+      hilog.error(QLog.DOMAIN, 'QLog', 'XLog close failed: %{public}s', String(error))
+    } finally {
+      QLog.fileLogger = undefined
+    }
+  }
+
   public static v(tagOrMessage: string, message?: string): void {
     QLog.write(LogLevel.VERBOSE, tagOrMessage, message)
   }
