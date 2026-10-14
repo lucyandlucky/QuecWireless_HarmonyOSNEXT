@@ -2,13 +2,8 @@ import { AbilityConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
 import { getWindowInsetsState, WindowInsetsState } from '@quec/basic-ui';
-import { QuecMmkvManager } from '@quec/mmkv';
 import { HMRouterMgr } from '@hadss/hmrouter';
-import { QuecOemAppConfig } from '@quec/oem-app-config';
 import { QLog } from '@quec/log';
-
-import { setupNetwork } from '../setup/network';
-import { setupUserSdk } from '../setup/user';
 
 const DOMAIN = 0x0000;
 
@@ -60,20 +55,14 @@ export default class EntryAbility extends UIAbility {
   }
 
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
-    const applicationContext = this.context.getApplicationContext()
-    QLog.init(applicationContext)
-    QLog.i('EntryAbility', 'Application started')
+    // Application-level initialization lives in QuecAbilityStage.
     HMRouterMgr.init({
       context: this.context
     })
-    QuecMmkvManager.init(applicationContext)
-    QuecOemAppConfig.init(applicationContext.resourceManager)
-    setupNetwork()
-    setupUserSdk()
   }
 
   onDestroy(): void {
-    QLog.close()
+    // QLog is closed by QuecAbilityStage.onDestroy.
   }
 
   onWindowStageCreate(windowStage: window.WindowStage): void {

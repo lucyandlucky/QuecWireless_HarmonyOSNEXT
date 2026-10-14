@@ -1,28 +1,26 @@
-import { resourceManager } from '@kit.LocalizationKit'
-import { util } from '@kit.ArkTS'
-import { parse } from 'yaml'
-import { QuecAppConfigData } from '../model/QuecAppConfigData'
+import { QuecOemBasicConfigModel } from '../model/QuecOemBasicConfigModel';
+import { QuecOemNetwork } from '../model/QuecOemNetworkConfigModel';
 
+/**
+ * Android DefaultConfig 中的顶层默认值
+ */
+export class QuecOemDefaultConfig {
+  static readonly CONFIG_ID: number = 111
+  static readonly VERSION: string = '1.0.0'
+  static readonly PLATFORM: string = 'android'
+}
+
+/**
+ * App 配置，由 QuecOemConfigManager 解析配置文件后写入。
+ * 解析前（或配置缺失时）各字段为 Android DefaultConfig 的默认值。
+ */
 export class QuecOemAppConfig {
-  private static config?: QuecAppConfigData
-
-  public static init(manager: resourceManager.ResourceManager): void {
-    QuecOemAppConfig.config = undefined
-    let bytes: Uint8Array
-    try {
-      bytes = manager.getRawFileContentSync('config/app_config.yml')
-    } catch (error) {
-      throw new Error('Cannot read config/app_config.yml from application resources')
-    }
-    const source: string = util.TextDecoder.create('utf-8').decodeToString(bytes)
-    QuecOemAppConfig.config = parse(source) as QuecAppConfigData
-  }
-
-  public static get(): QuecAppConfigData {
-    const config: QuecAppConfigData | undefined = QuecOemAppConfig.config
-    if (config === undefined) {
-      throw new Error('QuecOemAppConfig.initialize must be called before use')
-    }
-    return config
-  }
+  /** 配置文件 ID，由配置平台生成 */
+  static configId: number = QuecOemDefaultConfig.CONFIG_ID
+  /** 配置文件版本，由配置平台生成 */
+  static version: string = QuecOemDefaultConfig.VERSION
+  /** 应用平台，由配置平台生成 */
+  static platform: string = QuecOemDefaultConfig.PLATFORM
+  static basic: QuecOemBasicConfigModel = new QuecOemBasicConfigModel()
+  static network: QuecOemNetwork = new QuecOemNetwork()
 }
