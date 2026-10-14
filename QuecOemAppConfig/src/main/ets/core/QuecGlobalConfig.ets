@@ -7,7 +7,6 @@ import { QuecRegion } from '../model/QuecRegion';
 import { QuecOemAppConfig } from './QuecOemAppConfig';
 
 const TAG: string = 'QuecGlobalConfig'
-/** 与 Android CommonConstant.SERVICE_TYPE 同名，便于两边代码用同一个词检索 */
 const KEY_SERVICE_TYPE: string = 'service_type'
 const AREA_CHINA: string = 'china'
 const AREA_EUROPE: string = 'europe'
@@ -18,10 +17,6 @@ const AREA_EUROPE: string = 'europe'
  * `QuecOemAppConfig` 与配置文件严格一一对应（network 下三个区域并列），
  * 这里只负责挑出当前区域那一份，并转发与区域无关的部分。
  *
- * 注意：这不是 Android `GlobalConfig` 的移植。全部成员都是 getter，读穿到
- * `QuecOemAppConfig`，不保存任何配置副本。不要往这里加可变字段，也不要加
- * `getBaseXxxUrl()` 那类地址拼接方法——前者会让配置出现两份真相，
- * 后者由 axios 的 baseURL 承担。
  */
 export class QuecGlobalConfig {
   private static currentRegion: QuecRegion = QuecRegion.CHINA
@@ -42,7 +37,6 @@ export class QuecGlobalConfig {
   }
 
   /**
-   * 区域选择，纯函数。判断顺序与 Android QuectelApplication.setNetConfig() 一致，不可调整：
    * area 为 china 时固定中国区；否则优先使用已保存的选择（北美先于欧洲）；
    * 没有有效保存值时再按 area 兜底。
    *
@@ -64,7 +58,6 @@ export class QuecGlobalConfig {
 
   /**
    * 启动时调用，必须在 QuecMmkvManager.init 和 QuecOemConfigManager.init 之后。
-   * 与 Android 一样，每次启动都回写 service_type。
    */
   public static init(): void {
     const area: string = QuecOemAppConfig.basic.area
@@ -81,10 +74,6 @@ export class QuecGlobalConfig {
     return QuecGlobalConfig.currentRegion
   }
 
-  /**
-   * 当前区域的网络配置。每次读穿到 QuecOemAppConfig，
-   * 所以配置重新解析（会新建对象）之后不会拿到旧引用。
-   */
   public static get network(): QuecOemNetworkConfigModel {
     switch (QuecGlobalConfig.currentRegion) {
       case QuecRegion.EUROPE:
@@ -96,8 +85,6 @@ export class QuecGlobalConfig {
     }
   }
 
-  // 以下与区域无关，直接转发。thirdPlatform 和 business 的解析还没补，
-  // 补解析时在这里一并加 getter，避免现在读到空默认值。
   public static get configId(): number {
     return QuecOemAppConfig.configId
   }

@@ -16,7 +16,7 @@ QuecGlobalConfig.region               // QuecRegion.CHINA / EUROPE / NORTH_AMERI
 
 Only `network` depends on the region; `basic` and the top-level fields are single values in the YAML and are forwarded as they are. Use `QuecOemAppConfig` directly only when a specific region is needed, for example `QuecOemAppConfig.network.europe.loginStid`.
 
-`QuecGlobalConfig` is not a port of Android's `GlobalConfig`. Every member is a getter that reads through to `QuecOemAppConfig`, so it holds no copy of the configuration. Do not add mutable fields to it, and do not add `getBaseXxxUrl()`-style helpers: the former creates a second source of truth, the latter is covered by the axios `baseURL`.
+`QuecGlobalConfig` is not a port of Android's `GlobalConfig`. Every member is a getter that reads through to `QuecOemAppConfig`, so it holds no copy of the configuration. Do not add mutable fields to it, and do not add `getBaseXxxUrl()`-style helpers: the former creates a second source of truth, while building request URLs belongs to `QuecApiUrl` in `@quec/network-v2`.
 
 ## Startup
 

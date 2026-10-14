@@ -8,6 +8,7 @@
   "dependencies": {
     "@ohos/axios": "2.2.15",
     "@quec/log": "file:../QuecLog",
-    "@quec/mmkv": "file:../QuecMmkv"
+    "@quec/mmkv": "file:../QuecMmkv",
+    "@quec/oem-app-config": "file:../QuecOemAppConfig"
   }
 }

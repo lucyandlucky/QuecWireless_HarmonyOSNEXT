@@ -3,7 +3,7 @@ import { QuecGlobalConfig } from '@quec/oem-app-config'
 
 const APP_SYSTEM_TYPE: string = 'harmony'
 
-/** 公共请求头走 axios defaults，这样 @quec/network-v2 不需要依赖 @quec/oem-app-config */
+/** 公共请求头走 axios defaults，不需要改拦截器 */
 function commonHeaders(): AxiosHeaders {
   const headers: AxiosHeaders = new AxiosHeaders()
   headers.set('appVersion', QuecGlobalConfig.basic.appVersion)
@@ -12,9 +12,10 @@ function commonHeaders(): AxiosHeaders {
   return headers
 }
 
+/**
+ * 不配置 baseURL：各接口用 QuecApiUrl 拼完整地址，这样同一个客户端可以访问
+ * PaaS 和 SaaS 等不同 host。
+ */
 export function setupNetwork(): void {
-  QuecNetworkV2.init({
-    baseURL: QuecGlobalConfig.network.baseUrl,
-    headers: commonHeaders()
-  })
+  QuecNetworkV2.init({ headers: commonHeaders() })
 }

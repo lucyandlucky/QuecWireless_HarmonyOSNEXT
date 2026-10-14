@@ -16,9 +16,11 @@ import { QuecResponseLogInterceptor } from '../interceptor/QuecResponseLogInterc
 import { QuecApiResponse } from '../model/QuecApiResponse'
 import { QuecAxiosRequestConfig, QuecFormBody } from '../model/QuecRequestConfig'
 
+/** 与 axios helpers/isAbsoluteURL.js 的判断一致：scheme:// 或 // 开头 */
+const ABSOLUTE_URL: RegExp = /^([a-z][a-z\d+\-.]*:)?\/\//i
+
 // ArkTS accepts inline {} through declared interfaces; populated objects need concrete caller types.
 export interface QuecRequestParams {}
-
 export interface QuecRequestBody {}
 
 export interface QuecRequestOptions {
@@ -69,10 +71,22 @@ export class QuecNetworkV2 {
     return client
   }
 
+  private assertRequestUrl(url: string): void {
+    if (ABSOLUTE_URL.test(url)) {
+      return
+    }
+    // axios 不配置 baseURL，相对路径会原样发出去，所以在这里拦住。
+    throw new Error(
+      `Request url must be absolute: ${url}. ` +
+        'Build it with QuecApiUrl, and check that the application configuration was loaded.'
+    )
+  }
+
   private createRequestConfig(method: string, options: QuecRequestOptions): QuecAxiosRequestConfig {
     if (options.body !== undefined && options.formBody !== undefined) {
       throw new Error('Specify either body or formBody')
     }
+    this.assertRequestUrl(options.url)
     return {
       method,
       url: options.url,
