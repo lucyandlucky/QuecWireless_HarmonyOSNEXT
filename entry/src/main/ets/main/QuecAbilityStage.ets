@@ -1,7 +1,7 @@
 import { AbilityStage, common } from '@kit.AbilityKit';
 import { QLog } from '@quec/log';
 import { QuecMmkvManager } from '@quec/mmkv';
-import { QuecOemConfigManager } from '@quec/oem-app-config';
+import { QuecOemConfigManager, QuecGlobalConfig } from '@quec/oem-app-config';
 
 import { setupNetwork } from '../setup/network';
 import { setupUserSdk } from '../setup/user';
@@ -15,6 +15,7 @@ export default class QuecAbilityStage extends AbilityStage {
     QLog.init(applicationContext)
     QLog.i(TAG, 'onCreate')
     QuecOemConfigManager.init(applicationContext)
+    QuecGlobalConfig.init()
     setupNetwork()
     setupUserSdk()
   }

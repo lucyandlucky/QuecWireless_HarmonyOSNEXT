@@ -7,6 +7,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "yaml": "2.8.0",
-    "@quec/log": "file:../QuecLog"
+    "@quec/log": "file:../QuecLog",
+    "@quec/mmkv": "file:../QuecMmkv"
   }
 }
