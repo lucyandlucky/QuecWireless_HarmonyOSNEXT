@@ -14,28 +14,9 @@ interface QuecLogRequestConfig extends AxiosRequestConfig {
   quecLogRequest?: string
 }
 
-export type QuecHttpLogWriter = (tag: string, message: string, isError: boolean) => void
-
-function writeToQLog(tag: string, message: string, isError: boolean): void {
-  if (isError) {
-    QLog.e(tag, message)
-  } else {
-    QLog.i(tag, message)
-  }
-}
-
 export class QuecHttpLog {
   private nextId: number = 0
-  private readonly writer: QuecHttpLogWriter
-  private readonly inspector: QuecInspectorReporter
-
-  constructor(
-    writer: QuecHttpLogWriter = writeToQLog,
-    inspector: QuecInspectorReporter = new QuecInspectorReporter()
-  ) {
-    this.writer = writer
-    this.inspector = inspector
-  }
+  private readonly inspector: QuecInspectorReporter = new QuecInspectorReporter()
 
   private inspectorBody(value: Object | null | undefined): string | undefined {
     if (value === undefined) {
@@ -101,7 +82,11 @@ export class QuecHttpLog {
     for (let i: number = 0; i < lines.length; i++) {
       const line: string = lines[i]
       if (line.length === 0) {
-        this.writer(TAG, `[${id}] ${prefix}`, isError)
+        if (isError) {
+          QLog.e(TAG, `[${id}] ${prefix}`)
+        } else {
+          QLog.i(TAG, `[${id}] ${prefix}`)
+        }
         continue
       }
       let start: number = 0
@@ -114,7 +99,11 @@ export class QuecHttpLog {
           }
         }
         const chunk: string = line.slice(start, end)
-        this.writer(TAG, `[${id}] ${prefix}${chunk}`, isError)
+        if (isError) {
+          QLog.e(TAG, `[${id}] ${prefix}${chunk}`)
+        } else {
+          QLog.i(TAG, `[${id}] ${prefix}${chunk}`)
+        }
         start = end
       }
     }
