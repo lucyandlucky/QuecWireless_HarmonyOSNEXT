@@ -1,0 +1,11 @@
+{
+  "name": "@quec/log",
+  "version": "1.0.0",
+  "description": "Quectel logging for HarmonyOS.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@ohos/xlog": "1.0.0"
+  }
+}

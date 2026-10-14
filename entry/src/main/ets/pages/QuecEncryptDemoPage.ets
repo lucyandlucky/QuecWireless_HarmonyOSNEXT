@@ -4,7 +4,7 @@ import {
   QuecCodec,
   QuecDigestUtils,
   QuecRandomUtils
-} from 'quec_encrypt'
+} from '@quec/encrypt'
 
 const DOMAIN: number = 0x0000
 const TAG: string = 'QuecEncryptDemo'

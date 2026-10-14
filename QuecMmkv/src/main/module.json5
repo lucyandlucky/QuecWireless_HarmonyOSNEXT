@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "QuecMmkv",
+    "type": "har",
+    "deviceTypes": [
+      "default"
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "@quec/privacy-policy",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@hadss/hmrouter": "1.2.4",
+    "@quec/basic-ui": "file:../../QuecBasicUi",
+    "@quec/network-v2": "file:../../QuecNetworkV2",
+    "@quec/privacy-policy-api": "file:../QuecPrivacyPolicyApi"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "QuecLogin",
+    "type": "har",
+    "deviceTypes": [
+      "default"
+    ]
+  }
+}

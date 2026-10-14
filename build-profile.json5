@@ -53,64 +53,64 @@
       ]
     },
     {
-      "name": "quec_privacy_policy",
-      "srcPath": "./quec_privacy_policy/quec_privacy_policy",
+      "name": "QuecPrivacyPolicy",
+      "srcPath": "./QuecPrivacyPolicy/QuecPrivacyPolicy",
     },
     {
-      "name": "quec_privacy_policy_api",
-      "srcPath": "./quec_privacy_policy/quec_privacy_policy_api",
+      "name": "QuecPrivacyPolicyApi",
+      "srcPath": "./QuecPrivacyPolicy/QuecPrivacyPolicyApi",
     },
     {
-      "name": "quec_main",
-      "srcPath": "./quec_main/quec_main",
+      "name": "QuecMain",
+      "srcPath": "./QuecMain/QuecMain",
     },
     {
-      "name": "quec_main_api",
-      "srcPath": "./quec_main/quec_main_api",
+      "name": "QuecMainApi",
+      "srcPath": "./QuecMain/QuecMainApi",
     },
     {
-      "name": "quec_ui_config",
-      "srcPath": "./quec_ui_config",
+      "name": "QuecUiConfig",
+      "srcPath": "./QuecUiConfig",
     },
     {
-      "name": "quec_basic_ui",
-      "srcPath": "./quec_basic_ui",
+      "name": "QuecBasicUi",
+      "srcPath": "./QuecBasicUi",
     },
     {
-      "name": "quec_network_v2",
-      "srcPath": "./quec_network_v2",
+      "name": "QuecNetworkV2",
+      "srcPath": "./QuecNetworkV2",
     },
     {
-      "name": "quec_mmkv",
-      "srcPath": "./quec_mmkv",
+      "name": "QuecMmkv",
+      "srcPath": "./QuecMmkv",
     },
     {
-      "name": "quec_login",
-      "srcPath": "./quec_login/quec_login",
+      "name": "QuecLogin",
+      "srcPath": "./QuecLogin/QuecLogin",
     },
     {
-      "name": "quec_login_api",
-      "srcPath": "./quec_login/quec_login_api",
+      "name": "QuecLoginApi",
+      "srcPath": "./QuecLogin/QuecLoginApi",
     },
     {
-      "name": "quec_foundation",
-      "srcPath": "./quec_foundation",
+      "name": "QuecFoundation",
+      "srcPath": "./QuecFoundation",
     },
     {
-      "name": "quec_encrypt",
-      "srcPath": "./quec_encrypt",
+      "name": "QuecEncrypt",
+      "srcPath": "./QuecEncrypt",
     },
     {
-      "name": "quec_user_sdk",
-      "srcPath": "./quec_user_sdk",
+      "name": "QuecUserSdk",
+      "srcPath": "./QuecUserSdk",
     },
     {
-      "name": "quec_oem_app_config",
-      "srcPath": "./quec_oem_app_config",
+      "name": "QuecOemAppConfig",
+      "srcPath": "./QuecOemAppConfig",
     },
     {
-      "name": "quec_log",
-      "srcPath": "./quec_log",
+      "name": "QuecLog",
+      "srcPath": "./QuecLog",
     }
   ]
 }

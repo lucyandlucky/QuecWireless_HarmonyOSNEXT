@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "QuecFoundation",
+    "type": "har",
+    "deviceTypes": [
+      "default"
+    ]
+  }
+}

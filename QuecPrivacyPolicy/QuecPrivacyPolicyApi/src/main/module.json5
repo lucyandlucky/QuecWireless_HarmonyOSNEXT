@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "QuecPrivacyPolicyApi",
+    "type": "har",
+    "deviceTypes": [
+      "default"
+    ]
+  }
+}

@@ -7,18 +7,18 @@
   "license": "",
   "dependencies": {
     "@hadss/hmrouter": "1.2.4",
-    "quec_privacy_policy": "file:../quec_privacy_policy/quec_privacy_policy",
-    "quec_main": "file:../quec_main/quec_main",
-    "quec_main_api": "file:../quec_main/quec_main_api",
-    "quec_ui_config": "file:../quec_ui_config",
-    "quec_basic_ui": "file:../quec_basic_ui",
-    "quec_network_v2": "file:../quec_network_v2",
-    "quec_mmkv": "file:../quec_mmkv",
-    "quec_login": "file:../quec_login/quec_login",
-    "quec_login_api": "file:../quec_login/quec_login_api",
-    "quec_encrypt": "file:../quec_encrypt",
-    "quec_user_sdk": "file:../quec_user_sdk",
-    "quec-oem-app-config": "file:../quec_oem_app_config",
-    "quec_log": "file:../quec_log"
+    "@quec/privacy-policy": "file:../QuecPrivacyPolicy/QuecPrivacyPolicy",
+    "@quec/main": "file:../QuecMain/QuecMain",
+    "@quec/main-api": "file:../QuecMain/QuecMainApi",
+    "@quec/ui-config": "file:../QuecUiConfig",
+    "@quec/basic-ui": "file:../QuecBasicUi",
+    "@quec/network-v2": "file:../QuecNetworkV2",
+    "@quec/mmkv": "file:../QuecMmkv",
+    "@quec/login": "file:../QuecLogin/QuecLogin",
+    "@quec/login-api": "file:../QuecLogin/QuecLoginApi",
+    "@quec/encrypt": "file:../QuecEncrypt",
+    "@quec/user-sdk": "file:../QuecUserSdk",
+    "@quec/oem-app-config": "file:../QuecOemAppConfig",
+    "@quec/log": "file:../QuecLog"
   }
 }

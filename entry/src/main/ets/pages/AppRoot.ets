@@ -1,9 +1,9 @@
-import { LOGIN_ROUTE } from 'quec_login_api';
-import { MAIN_DEMO_ROUTE, WELCOME_ROUTE } from 'quec_main_api';
-import { QuecAgreementStorage } from 'quec_main';
+import { LOGIN_ROUTE } from '@quec/login-api';
+import { MAIN_DEMO_ROUTE, WELCOME_ROUTE } from '@quec/main-api';
+import { QuecAgreementStorage } from '@quec/main';
 import { AttributeUpdater } from '@kit.ArkUI';
 import { HMNavigation, HMNavigationOption } from '@hadss/hmrouter';
-import { QuecUserService } from 'quec_user_sdk';
+import { QuecUserService } from '@quec/user-sdk';
 
 const APP_NAVIGATION_ID: string = 'QuecAppNavigation'
 

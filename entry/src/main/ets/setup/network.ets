@@ -1,4 +1,4 @@
-import { QuecNetworkV2 } from 'quec_network_v2'
+import { QuecNetworkV2 } from '@quec/network-v2'
 
 const BASE_URL: string = 'https://iot-api.quectelcn.com'
 

@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "QuecBasicUiTest",
+    "type": "feature",
+    "deviceTypes": [
+      "default"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "@quec/main",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@hadss/hmrouter": "1.2.4",
+    "@quec/ui-config": "file:../../QuecUiConfig",
+    "@quec/privacy-policy-api": "file:../../QuecPrivacyPolicy/QuecPrivacyPolicyApi",
+    "@quec/mmkv": "file:../../QuecMmkv",
+    "@quec/main-api": "file:../QuecMainApi",
+    "@quec/login-api": "file:../../QuecLogin/QuecLoginApi",
+    "@quec/user-sdk": "file:../../QuecUserSdk",
+    "@quec/basic-ui": "file:../../QuecBasicUi"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "QuecLog",
+    "type": "har",
+    "deviceTypes": [
+      "default"
+    ]
+  }
+}

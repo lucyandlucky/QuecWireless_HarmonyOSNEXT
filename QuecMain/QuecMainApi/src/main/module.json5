@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "QuecMainApi",
+    "type": "har",
+    "deviceTypes": [
+      "default"
+    ]
+  }
+}

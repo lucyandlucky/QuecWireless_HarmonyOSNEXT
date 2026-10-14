@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "QuecUiConfig",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ]
+  }
+}

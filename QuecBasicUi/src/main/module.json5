@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "QuecBasicUi",
+    "type": "har",
+    "deviceTypes": [
+      "default"
+    ]
+  }
+}

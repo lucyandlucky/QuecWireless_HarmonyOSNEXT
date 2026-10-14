@@ -1,9 +1,0 @@
-{
-  "module": {
-    "name": "quec_user_sdk",
-    "type": "har",
-    "deviceTypes": [
-      "default"
-    ]
-  }
-}

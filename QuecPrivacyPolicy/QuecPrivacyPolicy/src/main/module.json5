@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "QuecPrivacyPolicy",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ]
+  }
+}

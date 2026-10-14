@@ -1,0 +1,14 @@
+{
+  "module": {
+    "name": "QuecNetworkV2",
+    "type": "har",
+    "deviceTypes": [
+      "default"
+    ],
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.INTERNET"
+      }
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "@quec/login",
+  "version": "1.0.0",
+  "description": "Quectel login feature library for HarmonyOS.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@hadss/hmrouter": "1.2.4",
+    "@quec/ui-config": "file:../../QuecUiConfig",
+    "@quec/basic-ui": "file:../../QuecBasicUi",
+    "@quec/foundation": "file:../../QuecFoundation",
+    "@quec/login-api": "file:../QuecLoginApi",
+    "@quec/main-api": "file:../../QuecMain/QuecMainApi",
+    "@quec/user-sdk": "file:../../QuecUserSdk"
+  }
+}

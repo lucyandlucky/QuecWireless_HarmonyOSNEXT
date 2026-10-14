@@ -1,13 +1,13 @@
 import { AbilityConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
-import { getWindowInsetsState, WindowInsetsState } from 'quec_basic_ui';
+import { getWindowInsetsState, WindowInsetsState } from '@quec/basic-ui';
 import { setupNetwork } from '../setup/network';
-import { QuecMmkvManager } from 'quec_mmkv';
+import { QuecMmkvManager } from '@quec/mmkv';
 import { HMRouterMgr } from '@hadss/hmrouter';
 import { setupUserSdk } from '../setup/user';
-import { QuecOemAppConfig } from 'quec-oem-app-config';
-import { QLog } from 'quec_log';
+import { QuecOemAppConfig } from '@quec/oem-app-config';
+import { QLog } from '@quec/log';
 
 const DOMAIN = 0x0000;
 

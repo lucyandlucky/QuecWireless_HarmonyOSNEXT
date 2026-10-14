@@ -1,0 +1,11 @@
+{
+  "name": "@quec/network",
+  "version": "1.0.0",
+  "description": "Quectel shared network library for HarmonyOS.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@quec/mmkv": "file:../QuecMmkv"
+  }
+}
