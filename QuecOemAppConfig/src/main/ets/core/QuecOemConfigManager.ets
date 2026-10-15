@@ -47,5 +47,13 @@ export class QuecOemConfigManager {
     // A missing section falls back to the model defaults, like Android DefaultConfig.
     QuecOemAppConfig.basic = QuecOemModelParser.basic(R.object(raw, 'basic'))
     QuecOemAppConfig.network = QuecOemModelParser.network(R.object(raw, 'network'))
+    QuecOemAppConfig.appTab = QuecOemModelParser.appTab(
+      R.objectArray(raw, 'appTabBarConfig'),
+      R.string(R.object(raw, 'business'), 'appTab', '')
+    )
+    if (QuecOemAppConfig.appTab.tabs.length === 0) {
+      // 没有 tab 配置 App 就没有主页面，必须暴露出来，不用硬编码默认值掩盖。
+      QLog.e(TAG, 'appTab is empty: both appTabBarConfig and business.appTab are missing or invalid')
+    }
   }
 }

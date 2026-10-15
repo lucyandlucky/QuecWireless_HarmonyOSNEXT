@@ -10,8 +10,10 @@ export { QuecOemAppName, QuecOemBasicConfigModel } from './src/main/ets/model/Qu
 
 export { QuecOemNetwork, QuecOemNetworkConfigModel } from './src/main/ets/model/QuecOemNetworkConfigModel'
 
+export { QuecOemAppTab, QuecOemTab } from './src/main/ets/model/QuecOemBusinessConfigModel'
+
 // Types reserved for the sections that are not parsed yet.
-export { QuecOemAppTab, QuecOemBusinessConfigModel, QuecOemTab } from './src/main/ets/model/QuecOemBusinessConfigModel'
+export { QuecOemBusinessConfigModel } from './src/main/ets/model/QuecOemBusinessConfigModel'
 
 export { QuecOemPushModel, QuecOemThirdPlatformConfigModel } from './src/main/ets/model/QuecOemThirdPlatformConfigModel'
 

@@ -1,6 +1,22 @@
 {
   "string": [
     {
+      "name": "quec_tab1_title",
+      "value": "首页"
+    },
+    {
+      "name": "quec_tab2_title_scene",
+      "value": "智能"
+    },
+    {
+      "name": "quec_tab3_title",
+      "value": "我的"
+    },
+    {
+      "name": "quec_user_signout",
+      "value": "退出登录"
+    },
+    {
       "name": "quec_important_tip",
       "value": "重要提示"
     },

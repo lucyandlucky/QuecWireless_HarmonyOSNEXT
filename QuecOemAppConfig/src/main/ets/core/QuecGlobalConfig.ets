@@ -1,6 +1,7 @@
 import { QLog } from '@quec/log';
 import { QuecMmkvManager } from '@quec/mmkv';
 
+import { QuecOemAppTab } from '../model/QuecOemBusinessConfigModel';
 import { QuecOemBasicConfigModel } from '../model/QuecOemBasicConfigModel';
 import { QuecOemNetworkConfigModel } from '../model/QuecOemNetworkConfigModel';
 import { QuecRegion } from '../model/QuecRegion';
@@ -99,5 +100,9 @@ export class QuecGlobalConfig {
 
   public static get basic(): QuecOemBasicConfigModel {
     return QuecOemAppConfig.basic
+  }
+
+  public static get appTab(): QuecOemAppTab {
+    return QuecOemAppConfig.appTab
   }
 }

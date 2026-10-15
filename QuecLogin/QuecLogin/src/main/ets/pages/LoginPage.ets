@@ -8,7 +8,7 @@ import { QuecLoginPolicy } from '../components/QuecLoginPolicy';
 import { QuecUnderlineTextInput } from '../components/QuecUnderlineTextInput';
 import { LOGIN_ROUTE } from '@quec/login-api';
 import { QuecUserService } from '@quec/user-sdk';
-import { MAIN_DEMO_ROUTE } from '@quec/main-api';
+import { MAIN_ROUTE } from '@quec/main-api';
 
 @HMRouter({ pageUrl: LOGIN_ROUTE })
 @ComponentV2
@@ -65,7 +65,7 @@ export struct LoginPage {
       } else {
         await QuecUserService.loginByPhone(account, this.password, '86')
       }
-      HMRouterMgr.replace({ pageUrl: MAIN_DEMO_ROUTE })
+      HMRouterMgr.replace({ pageUrl: MAIN_ROUTE })
 
     } catch (error) {
       this.getUIContext().getPromptAction().showToast({

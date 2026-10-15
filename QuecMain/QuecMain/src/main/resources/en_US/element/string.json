@@ -1,6 +1,22 @@
 {
   "string": [
     {
+      "name": "quec_tab1_title",
+      "value": "Home"
+    },
+    {
+      "name": "quec_tab2_title_scene",
+      "value": "Smart"
+    },
+    {
+      "name": "quec_tab3_title",
+      "value": "Me"
+    },
+    {
+      "name": "quec_user_signout",
+      "value": "Log Out"
+    },
+    {
       "name": "quec_important_tip",
       "value": "Import Tips"
     },

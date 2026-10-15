@@ -1,5 +1,5 @@
 import { LOGIN_ROUTE } from '@quec/login-api';
-import { MAIN_DEMO_ROUTE, WELCOME_ROUTE } from '@quec/main-api';
+import { MAIN_ROUTE, WELCOME_ROUTE } from '@quec/main-api';
 import { QuecAgreementStorage } from '@quec/main';
 import { AttributeUpdater } from '@kit.ArkUI';
 import { HMNavigation, HMNavigationOption } from '@hadss/hmrouter';
@@ -23,7 +23,7 @@ function resolveRootUrl(): string {
   if (!QuecAgreementStorage.hasAgreed()) {
     return WELCOME_ROUTE
   }
-  return QuecUserService.isLogin() ? MAIN_DEMO_ROUTE : LOGIN_ROUTE
+  return QuecUserService.isLogin() ? MAIN_ROUTE : LOGIN_ROUTE
 }
 
 @Entry

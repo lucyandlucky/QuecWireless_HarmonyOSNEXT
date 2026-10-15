@@ -118,7 +118,7 @@ export class QuecOemTab {
 }
 
 /**
- * 底部 Tab 配置。Android 中由 appTabBarConfig 或 business.appTab 派生，当前尚未实现派生逻辑。
+ * 底部 Tab 配置。由顶层 appTabBarConfig 或 business.appTab 派生，见 QuecOemModelParser.appTab。
  */
 export class QuecOemAppTab {
   static readonly TAB1: string = 'quec_tab1_title'
