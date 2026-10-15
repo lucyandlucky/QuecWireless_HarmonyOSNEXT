@@ -1,0 +1,11 @@
+{
+  "name": "@quec/device-list-api",
+  "version": "1.0.0",
+  "description": "Public device list builder contract.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@hadss/hmrouter": "1.2.4"
+  }
+}
