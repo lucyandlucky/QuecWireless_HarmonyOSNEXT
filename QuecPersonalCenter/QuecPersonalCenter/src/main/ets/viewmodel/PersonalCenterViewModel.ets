@@ -50,15 +50,6 @@ export class PersonalCenterViewModel {
     }
   }
 
-  public async logout(): Promise<void> {
-    this.state.isLoggingOut = true
-    try {
-      await QuecUserService.logout()
-    } finally {
-      this.state.isLoggingOut = false
-    }
-  }
-
   public dispose(): void {
     this.initialized = false
     this.requestVersion++

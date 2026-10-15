@@ -31,6 +31,78 @@
     {
       "name": "quec_user_remind",
       "value": "查看并编辑个人资料"
+    },
+    {
+      "name": "quec_user_profile",
+      "value": "个人信息"
+    },
+    {
+      "name": "quec_user_profile_avatar",
+      "value": "更换头像"
+    },
+    {
+      "name": "quec_user_nickname",
+      "value": "昵称"
+    },
+    {
+      "name": "quec_email",
+      "value": "邮箱"
+    },
+    {
+      "name": "quec_login_phone",
+      "value": "手机号"
+    },
+    {
+      "name": "quec_safety",
+      "value": "安全"
+    },
+    {
+      "name": "quec_account_and_security",
+      "value": "账号与安全"
+    },
+    {
+      "name": "quec_ota_update",
+      "value": "更新"
+    },
+    {
+      "name": "quec_ota_device",
+      "value": "设备升级"
+    },
+    {
+      "name": "quec_general",
+      "value": "通用"
+    },
+    {
+      "name": "quec_family_pattern",
+      "value": "家居模式"
+    },
+    {
+      "name": "quec_user_setting_family_mode",
+      "value": "可邀请家庭成员，共同使用家庭中的智能设备"
+    },
+    {
+      "name": "quec_user_push",
+      "value": "推送设置"
+    },
+    {
+      "name": "quec_display_dark",
+      "value": "深色模式"
+    },
+    {
+      "name": "quec_setting_cache",
+      "value": "清空缓存"
+    },
+    {
+      "name": "quec_private",
+      "value": "隐私"
+    },
+    {
+      "name": "quec_setting_privacy",
+      "value": "隐私政策管理"
+    },
+    {
+      "name": "quec_setting_permission",
+      "value": "系统权限管理"
     }
   ]
 }

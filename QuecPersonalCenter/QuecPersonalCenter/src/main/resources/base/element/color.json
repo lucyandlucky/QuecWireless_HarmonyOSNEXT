@@ -1,0 +1,12 @@
+{
+  "color": [
+    {
+      "name": "quec_personal_center_divider",
+      "value": "#E7E7E7"
+    },
+    {
+      "name": "quec_personal_center_error",
+      "value": "#FF4219"
+    }
+  ]
+}

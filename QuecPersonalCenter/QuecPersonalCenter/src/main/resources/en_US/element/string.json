@@ -31,6 +31,78 @@
     {
       "name": "quec_user_remind",
       "value": "View and Edit Personal Info"
+    },
+    {
+      "name": "quec_user_profile",
+      "value": "Personal Information"
+    },
+    {
+      "name": "quec_user_profile_avatar",
+      "value": "Change Avatar"
+    },
+    {
+      "name": "quec_user_nickname",
+      "value": "Nickname"
+    },
+    {
+      "name": "quec_email",
+      "value": "Email"
+    },
+    {
+      "name": "quec_login_phone",
+      "value": "Phone Number"
+    },
+    {
+      "name": "quec_safety",
+      "value": "Security"
+    },
+    {
+      "name": "quec_account_and_security",
+      "value": "Account and Security"
+    },
+    {
+      "name": "quec_ota_update",
+      "value": "Updates"
+    },
+    {
+      "name": "quec_ota_device",
+      "value": "Device Update"
+    },
+    {
+      "name": "quec_general",
+      "value": "General"
+    },
+    {
+      "name": "quec_family_pattern",
+      "value": "Home Mode"
+    },
+    {
+      "name": "quec_user_setting_family_mode",
+      "value": "Invite family members to share smart devices in your home."
+    },
+    {
+      "name": "quec_user_push",
+      "value": "Push Settings"
+    },
+    {
+      "name": "quec_display_dark",
+      "value": "Dark Mode"
+    },
+    {
+      "name": "quec_setting_cache",
+      "value": "Clear Cache"
+    },
+    {
+      "name": "quec_private",
+      "value": "Privacy"
+    },
+    {
+      "name": "quec_setting_privacy",
+      "value": "Privacy Policy Management"
+    },
+    {
+      "name": "quec_setting_permission",
+      "value": "System Permissions"
     }
   ]
 }

@@ -1,32 +1,16 @@
 import { QuecUserModel } from '@quec/user-sdk'
 
+import { PersonalCenterAvatar } from './PersonalCenterAvatar'
+
 @ComponentV2
 export struct PersonalCenterHeader {
   @Param user: QuecUserModel | undefined = undefined
   @Event onHeadClick: () => void = () => {
   }
-  @Local private imageFailed: boolean = false
-
-  @Monitor('user')
-  private resetAvatar(): void {
-    this.imageFailed = false
-  }
-
-  private avatar(): ResourceStr {
-    const url: string = this.user?.headimg ?? ''
-    return !this.imageFailed && url.length > 0 ? url : $r('app.media.quec_personal_center_default_head')
-  }
 
   build() {
     Row({ space: 12 }) {
-      Image(this.avatar())
-        .width(64)
-        .height(64)
-        .objectFit(ImageFit.Cover)
-        .borderRadius(32)
-        .border({ width: 1, color: $r('app.color.W6') })
-        .alt($r('app.media.quec_personal_center_default_head'))
-        .onError(() => this.imageFailed = true)
+      PersonalCenterAvatar({ user: this.user })
       Column({ space: 4 }) {
         Text(this.user?.nikeName ?? '')
           .fontSize(16)
