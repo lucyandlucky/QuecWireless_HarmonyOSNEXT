@@ -1,0 +1,40 @@
+{
+  "string": [
+    {
+      "name": "quec_home_device_devicelist_title",
+      "value": "All"
+    },
+    {
+      "name": "quec_device_online",
+      "value": "Online"
+    },
+    {
+      "name": "quec_device_offline",
+      "value": "Offline"
+    },
+    {
+      "name": "quec_family_share",
+      "value": "Share"
+    },
+    {
+      "name": "quec_device_not_yet",
+      "value": "No device yet. Add now."
+    },
+    {
+      "name": "quec_refresh_footer_noMoreData",
+      "value": "All loaded"
+    },
+    {
+      "name": "quec_device_invalid",
+      "value": "Invalid"
+    },
+    {
+      "name": "quec_ota_upgrading",
+      "value": "Upgrading"
+    },
+    {
+      "name": "quec_refresh_footer_refreshing",
+      "value": "Loading more data…"
+    }
+  ]
+}

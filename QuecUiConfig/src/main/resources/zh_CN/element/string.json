@@ -3,6 +3,18 @@
     {
       "name": "app_name",
       "value": "移联万物"
+    },
+    {
+      "name": "quec_retry",
+      "value": "重试"
+    },
+    {
+      "name": "quec_no_network",
+      "value": "网络不小心迷失啦"
+    },
+    {
+      "name": "Loading",
+      "value": "加载中…"
     }
   ]
 }

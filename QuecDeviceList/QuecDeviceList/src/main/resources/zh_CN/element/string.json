@@ -1,0 +1,40 @@
+{
+  "string": [
+    {
+      "name": "quec_home_device_devicelist_title",
+      "value": "全部设备"
+    },
+    {
+      "name": "quec_device_online",
+      "value": "在线"
+    },
+    {
+      "name": "quec_device_offline",
+      "value": "离线"
+    },
+    {
+      "name": "quec_family_share",
+      "value": "共享"
+    },
+    {
+      "name": "quec_device_not_yet",
+      "value": "当前还没有设备呢，快去添加吧～"
+    },
+    {
+      "name": "quec_refresh_footer_noMoreData",
+      "value": "已经全部加载完毕"
+    },
+    {
+      "name": "quec_device_invalid",
+      "value": "无效"
+    },
+    {
+      "name": "quec_ota_upgrading",
+      "value": "升级中"
+    },
+    {
+      "name": "quec_refresh_footer_refreshing",
+      "value": "正在加载更多的数据..."
+    }
+  ]
+}

@@ -3,6 +3,10 @@
     {
       "name": "quec_device_list",
       "value": "设备列表"
+    },
+    {
+      "name": "quec_home_my_devices",
+      "value": "我的设备"
     }
   ]
 }

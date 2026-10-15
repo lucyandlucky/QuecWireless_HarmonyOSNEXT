@@ -3,6 +3,18 @@
     {
       "name": "app_name",
       "value": "QuecWireless"
+    },
+    {
+      "name": "quec_retry",
+      "value": "Retry"
+    },
+    {
+      "name": "quec_no_network",
+      "value": "Network Not Found"
+    },
+    {
+      "name": "Loading",
+      "value": "Loading…"
     }
   ]
 }
