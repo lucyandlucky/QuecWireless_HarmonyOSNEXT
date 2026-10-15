@@ -4,20 +4,15 @@ import { QuecHomePageServiceManager } from '@quec/home-page-api';
 import { QLog } from '@quec/log';
 import { MAIN_ROUTE } from '@quec/main-api';
 import { QuecGlobalConfig, QuecOemTab } from '@quec/oem-app-config';
+import { QuecPersonalCenterServiceManager } from '@quec/personal-center-api';
 
 import { MainTabBarItem } from '../components/tabs/MainTabBarItem';
-import { ProfileTabPage } from '../components/tabs/ProfileTabPage';
 import { TabContentHost } from '../components/tabs/TabContentHost';
 import { MainUiState } from '../state/MainUiState';
 import { MainViewModel } from '../viewmodel/MainViewModel';
 
 const TAG: string = 'MainPage'
 const TAB_BAR_CONTENT_HEIGHT: number = 56
-
-@Builder
-function profileBuilder() {
-  ProfileTabPage()
-}
 
 /** 仅在 UI 层把原始 Tab 配置与页面绑定，配置模型不持有 UI 构建器。 */
 class MainTabContent {
@@ -53,7 +48,7 @@ export struct MainPage {
     } else if (tab.title === QuecGlobalConfig.quecTabNames[QuecGlobalConfig.tab2]) {
       return QuecHomePageServiceManager.getInstance().getHomePageBuilder()
     } else if (tab.title === QuecGlobalConfig.quecTabNames[QuecGlobalConfig.tab3]) {
-      return wrapBuilder(profileBuilder)
+      return QuecPersonalCenterServiceManager.getInstance().getPersonalCenterBuilder()
     } else {
       return undefined
     }

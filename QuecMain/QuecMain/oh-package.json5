@@ -12,8 +12,8 @@
     "@quec/mmkv": "file:../../QuecMmkv",
     "@quec/main-api": "file:../QuecMainApi",
     "@quec/home-page-api": "file:../../QuecHomePage/QuecHomePageApi",
+    "@quec/personal-center-api": "file:../../QuecPersonalCenter/QuecPersonalCenterApi",
     "@quec/login-api": "file:../../QuecLogin/QuecLoginApi",
-    "@quec/user-sdk": "file:../../QuecUserSdk",
     "@quec/basic-ui": "file:../../QuecBasicUi",
     "@quec/oem-app-config": "file:../../QuecOemAppConfig",
     "@quec/log": "file:../../QuecLog"

@@ -1,0 +1,16 @@
+{
+  "name": "@quec/personal-center",
+  "version": "1.0.0",
+  "description": "Personal center tab page and its service provider.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@hadss/hmrouter": "1.2.4",
+    "@quec/personal-center-api": "file:../QuecPersonalCenterApi",
+    "@quec/basic-ui": "file:../../QuecBasicUi",
+    "@quec/ui-config": "file:../../QuecUiConfig",
+    "@quec/login-api": "file:../../QuecLogin/QuecLoginApi",
+    "@quec/user-sdk": "file:../../QuecUserSdk"
+  }
+}

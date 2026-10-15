@@ -3,14 +3,8 @@ import { QuecTitleBar } from '@quec/basic-ui';
 import { LOGIN_ROUTE } from '@quec/login-api';
 import { QuecUserModel, QuecUserService } from '@quec/user-sdk';
 
-/**
- * 我的 tab（配置里的 about_me）。
- *
- * 对应 Android 通过 PersonalCenterConstant.MY 取到的个人中心 Fragment。真实个人中心还没
- * 复刻，这里暂时承载原 MainDemoPage 的用户信息和登出入口，否则登录后没有地方退出登录。
- */
 @ComponentV2
-export struct ProfileTabPage {
+export struct PersonalCenterPage {
   @Local private user: QuecUserModel | undefined = QuecUserService.getUserModel()
   @Local private isLoggingOut: boolean = false
 
@@ -18,7 +12,6 @@ export struct ProfileTabPage {
     this.isLoggingOut = true
     try {
       await QuecUserService.logout()
-      // MainPage 是路由页，replace 掉它就回到登录页，tab 状态随之销毁。
       HMRouterMgr.replace({ pageUrl: LOGIN_ROUTE })
     } catch (error) {
       this.getUIContext().getPromptAction().showToast({
@@ -47,7 +40,7 @@ export struct ProfileTabPage {
   build() {
     Column() {
       QuecTitleBar({
-        title: $r('app.string.quec_tab3_title'),
+        title: '个人中心',
         leftIconVisible: false
       })
       Column() {

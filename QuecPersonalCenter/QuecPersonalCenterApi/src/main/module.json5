@@ -1,0 +1,7 @@
+{
+  "module": {
+    "name": "QuecPersonalCenterApi",
+    "type": "har",
+    "deviceTypes": ["default"]
+  }
+}

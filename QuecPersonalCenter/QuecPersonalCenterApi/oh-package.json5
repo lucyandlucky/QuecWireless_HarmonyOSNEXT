@@ -1,0 +1,11 @@
+{
+  "name": "@quec/personal-center-api",
+  "version": "1.0.0",
+  "description": "Personal center page service contract.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@hadss/hmrouter": "1.2.4"
+  }
+}
