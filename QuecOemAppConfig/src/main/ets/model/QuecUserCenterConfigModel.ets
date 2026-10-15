@@ -37,7 +37,8 @@ export class QuecUserCenterMainModel {
 }
 
 /**
- * 用户中心配置。Android 中由 business.userCenterConfig 配合各业务开关派生，当前尚未实现派生逻辑。
+ * 用户中心配置，由 business.userCenterConfig 配合业务开关生成。
+ * 当前解析头像分区、功能分区和其他分区，菜单 configs 只包含已开启的功能。
  * 未配置或被业务开关关闭的功能为 null。
  */
 export class QuecUserCenterConfigModel {

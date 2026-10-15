@@ -3,6 +3,34 @@
     {
       "name": "quec_user_signout",
       "value": "Log Out"
+    },
+    {
+      "name": "quec_custom_usercenter_device",
+      "value": "Device Management"
+    },
+    {
+      "name": "quec_custom_usercenter_message",
+      "value": "Message Center"
+    },
+    {
+      "name": "quec_custom_key_setting",
+      "value": "Settings"
+    },
+    {
+      "name": "quec_custom_user_aboutme",
+      "value": "About"
+    },
+    {
+      "name": "quec_custom_user_help",
+      "value": "Help document"
+    },
+    {
+      "name": "quec_custom_user_issue",
+      "value": "Feedback"
+    },
+    {
+      "name": "quec_user_remind",
+      "value": "View and Edit Personal Info"
     }
   ]
 }

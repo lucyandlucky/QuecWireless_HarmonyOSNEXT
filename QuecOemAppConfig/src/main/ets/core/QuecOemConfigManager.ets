@@ -4,6 +4,7 @@ import { parse } from 'yaml';
 import { QLog } from '@quec/log';
 
 import { QuecOemModelParser } from '../parser/QuecOemModelParser';
+import { QuecUserCenterConfigParser } from '../parser/QuecUserCenterConfigParser';
 import { QuecOemRawReader as R, QuecRawObject, QuecRawValue } from '../parser/QuecOemRawReader';
 import { QuecOemAppConfig, QuecOemDefaultConfig } from './QuecOemAppConfig';
 
@@ -13,7 +14,7 @@ const APP_CONFIG_PATH: string = 'config/app_config.yml'
 
 /**
  * App 配置文件管理类，对应 Android com.quectel.oem.config.QuecOemConfigManager。
- * 当前只解析顶层字段、basic 和 network。
+ * 解析启动配置及个人中心基础菜单。
  */
 export class QuecOemConfigManager {
   private static describe(error: Object | null | undefined): string {
@@ -47,9 +48,13 @@ export class QuecOemConfigManager {
     // A missing section falls back to the model defaults, like Android DefaultConfig.
     QuecOemAppConfig.basic = QuecOemModelParser.basic(R.object(raw, 'basic'))
     QuecOemAppConfig.network = QuecOemModelParser.network(R.object(raw, 'network'))
+    QuecOemAppConfig.business = QuecOemModelParser.business(R.object(raw, 'business'))
+    QuecOemAppConfig.userCenter = QuecUserCenterConfigParser.parse(
+      QuecOemAppConfig.business, QuecOemAppConfig.basic
+    )
     QuecOemAppConfig.appTab = QuecOemModelParser.appTab(
       R.objectArray(raw, 'appTabBarConfig'),
-      R.string(R.object(raw, 'business'), 'appTab', '')
+      QuecOemAppConfig.business.appTab
     )
     if (QuecOemAppConfig.appTab.tabs.length === 0) {
       // 没有 tab 配置 App 就没有主页面，必须暴露出来，不用硬编码默认值掩盖。

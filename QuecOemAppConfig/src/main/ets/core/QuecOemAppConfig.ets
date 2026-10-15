@@ -1,6 +1,7 @@
-import { QuecOemAppTab } from '../model/QuecOemBusinessConfigModel';
+import { QuecOemAppTab, QuecOemBusinessConfigModel } from '../model/QuecOemBusinessConfigModel';
 import { QuecOemBasicConfigModel } from '../model/QuecOemBasicConfigModel';
 import { QuecOemNetwork } from '../model/QuecOemNetworkConfigModel';
+import { QuecUserCenterConfigModel } from '../model/QuecUserCenterConfigModel';
 
 /**
  * Android DefaultConfig 中的顶层默认值
@@ -24,6 +25,8 @@ export class QuecOemAppConfig {
   static platform: string = QuecOemDefaultConfig.PLATFORM
   static basic: QuecOemBasicConfigModel = new QuecOemBasicConfigModel()
   static network: QuecOemNetwork = new QuecOemNetwork()
+  static business: QuecOemBusinessConfigModel = new QuecOemBusinessConfigModel()
+  static userCenter: QuecUserCenterConfigModel = new QuecUserCenterConfigModel()
   /** 底部 tab，由顶层 appTabBarConfig 或 business.appTab 派生 */
   static appTab: QuecOemAppTab = new QuecOemAppTab()
 }

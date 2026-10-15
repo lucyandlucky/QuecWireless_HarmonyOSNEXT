@@ -12,8 +12,9 @@ export { QuecOemNetwork, QuecOemNetworkConfigModel } from './src/main/ets/model/
 
 export { QuecOemAppTab, QuecOemTab } from './src/main/ets/model/QuecOemBusinessConfigModel'
 
-// Types reserved for the sections that are not parsed yet.
 export { QuecOemBusinessConfigModel } from './src/main/ets/model/QuecOemBusinessConfigModel'
+
+export { QuecUserCenterId } from './src/main/ets/constants/userCenter'
 
 export { QuecOemPushModel, QuecOemThirdPlatformConfigModel } from './src/main/ets/model/QuecOemThirdPlatformConfigModel'
 

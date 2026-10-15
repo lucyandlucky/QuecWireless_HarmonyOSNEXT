@@ -3,6 +3,34 @@
     {
       "name": "quec_user_signout",
       "value": "退出登录"
+    },
+    {
+      "name": "quec_custom_usercenter_device",
+      "value": "设备管理"
+    },
+    {
+      "name": "quec_custom_usercenter_message",
+      "value": "消息中心"
+    },
+    {
+      "name": "quec_custom_key_setting",
+      "value": "设置"
+    },
+    {
+      "name": "quec_custom_user_aboutme",
+      "value": "关于我们"
+    },
+    {
+      "name": "quec_custom_user_help",
+      "value": "帮助文档"
+    },
+    {
+      "name": "quec_custom_user_issue",
+      "value": "意见反馈"
+    },
+    {
+      "name": "quec_user_remind",
+      "value": "查看并编辑个人资料"
     }
   ]
 }

@@ -1,10 +1,11 @@
 import { QLog } from '@quec/log';
 import { QuecMmkvManager } from '@quec/mmkv';
 
-import { QuecOemAppTab } from '../model/QuecOemBusinessConfigModel';
+import { QuecOemAppTab, QuecOemBusinessConfigModel } from '../model/QuecOemBusinessConfigModel';
 import { QuecOemBasicConfigModel } from '../model/QuecOemBasicConfigModel';
 import { QuecOemNetworkConfigModel } from '../model/QuecOemNetworkConfigModel';
 import { QuecRegion } from '../model/QuecRegion';
+import { QuecUserCenterConfigModel } from '../model/QuecUserCenterConfigModel';
 import { QuecOemAppConfig } from './QuecOemAppConfig';
 import { QUEC_TAB_1_NAME, QUEC_TAB_2_NAME, QUEC_TAB_3_NAME } from '../constants/tab';
 
@@ -105,5 +106,13 @@ export class QuecGlobalConfig {
 
   public static get appTab(): QuecOemAppTab {
     return QuecOemAppConfig.appTab
+  }
+
+  public static get business(): QuecOemBusinessConfigModel {
+    return QuecOemAppConfig.business
+  }
+
+  public static get userCenter(): QuecUserCenterConfigModel {
+    return QuecOemAppConfig.userCenter
   }
 }

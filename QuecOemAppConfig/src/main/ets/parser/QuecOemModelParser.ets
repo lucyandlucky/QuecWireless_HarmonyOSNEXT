@@ -1,4 +1,4 @@
-import { QuecOemAppTab, QuecOemTab } from '../model/QuecOemBusinessConfigModel';
+import { QuecOemAppTab, QuecOemBusinessConfigModel, QuecOemTab } from '../model/QuecOemBusinessConfigModel';
 import { QuecOemAppName, QuecOemBasicConfigModel } from '../model/QuecOemBasicConfigModel';
 import { QuecOemNetwork, QuecOemNetworkConfigModel } from '../model/QuecOemNetworkConfigModel';
 import { QuecOemRawReader as R, QuecRawObject, QuecRawValue } from './QuecOemRawReader';
@@ -104,6 +104,19 @@ export class QuecOemModelParser {
     model.china = QuecOemModelParser.networkConfig(R.object(raw, 'china'))
     model.europe = QuecOemModelParser.networkConfig(R.object(raw, 'europe'))
     model.northAmerica = QuecOemModelParser.networkConfig(R.object(raw, 'northAmerica'))
+    return model
+  }
+
+  /** 当前解析底部 Tab 和个人中心基础菜单所需的业务字段。 */
+  public static business(raw: QuecRawObject | undefined): QuecOemBusinessConfigModel {
+    const model: QuecOemBusinessConfigModel = new QuecOemBusinessConfigModel()
+    model.appTab = R.string(raw, 'appTab', model.appTab)
+    model.userCenterConfig = R.string(raw, 'userCenterConfig', model.userCenterConfig)
+    model.isHomeList = R.boolean(raw, 'isHomeList', model.isHomeList)
+    model.isShowDeviceManager = R.boolean(raw, 'isShowDeviceManager', model.isShowDeviceManager)
+    model.isShowMessageCenter = R.boolean(raw, 'isShowMessageCenter', model.isShowMessageCenter)
+    model.isShowFeedback = R.boolean(raw, 'isShowFeedback', model.isShowFeedback)
+    model.quecFeedbackPanel = R.number(raw, 'quecFeedbackPanel', model.quecFeedbackPanel)
     return model
   }
 

@@ -1,6 +1,6 @@
 # @quec/oem-app-config
 
-Partial HarmonyOS port of Android `com.quectel.app.basic:quec-oem-config:3.8.0.004-SNAPSHOT`. It currently reads only the top-level fields (`configId`, `version`, `platform`), `basic`, and `network`. The configuration file is `entry/src/main/resources/rawfile/config/app_config.yml`, copied unchanged from the Android app.
+Partial HarmonyOS port of Android `com.quectel.app.basic:quec-oem-config:3.8.0.004-SNAPSHOT`. It reads the top-level fields (`configId`, `version`, `platform`), `basic`, `network`, bottom tabs, and the business fields needed by the personal center's basic menus. The configuration file is `entry/src/main/resources/rawfile/config/app_config.yml`, copied unchanged from the Android app.
 
 ## Reading the configuration
 
@@ -12,6 +12,8 @@ QuecGlobalConfig.network.userDomain
 QuecGlobalConfig.basic.appVersion
 QuecGlobalConfig.configId
 QuecGlobalConfig.region               // QuecRegion.CHINA / EUROPE / NORTH_AMERICA
+QuecGlobalConfig.appTab.tabs
+QuecGlobalConfig.userCenter.other     // 已过滤关闭功能的菜单分组
 ```
 
 Only `network` depends on the region; `basic` and the top-level fields are single values in the YAML and are forwarded as they are. Use `QuecOemAppConfig` directly only when a specific region is needed, for example `QuecOemAppConfig.network.europe.loginStid`.
@@ -28,7 +30,7 @@ QuecGlobalConfig.init()                          // 选区域，回写 service_t
 
 The order matters: region selection reads `basic.area` from the parsed configuration and the saved `service_type` from MMKV.
 
-`QuecOemConfigManager.parseConfigContent(source)` parses YAML text directly and is what the unit tests use.
+`QuecOemConfigManager.parseConfigContent(source)` also accepts YAML text directly.
 
 ## Region selection
 
@@ -52,11 +54,16 @@ Switching regions at runtime (Android `ConstantUtil.refreshBasicUrl`) is not imp
 - `QuecOemConfigManager.init` logs failures through `QLog` and does not throw. `parseConfigContent` throws if the YAML is not a mapping, and the current configuration stays unchanged.
 - When parsing fails, `basic.area` is empty and the region falls back to North America, matching Android. `QuecGlobalConfig.init()` logs a warning in that case so the cause is visible.
 
+## Personal center
+
+The parsed business fields are `appTab`, `userCenterConfig`, `isHomeList`, `isShowDeviceManager`, `isShowMessageCenter`, `isShowFeedback`, and `quecFeedbackPanel`. Other business fields still hold their model defaults.
+
+`QuecUserCenterConfigParser` reads the header, function, and other groups from `business.userCenterConfig`. Function items require their corresponding business switches; device management also requires `basic.appTypeId === 1166110884101666 || !business.isHomeList`. Feedback uses `quecFeedbackPanel` when it is positive. Disabled or unsupported items are removed from `configs`, group order within `configs` is retained, and empty menu groups become `null`. The individual fields such as `device` and `feedback` refer to the same objects as the filtered groups.
+
+Missing or invalid user-center JSON produces an empty model without adding hardcoded menus. Invalid JSON is logged without printing the configuration contents. Banner, selected services, third-party voice, medals, and their switches are not parsed yet.
+
 ## Not parsed yet
 
-The model types are all present, but only the top-level fields, `basic`, and `network` are parsed.
-
-- `QuecOemBusinessConfigModel` and `QuecOemThirdPlatformConfigModel` describe the `business` and `thirdPlatform` sections. Both are plain field mappings: add a parser method, and a getter on `QuecGlobalConfig`, when they are needed. They are deliberately absent from `QuecGlobalConfig` for now so that callers cannot read empty defaults by mistake.
-- `QuecOemAppTab`, `QuecUserCenterConfigModel`, and `QuecThirdVoiceConfig` are derived on Android rather than read directly: `appTab` comes from `appTabBarConfig` or the `business.appTab` JSON, `userCenter` comes from the `business.userCenterConfig` JSON filtered by the business switches, and `thirdVoiceConfig` comes from `business.alexaConfig` and `business.googleAssistantConfig`. Porting these also means porting the Android derivation logic.
+The remaining business fields and `QuecOemThirdPlatformConfigModel` are not parsed. `QuecThirdVoiceConfig` will also require deriving configuration from `business.alexaConfig` and `business.googleAssistantConfig`.
 
 Also not ported: the utility classes (`QuecOemConfigUtil`, `QuecDarkModeUtil`, `QuecUserCenterConfigUtil`), `isHaveSmart`, and decryption of the encrypted configuration format, where Android decrypts files starting with `Base64("quectel")` using AES/ECB/PKCS7. Port these from the Android sources when they are needed.
