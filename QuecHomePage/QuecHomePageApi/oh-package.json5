@@ -5,5 +5,7 @@
   "main": "Index.ets",
   "author": "",
   "license": "Apache-2.0",
-  "dependencies": {}
+  "dependencies": {
+    "@hadss/hmrouter": "1.2.4"
+  }
 }

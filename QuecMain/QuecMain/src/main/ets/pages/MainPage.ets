@@ -1,6 +1,6 @@
-import { HMRouter, HMRouterMgr } from '@hadss/hmrouter';
+import { HMRouter } from '@hadss/hmrouter';
 import { getWindowInsetsState, WindowInsetsState } from '@quec/basic-ui';
-import { HOME_PAGE_SERVICE, QuecHomePageService } from '@quec/home-page-api';
+import { QuecHomePageServiceManager } from '@quec/home-page-api';
 import { QLog } from '@quec/log';
 import { MAIN_ROUTE } from '@quec/main-api';
 import { QuecGlobalConfig, QuecOemTab } from '@quec/oem-app-config';
@@ -58,7 +58,7 @@ export struct MainPage {
    */
   private getPageForTab(tab: QuecOemTab): WrappedBuilder<[]> | undefined {
     if (tab.title === QuecGlobalConfig.quecTabNames[QuecGlobalConfig.tab1]) {
-      return HMRouterMgr.getService<QuecHomePageService>(HOME_PAGE_SERVICE)?.getPageBuilder()
+      return QuecHomePageServiceManager.getInstance().getHomePageBuilder()
     } else if (tab.title === QuecGlobalConfig.quecTabNames[QuecGlobalConfig.tab2]) {
       return wrapBuilder(smartBuilder)
     } else if (tab.title === QuecGlobalConfig.quecTabNames[QuecGlobalConfig.tab3]) {
