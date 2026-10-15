@@ -1,0 +1,14 @@
+{
+  "name": "@quec/home-page",
+  "version": "1.0.0",
+  "description": "Home tab page and its service provider.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@hadss/hmrouter": "1.2.4",
+    "@quec/home-page-api": "file:../QuecHomePageApi",
+    "@quec/basic-ui": "file:../../QuecBasicUi",
+    "@quec/ui-config": "file:../../QuecUiConfig"
+  }
+}

@@ -11,6 +11,7 @@
     "@quec/privacy-policy-api": "file:../../QuecPrivacyPolicy/QuecPrivacyPolicyApi",
     "@quec/mmkv": "file:../../QuecMmkv",
     "@quec/main-api": "file:../QuecMainApi",
+    "@quec/home-page-api": "file:../../QuecHomePage/QuecHomePageApi",
     "@quec/login-api": "file:../../QuecLogin/QuecLoginApi",
     "@quec/user-sdk": "file:../../QuecUserSdk",
     "@quec/basic-ui": "file:../../QuecBasicUi",

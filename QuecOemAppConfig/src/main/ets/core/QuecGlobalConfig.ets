@@ -6,6 +6,7 @@ import { QuecOemBasicConfigModel } from '../model/QuecOemBasicConfigModel';
 import { QuecOemNetworkConfigModel } from '../model/QuecOemNetworkConfigModel';
 import { QuecRegion } from '../model/QuecRegion';
 import { QuecOemAppConfig } from './QuecOemAppConfig';
+import { QUEC_TAB_1_NAME, QUEC_TAB_2_NAME, QUEC_TAB_3_NAME } from '../constants/tab';
 
 const TAG: string = 'QuecGlobalConfig'
 const KEY_SERVICE_TYPE: string = 'service_type'
@@ -20,6 +21,10 @@ const AREA_EUROPE: string = 'europe'
  *
  */
 export class QuecGlobalConfig {
+  public static tab1 = 0
+  public static tab2 = 1
+  public static tab3 = 2
+  public static quecTabNames = [QUEC_TAB_1_NAME, QUEC_TAB_2_NAME, QUEC_TAB_3_NAME]
   private static currentRegion: QuecRegion = QuecRegion.CHINA
 
   private static readSaved(): number {
@@ -62,10 +67,6 @@ export class QuecGlobalConfig {
    */
   public static init(): void {
     const area: string = QuecOemAppConfig.basic.area
-    if (area.length === 0) {
-      // 配置解析失败时会走到这里。保留 Android 的行为（落到北美），但留下排查线索。
-      QLog.w(TAG, 'basic.area is empty, the configuration may not have been parsed')
-    }
     QuecGlobalConfig.currentRegion = QuecGlobalConfig.resolve(area, QuecGlobalConfig.readSaved())
     QuecGlobalConfig.persist(QuecGlobalConfig.currentRegion)
     QLog.i(TAG, `region: ${QuecGlobalConfig.currentRegion}, area: ${area}`)

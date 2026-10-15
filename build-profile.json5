@@ -69,6 +69,14 @@
       "srcPath": "./QuecMain/QuecMainApi",
     },
     {
+      "name": "QuecHomePage",
+      "srcPath": "./QuecHomePage/QuecHomePage",
+    },
+    {
+      "name": "QuecHomePageApi",
+      "srcPath": "./QuecHomePage/QuecHomePageApi",
+    },
+    {
       "name": "QuecUiConfig",
       "srcPath": "./QuecUiConfig",
     },

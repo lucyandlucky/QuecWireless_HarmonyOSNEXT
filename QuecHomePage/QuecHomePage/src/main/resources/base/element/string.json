@@ -1,0 +1,12 @@
+{
+  "string": [
+    {
+      "name": "quec_home_page_title",
+      "value": "Home"
+    },
+    {
+      "name": "quec_home_page_placeholder",
+      "value": "Home is coming soon"
+    }
+  ]
+}

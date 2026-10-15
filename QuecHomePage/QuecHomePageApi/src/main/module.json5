@@ -1,0 +1,7 @@
+{
+  "module": {
+    "name": "QuecHomePageApi",
+    "type": "har",
+    "deviceTypes": ["default"]
+  }
+}

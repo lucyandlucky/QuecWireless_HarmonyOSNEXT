@@ -1,0 +1,7 @@
+{
+  "module": {
+    "name": "QuecHomePage",
+    "type": "har",
+    "deviceTypes": ["default", "tablet"]
+  }
+}

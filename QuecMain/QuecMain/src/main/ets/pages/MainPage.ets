@@ -1,17 +1,40 @@
-import { HMRouter } from '@hadss/hmrouter';
+import { HMRouter, HMRouterMgr } from '@hadss/hmrouter';
 import { getWindowInsetsState, WindowInsetsState } from '@quec/basic-ui';
+import { HOME_PAGE_SERVICE, QuecHomePageService } from '@quec/home-page-api';
 import { QLog } from '@quec/log';
 import { MAIN_ROUTE } from '@quec/main-api';
+import { QuecGlobalConfig, QuecOemTab } from '@quec/oem-app-config';
 
 import { MainTabBarItem } from '../components/tabs/MainTabBarItem';
-import { QuecTabRegistry } from '../components/tabs/QuecTabRegistry';
+import { ProfileTabPage } from '../components/tabs/ProfileTabPage';
+import { SmartTabPage } from '../components/tabs/SmartTabPage';
 import { TabContentHost } from '../components/tabs/TabContentHost';
-import { MainTabModel } from '../model/MainTabModel';
 import { MainUiState } from '../state/MainUiState';
 import { MainViewModel } from '../viewmodel/MainViewModel';
 
 const TAG: string = 'MainPage'
 const TAB_BAR_CONTENT_HEIGHT: number = 56
+
+@Builder
+function smartBuilder() {
+  SmartTabPage()
+}
+
+@Builder
+function profileBuilder() {
+  ProfileTabPage()
+}
+
+/** 仅在 UI 层把原始 Tab 配置与页面绑定，配置模型不持有 UI 构建器。 */
+class MainTabContent {
+  readonly tab: QuecOemTab
+  readonly page: WrappedBuilder<[]>
+
+  constructor(tab: QuecOemTab, page: WrappedBuilder<[]>) {
+    this.tab = tab
+    this.page = page
+  }
+}
 
 /**
  * App 主页面，对应 Android MainActivity。
@@ -26,36 +49,53 @@ export struct MainPage {
   @Local private windowInsets: WindowInsetsState = getWindowInsetsState()
   private viewModel: MainViewModel = new MainViewModel()
   @Local private state: MainUiState = this.viewModel.state
+  @Local private tabContents: MainTabContent[] = []
+  private tabPagesInitialized: boolean = false
 
   /**
-   * 配置里的 tab 不一定都有对应组件，这里过滤掉没有的。
-   *
-   * 过滤放在 UI 层而不是 ViewModel：「这个 tabKey 能不能渲染」取决于 QuecTabRegistry，
-   * 而那里面是 @Builder（UI 代码），ViewModel 不该依赖。这样 registry 是这份知识的唯一来源，
-   * 不需要在别处维护一份 key 清单的副本。
-   *
-   * selectedIndex 也是这个列表的索引（Tabs 的 onChange 给的就是渲染列表里的下标），
-   * 过滤和索引在同一层，不会错位。
+   * 对应 Android getFragmentForTab：根据 Tab 配置选择页面，返回 Builder。
+   * 首页通过模块服务获取，智能和我的暂时使用本模块的占位组件。
    */
-  @Computed
-  get renderableTabs(): MainTabModel[] {
-    const items: MainTabModel[] = []
-    for (const item of this.state.tabs) {
-      if (QuecTabRegistry.has(item.tabKey)) {
-        items.push(item)
-      } else {
-        QLog.e(TAG, `no page for tabKey '${item.tabKey}', skipped`)
-      }
+  private getPageForTab(tab: QuecOemTab): WrappedBuilder<[]> | undefined {
+    if (tab.title === QuecGlobalConfig.quecTabNames[QuecGlobalConfig.tab1]) {
+      return HMRouterMgr.getService<QuecHomePageService>(HOME_PAGE_SERVICE)?.getPageBuilder()
+    } else if (tab.title === QuecGlobalConfig.quecTabNames[QuecGlobalConfig.tab2]) {
+      return wrapBuilder(smartBuilder)
+    } else if (tab.title === QuecGlobalConfig.quecTabNames[QuecGlobalConfig.tab3]) {
+      return wrapBuilder(profileBuilder)
+    } else {
+      return undefined
     }
-    return items
+  }
+
+  /**
+   * 对应 Android initFragments：按配置顺序解析一次并保存页面。
+   * Tab 栏和内容共用这份列表，缺失页面时一起跳过，避免下标错位。
+   */
+  private initTabPages(): void {
+    if (this.tabPagesInitialized) {
+      return
+    }
+    const contents: MainTabContent[] = []
+    for (const tab of this.state.tabs) {
+      const page: WrappedBuilder<[]> | undefined = this.getPageForTab(tab)
+      if (page === undefined) {
+        QLog.e(TAG, `no page for tabKey '${tab.tabKey}', skipped`)
+        continue
+      }
+      contents.push(new MainTabContent(tab, page))
+    }
+    this.tabContents = contents
+    this.tabPagesInitialized = true
   }
 
   aboutToAppear(): void {
     this.viewModel.init()
+    this.initTabPages()
   }
 
   @Builder
-  TabBarBuilder(item: MainTabModel, index: number) {
+  TabBarBuilder(item: QuecOemTab, index: number) {
     MainTabBarItem({
       item: item,
       selected: index === this.state.selectedIndex,
@@ -71,14 +111,14 @@ export struct MainPage {
         index: this.state.selectedIndex
       }) {
         ForEach(
-          this.renderableTabs,
-          (item: MainTabModel, index: number) => {
+          this.tabContents,
+          (content: MainTabContent, index: number) => {
             TabContent() {
-              TabContentHost({ tabKey: item.tabKey })
+              TabContentHost({ page: content.page })
             }
-            .tabBar(this.TabBarBuilder(item, index))
+            .tabBar(this.TabBarBuilder(content.tab, index))
           },
-          (item: MainTabModel) => item.tabKey
+          (content: MainTabContent) => content.tab.tabKey
         )
       }
       // Android 用 RecyclerView 做 tab 栏、FrameLayout 装内容，没有横滑换页，这里保持一致。

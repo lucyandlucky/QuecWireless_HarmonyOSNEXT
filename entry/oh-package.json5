@@ -10,6 +10,7 @@
     "@quec/privacy-policy": "file:../QuecPrivacyPolicy/QuecPrivacyPolicy",
     "@quec/main": "file:../QuecMain/QuecMain",
     "@quec/main-api": "file:../QuecMain/QuecMainApi",
+    "@quec/home-page": "file:../QuecHomePage/QuecHomePage",
     "@quec/ui-config": "file:../QuecUiConfig",
     "@quec/basic-ui": "file:../QuecBasicUi",
     "@quec/network-v2": "file:../QuecNetworkV2",
