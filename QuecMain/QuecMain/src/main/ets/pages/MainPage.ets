@@ -7,18 +7,12 @@ import { QuecGlobalConfig, QuecOemTab } from '@quec/oem-app-config';
 
 import { MainTabBarItem } from '../components/tabs/MainTabBarItem';
 import { ProfileTabPage } from '../components/tabs/ProfileTabPage';
-import { SmartTabPage } from '../components/tabs/SmartTabPage';
 import { TabContentHost } from '../components/tabs/TabContentHost';
 import { MainUiState } from '../state/MainUiState';
 import { MainViewModel } from '../viewmodel/MainViewModel';
 
 const TAG: string = 'MainPage'
 const TAB_BAR_CONTENT_HEIGHT: number = 56
-
-@Builder
-function smartBuilder() {
-  SmartTabPage()
-}
 
 @Builder
 function profileBuilder() {
@@ -52,15 +46,12 @@ export struct MainPage {
   @Local private tabContents: MainTabContent[] = []
   private tabPagesInitialized: boolean = false
 
-  /**
-   * 对应 Android getFragmentForTab：根据 Tab 配置选择页面，返回 Builder。
-   * 首页通过模块服务获取，智能和我的暂时使用本模块的占位组件。
-   */
+  /** 根据 Tab 配置选择页面，返回 Builder。 */
   private getPageForTab(tab: QuecOemTab): WrappedBuilder<[]> | undefined {
     if (tab.title === QuecGlobalConfig.quecTabNames[QuecGlobalConfig.tab1]) {
       return QuecHomePageServiceManager.getInstance().getHomePageBuilder()
     } else if (tab.title === QuecGlobalConfig.quecTabNames[QuecGlobalConfig.tab2]) {
-      return wrapBuilder(smartBuilder)
+      return QuecHomePageServiceManager.getInstance().getHomePageBuilder()
     } else if (tab.title === QuecGlobalConfig.quecTabNames[QuecGlobalConfig.tab3]) {
       return wrapBuilder(profileBuilder)
     } else {
