@@ -1,16 +1,11 @@
-import { QuecTitleBar } from '@quec/basic-ui'
 
 /** 首页 Tab 内容，路由栈由主容器管理。 */
 @ComponentV2
 export struct HomePage {
   build() {
     Column() {
-      QuecTitleBar({
-        title: $r('app.string.quec_home_page_title'),
-        leftIconVisible: false
-      })
       Column() {
-        Text($r('app.string.quec_home_page_placeholder'))
+        Text($r('app.string.quec_device_list'))
           .fontColor($r('app.color.W2'))
           .fontSize('14fp')
       }
