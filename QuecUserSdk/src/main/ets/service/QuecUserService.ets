@@ -1,5 +1,5 @@
 import { QuecMmkvManager } from '@quec/mmkv'
-import { QuecApiResponse, QuecFormBody, QuecTokenManager } from '@quec/network-v2'
+import { QuecFormBody, QuecPaaSResponse, QuecTokenManager } from '@quec/network-v2'
 import { QuecUserSdkConfig } from '../config/QuecUserSdkConfig'
 import { QuecUserConstants } from '../constants/QuecUserConstants'
 import { QuecLoginTokenData, QuecUserModel } from '../model/QuecUserModel'
@@ -39,7 +39,7 @@ export class QuecUserService {
   }
 
   private async fetchUserInfo(): Promise<QuecUserModel> {
-    const response: QuecApiResponse<QuecUserModel> = await this.dataSource.getUserInfo()
+    const response: QuecPaaSResponse<QuecUserModel> = await this.dataSource.getUserInfo()
     const user: QuecUserModel | null | undefined = response.data
     if (user === null || user === undefined) {
       throw new Error('Response data is empty')
@@ -126,7 +126,7 @@ export class QuecUserService {
     const service: QuecUserService = QuecUserService.getInstance()
     const formBody: QuecFormBody =
       service.loginBuilder.buildEmailPasswordLogin(email, password)
-    const response: QuecApiResponse<QuecLoginTokenData> = await service.dataSource.loginByEmail(formBody)
+    const response: QuecPaaSResponse<QuecLoginTokenData> = await service.dataSource.loginByEmail(formBody)
     const tokenData: QuecLoginTokenData | null | undefined = response.data
     if (tokenData === null || tokenData === undefined) {
       throw new Error('Response data is empty')
@@ -145,7 +145,7 @@ export class QuecUserService {
       password,
       internationalCode
     )
-    const response: QuecApiResponse<QuecLoginTokenData> = await service.dataSource.loginByPhone(formBody)
+    const response: QuecPaaSResponse<QuecLoginTokenData> = await service.dataSource.loginByPhone(formBody)
     const tokenData: QuecLoginTokenData | null | undefined = response.data
     if (tokenData === null || tokenData === undefined) {
       throw new Error('Response data is empty')

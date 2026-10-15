@@ -2,5 +2,6 @@ export interface QuecApiResponse<T> {
   code: number
   data?: T | null
   msg?: string
+  extMsg?: Object | null
   subCode?: number
 }

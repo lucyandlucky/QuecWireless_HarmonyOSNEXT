@@ -1,0 +1,7 @@
+{
+  "module": {
+    "name": "QuecDeviceSdk",
+    "type": "har",
+    "deviceTypes": ["default", "tablet"]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "@quec/device-sdk",
+  "version": "1.0.0",
+  "description": "Quectel shared device service SDK for HarmonyOS.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@quec/network-v2": "file:../QuecNetworkV2"
+  }
+}

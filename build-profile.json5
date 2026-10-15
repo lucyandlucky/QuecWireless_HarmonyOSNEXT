@@ -121,6 +121,10 @@
       "srcPath": "./QuecUserSdk",
     },
     {
+      "name": "QuecDeviceSdk",
+      "srcPath": "./QuecDeviceSdk",
+    },
+    {
       "name": "QuecOemAppConfig",
       "srcPath": "./QuecOemAppConfig",
     },

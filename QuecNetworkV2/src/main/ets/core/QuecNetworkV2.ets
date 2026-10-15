@@ -13,7 +13,6 @@ import { QuecRequestTokenInterceptor } from '../interceptor/QuecRequestTokenInte
 import { QuecResponseDataInterceptor } from '../interceptor/QuecResponseDataInterceptor'
 import { IQuecResponseInterceptor } from '../interceptor/QuecResponseInterceptor'
 import { QuecResponseLogInterceptor } from '../interceptor/QuecResponseLogInterceptor'
-import { QuecApiResponse } from '../model/QuecApiResponse'
 import { QuecAxiosRequestConfig, QuecFormBody } from '../model/QuecRequestConfig'
 
 /** 与 axios helpers/isAbsoluteURL.js 的判断一致：scheme:// 或 // 开头 */
@@ -98,8 +97,8 @@ export class QuecNetworkV2 {
     }
   }
 
-  private async request<T>(method: string, options: QuecRequestOptions): Promise<QuecApiResponse<T>> {
-    const response: AxiosResponse<QuecApiResponse<T>> = await this.client.request<QuecApiResponse<T>>(
+  private async request<T>(method: string, options: QuecRequestOptions): Promise<T> {
+    const response: AxiosResponse<T> = await this.client.request<T>(
       this.createRequestConfig(method, options)
     )
     return response.data
@@ -123,19 +122,19 @@ export class QuecNetworkV2 {
     return client
   }
 
-  public get<T = Object>(options: QuecRequestOptions): Promise<QuecApiResponse<T>> {
+  public get<T = Object>(options: QuecRequestOptions): Promise<T> {
     return this.request<T>('GET', options)
   }
 
-  public post<T = Object>(options: QuecRequestOptions): Promise<QuecApiResponse<T>> {
+  public post<T = Object>(options: QuecRequestOptions): Promise<T> {
     return this.request<T>('POST', options)
   }
 
-  public put<T = Object>(options: QuecRequestOptions): Promise<QuecApiResponse<T>> {
+  public put<T = Object>(options: QuecRequestOptions): Promise<T> {
     return this.request<T>('PUT', options)
   }
 
-  public delete<T = Object>(options: QuecRequestOptions): Promise<QuecApiResponse<T>> {
+  public delete<T = Object>(options: QuecRequestOptions): Promise<T> {
     return this.request<T>('DELETE', options)
   }
 

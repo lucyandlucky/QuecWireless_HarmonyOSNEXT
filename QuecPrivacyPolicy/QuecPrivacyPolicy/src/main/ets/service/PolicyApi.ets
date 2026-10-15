@@ -1,4 +1,4 @@
-import { QuecApiResponse, QuecApiUrl, QuecNetworkV2 } from '@quec/network-v2';
+import { QuecApiUrl, QuecNetworkV2, QuecPaaSResponse } from '@quec/network-v2';
 import { PolicyType } from '@quec/privacy-policy-api';
 import { PolicyTermDto } from '../model/PolicyTermDto';
 
@@ -18,7 +18,7 @@ export interface PolicyDataSource {
 export class PolicyApi implements PolicyDataSource {
   public async getLatest(type: PolicyType): Promise<PolicyTermDto> {
     const params: PolicyLatestParams = { type, appId: POLICY_APP_ID, platform: POLICY_PLATFORM }
-    const response: QuecApiResponse<PolicyTermDto> = await QuecNetworkV2.getClient().get<PolicyTermDto>({
+    const response: QuecPaaSResponse<PolicyTermDto> = await QuecNetworkV2.getClient().get<QuecPaaSResponse<PolicyTermDto>>({
       url: QuecApiUrl.paas('/v2/contentagreement/enduserapi/terms/latest'),
       params
     })

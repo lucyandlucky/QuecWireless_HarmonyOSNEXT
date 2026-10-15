@@ -1,37 +1,37 @@
-import { QuecApiResponse, QuecApiUrl, QuecFormBody, QuecNetworkV2 } from '@quec/network-v2'
+import { QuecApiUrl, QuecFormBody, QuecNetworkV2, QuecPaaSResponse } from '@quec/network-v2'
 import { QuecLoginTokenData, QuecUserModel } from '../model/QuecUserModel'
 
 export interface QuecUserDataSource {
-  loginByEmail(formBody: QuecFormBody): Promise<QuecApiResponse<QuecLoginTokenData>>
+  loginByEmail(formBody: QuecFormBody): Promise<QuecPaaSResponse<QuecLoginTokenData>>
 
-  loginByPhone(formBody: QuecFormBody): Promise<QuecApiResponse<QuecLoginTokenData>>
+  loginByPhone(formBody: QuecFormBody): Promise<QuecPaaSResponse<QuecLoginTokenData>>
 
-  getUserInfo(): Promise<QuecApiResponse<QuecUserModel>>
+  getUserInfo(): Promise<QuecPaaSResponse<QuecUserModel>>
 
-  logout(): Promise<QuecApiResponse<void>>
+  logout(): Promise<QuecPaaSResponse<void>>
 }
 
 export class QuecUserApi implements QuecUserDataSource {
-  public loginByEmail(formBody: QuecFormBody): Promise<QuecApiResponse<QuecLoginTokenData>> {
-    return QuecNetworkV2.getClient().post<QuecLoginTokenData>({
+  public loginByEmail(formBody: QuecFormBody): Promise<QuecPaaSResponse<QuecLoginTokenData>> {
+    return QuecNetworkV2.getClient().post<QuecPaaSResponse<QuecLoginTokenData>>({
       url: QuecApiUrl.paas('/v2/enduser/enduserapi/emailPwdLogin'), formBody
     })
   }
 
-  public loginByPhone(formBody: QuecFormBody): Promise<QuecApiResponse<QuecLoginTokenData>> {
-    return QuecNetworkV2.getClient().post<QuecLoginTokenData>({
+  public loginByPhone(formBody: QuecFormBody): Promise<QuecPaaSResponse<QuecLoginTokenData>> {
+    return QuecNetworkV2.getClient().post<QuecPaaSResponse<QuecLoginTokenData>>({
       url: QuecApiUrl.paas('/v2/enduser/enduserapi/phonePwdLogin'), formBody
     })
   }
 
-  public getUserInfo(): Promise<QuecApiResponse<QuecUserModel>> {
-    return QuecNetworkV2.getClient().get<QuecUserModel>({
+  public getUserInfo(): Promise<QuecPaaSResponse<QuecUserModel>> {
+    return QuecNetworkV2.getClient().get<QuecPaaSResponse<QuecUserModel>>({
       url: QuecApiUrl.paas('/v2/enduser/enduserapi/userInfo')
     })
   }
 
-  public logout(): Promise<QuecApiResponse<void>> {
-    return QuecNetworkV2.getClient().delete<void>({
+  public logout(): Promise<QuecPaaSResponse<void>> {
+    return QuecNetworkV2.getClient().delete<QuecPaaSResponse<void>>({
       url: QuecApiUrl.paas('/v2/enduser/enduserapi/userLogout')
     })
   }
