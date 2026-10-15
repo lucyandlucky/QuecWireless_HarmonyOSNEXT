@@ -9,11 +9,7 @@ export struct HomePage {
         title: $r('app.string.quec_home_page_title'),
         leftIconVisible: false
       })
-      Column({ space: 16 }) {
-        Image($r('app.media.quec_home_page_placeholder'))
-          .width(180)
-          .height(144)
-          .objectFit(ImageFit.Contain)
+      Column() {
         Text($r('app.string.quec_home_page_placeholder'))
           .fontColor($r('app.color.W2'))
           .fontSize('14fp')
