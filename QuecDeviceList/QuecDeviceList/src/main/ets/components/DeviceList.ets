@@ -80,16 +80,20 @@ export struct DeviceList {
       .padding({ left: 16, right: 16 })
 
       Refresh({ refreshing: this.state.refreshing }) {
-        if (this.state.devices.length > 0) {
+        if (this.state.deviceList.length > 0) {
           Grid(this.scroller, {
             regularSize: [1, 1],
-            irregularIndexes: [this.state.devices.length]
+            irregularIndexes: [this.state.deviceList.length]
           }) {
-            ForEach(this.state.devices, (device: QuecDeviceModel) => {
-              GridItem() {
-                DeviceCard({ device: device })
-              }
-            }, (device: QuecDeviceModel, index: number) => DeviceListViewModel.deviceKey(device) || `device-${index}`)
+            ForEach(
+              this.state.deviceList,
+              (device: QuecDeviceModel) => {
+                GridItem() {
+                  DeviceCard({ device: device })
+                }
+              },
+              (device: QuecDeviceModel) => `${device.productKey}_${device.deviceKey}`
+            )
             GridItem() {
               this.PaginationFooter()
             }
@@ -100,7 +104,12 @@ export struct DeviceList {
           .columnsGap(8)
           .rowsGap(8)
           .cachedCount(2)
-          .padding({ top: 8, left: 12, right: 12, bottom: 12 })
+          .padding({
+            top: 8,
+            left: 12,
+            right: 12,
+            bottom: 12
+          })
           .scrollBar(BarState.Off)
           .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: true })
           .onReachEnd(() => this.viewModel.loadMore())

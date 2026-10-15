@@ -42,7 +42,7 @@ export class DeviceListViewModel {
       if (version !== this.requestVersion) {
         return
       }
-      this.state.devices = this.mergeDevices([], response.data.list)
+      this.state.deviceList = this.mergeDevices([], response.data.list)
       this.pageNumber = response.data.pageNum
       this.state.hasNextPage = response.data.hasNextPage && response.data.list.length > 0
       this.hasLoaded = true
@@ -67,7 +67,7 @@ export class DeviceListViewModel {
       if (version !== this.requestVersion) {
         return
       }
-      this.state.devices = this.mergeDevices(this.state.devices, response.data.list)
+      this.state.deviceList = this.mergeDevices(this.state.deviceList, response.data.list)
       this.pageNumber = response.data.pageNum
       this.state.hasNextPage = response.data.hasNextPage && response.data.list.length > 0
     } catch (_) {
