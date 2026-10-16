@@ -32,6 +32,19 @@ The order matters: region selection reads `basic.area` from the parsed configura
 
 `QuecOemConfigManager.parseConfigContent(source)` also accepts YAML text directly.
 
+## Parsers
+
+`QuecOemConfigManager` reads the YAML and writes the parsed models to `QuecOemAppConfig`.
+Each configuration section has its own parser with a `parse(...)` entry point:
+
+- `QuecOemBasicConfigParser`: basic fields and the nested app name.
+- `QuecOemNetworkConfigParser`: network fields for all three regions.
+- `QuecOemBusinessConfigParser`: the supported business fields.
+- `QuecOemAppTabConfigParser`: bottom tabs, preferring `appTabBarConfig` and falling back to the JSON in `business.appTab`.
+- `QuecUserCenterConfigParser`: personal-center menus derived from the parsed basic and business models.
+
+Parsers return models. Shared type conversion and default-value handling stay in `QuecOemRawReader`.
+
 ## Region selection
 
 `QuecGlobalConfig.resolve(area, saved)` is a pure function and keeps Android's branch order, which must not be reordered:

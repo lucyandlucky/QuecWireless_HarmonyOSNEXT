@@ -29,17 +29,10 @@ export class QuecGlobalConfig {
   private static currentRegion: QuecRegion = QuecRegion.CHINA
 
   private static readSaved(): number {
-    // 与 QuecRequestTokenInterceptor 一致：MMKV 未初始化时退回默认值，不抛错。
-    if (!QuecMmkvManager.isInitialized()) {
-      return QuecRegion.CHINA
-    }
     return QuecMmkvManager.getInstance().getInt(KEY_SERVICE_TYPE, QuecRegion.CHINA)
   }
 
   private static persist(region: QuecRegion): void {
-    if (!QuecMmkvManager.isInitialized()) {
-      return
-    }
     QuecMmkvManager.getInstance().putInt(KEY_SERVICE_TYPE, region)
   }
 

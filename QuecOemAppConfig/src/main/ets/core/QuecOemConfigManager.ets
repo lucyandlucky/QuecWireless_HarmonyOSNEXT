@@ -3,7 +3,10 @@ import { util } from '@kit.ArkTS';
 import { parse } from 'yaml';
 import { QLog } from '@quec/log';
 
-import { QuecOemModelParser } from '../parser/QuecOemModelParser';
+import { QuecOemAppTabConfigParser } from '../parser/QuecOemAppTabConfigParser';
+import { QuecOemBasicConfigParser } from '../parser/QuecOemBasicConfigParser';
+import { QuecOemBusinessConfigParser } from '../parser/QuecOemBusinessConfigParser';
+import { QuecOemNetworkConfigParser } from '../parser/QuecOemNetworkConfigParser';
 import { QuecUserCenterConfigParser } from '../parser/QuecUserCenterConfigParser';
 import { QuecOemRawReader as R, QuecRawObject, QuecRawValue } from '../parser/QuecOemRawReader';
 import { QuecOemAppConfig, QuecOemDefaultConfig } from './QuecOemAppConfig';
@@ -45,19 +48,17 @@ export class QuecOemConfigManager {
     QuecOemAppConfig.configId = R.number(raw, 'configId', QuecOemDefaultConfig.CONFIG_ID)
     QuecOemAppConfig.version = R.string(raw, 'version', QuecOemDefaultConfig.VERSION)
     QuecOemAppConfig.platform = R.string(raw, 'platform', QuecOemDefaultConfig.PLATFORM)
-    // A missing section falls back to the model defaults, like Android DefaultConfig.
-    QuecOemAppConfig.basic = QuecOemModelParser.basic(R.object(raw, 'basic'))
-    QuecOemAppConfig.network = QuecOemModelParser.network(R.object(raw, 'network'))
-    QuecOemAppConfig.business = QuecOemModelParser.business(R.object(raw, 'business'))
+    QuecOemAppConfig.basic = QuecOemBasicConfigParser.parse(R.object(raw, 'basic'))
+    QuecOemAppConfig.network = QuecOemNetworkConfigParser.parse(R.object(raw, 'network'))
+    QuecOemAppConfig.business = QuecOemBusinessConfigParser.parse(R.object(raw, 'business'))
     QuecOemAppConfig.userCenter = QuecUserCenterConfigParser.parse(
       QuecOemAppConfig.business, QuecOemAppConfig.basic
     )
-    QuecOemAppConfig.appTab = QuecOemModelParser.appTab(
+    QuecOemAppConfig.appTab = QuecOemAppTabConfigParser.parse(
       R.objectArray(raw, 'appTabBarConfig'),
       QuecOemAppConfig.business.appTab
     )
     if (QuecOemAppConfig.appTab.tabs.length === 0) {
-      // 没有 tab 配置 App 就没有主页面，必须暴露出来，不用硬编码默认值掩盖。
       QLog.e(TAG, 'appTab is empty: both appTabBarConfig and business.appTab are missing or invalid')
     }
   }

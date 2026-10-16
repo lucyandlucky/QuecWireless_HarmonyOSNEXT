@@ -14,8 +14,10 @@ import { QuecOemRawReader as R, QuecRawObject, QuecRawValue } from './QuecOemRaw
 const ENERGY_APP_TYPE: number = 1166110884101666
 
 export class QuecUserCenterConfigParser {
-  public static parse(business: QuecOemBusinessConfigModel,
-    basic: QuecOemBasicConfigModel): QuecUserCenterConfigModel {
+  public static parse(
+    business: QuecOemBusinessConfigModel,
+    basic: QuecOemBasicConfigModel
+  ): QuecUserCenterConfigModel {
     const config: QuecUserCenterConfigModel = new QuecUserCenterConfigModel()
     if (business.userCenterConfig.trim().length === 0) {
       return config
