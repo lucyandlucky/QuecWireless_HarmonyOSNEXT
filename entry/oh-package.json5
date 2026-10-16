@@ -23,6 +23,9 @@
     "@quec/encrypt": "file:../QuecEncrypt",
     "@quec/user-sdk": "file:../QuecUserSdk",
     "@quec/oem-app-config": "file:../QuecOemAppConfig",
-    "@quec/log": "file:../QuecLog"
-  }
+    "@quec/log": "file:../QuecLog",
+    "@rnoh/react-native-openharmony": "0.82.30"
+  },
+  "devDependencies": {},
+  "dynamicDependencies": {}
 }

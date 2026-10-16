@@ -7,11 +7,11 @@
         "material": {
           "certpath": "/Users/lucy/.ohos/config/default_QuecWireless_c57QvpiFV9ZQ8E_R8rJ6hyzad-UuteaUwkud2qmC2zs=.cer",
           "keyAlias": "debugKey",
-          "keyPassword": "0000001B267032633C097576811CE4C0D2D6B0887EADF51F22FF22E62042982A64FFCB3CAFAA9E28DFED42",
+          "keyPassword": "0000001B6B76BB94BFB36291ED1607B0D9B70E65625AA3B05F027B5D5B9DBE3F720FF4466A807F8337D580",
           "profile": "/Users/lucy/.ohos/config/default_QuecWireless_c57QvpiFV9ZQ8E_R8rJ6hyzad-UuteaUwkud2qmC2zs=.p7b",
           "signAlg": "SHA256withECDSA",
           "storeFile": "/Users/lucy/.ohos/config/default_QuecWireless_c57QvpiFV9ZQ8E_R8rJ6hyzad-UuteaUwkud2qmC2zs=.p12",
-          "storePassword": "0000001BED27B46B85728940050A74C7DD059BEF4D9D8984680C3F70C3A994EB265CCAF618B34666957573"
+          "storePassword": "0000001B311108142C3117C40E493919C739EC2005B42A7CC81DC03CF2ABC908882BCDA128142EC887BADB"
         }
       }
     ],
