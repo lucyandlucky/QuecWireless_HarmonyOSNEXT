@@ -51,6 +51,18 @@
     {
       "name": "quec_login_user_privacy",
       "value": "《服务协议》"
+    },
+    {
+      "name": "quec_agree_and_continue",
+      "value": "同意并继续"
+    },
+    {
+      "name": "quec_disagree_and_exit",
+      "value": "不同意并退出"
+    },
+    {
+      "name": "quec_browse_product_features",
+      "value": "浏览产品功能"
     }
   ]
 }

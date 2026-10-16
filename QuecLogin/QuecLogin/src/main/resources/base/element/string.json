@@ -38,11 +38,11 @@
     },
     {
       "name": "quec_login_agree",
-      "value": "I have read and agreed the "
+      "value": "I have read and agree to the "
     },
     {
       "name": "quec_login_add",
-      "value": "and"
+      "value": " and "
     },
     {
       "name": "quec_login_user_privacy",
@@ -234,7 +234,7 @@
     },
     {
       "name": "quec_login_privacy_info_title",
-      "value": "Please read and agree to the following agreements"
+      "value": "Please read and agree to the following terms"
     },
     {
       "name": "quec_login_privacy_info_confirm",

@@ -1,8 +1,13 @@
+import { PolicyType } from '@quec/privacy-policy-api';
+
 @ComponentV2
 export struct QuecLoginPolicy {
   @Param checked: boolean = false
   @Param checkedIconVisible: boolean = true
+  @Param textAlign: TextAlign = TextAlign.Start
   @Event onChecked: (checked: boolean) => void = () => {
+  }
+  @Event onOpenPolicy: (type: PolicyType, title: ResourceStr) => void = () => {
   }
 
   build() {
@@ -26,14 +31,21 @@ export struct QuecLoginPolicy {
         Span($r('app.string.quec_login_agree'))
         Span($r('app.string.quec_login_user_privacy'))
           .fontColor($r('app.color.M1'))
+          .onClick(() => {
+            this.onOpenPolicy(PolicyType.SERVICE, $r('app.string.quec_login_user_privacy'))
+          })
         Span($r('app.string.quec_login_add'))
         Span($r('app.string.quec_login_privacy'))
           .fontColor($r('app.color.M1'))
+          .onClick(() => {
+            this.onOpenPolicy(PolicyType.PRIVACY, $r('app.string.quec_login_privacy'))
+          })
       }
       .layoutWeight(1)
       .fontSize(14)
       .lineHeight(20)
       .fontColor($r('app.color.W2'))
+      .textAlign(this.textAlign)
     }
     .width('100%')
     .alignItems(VerticalAlign.Top)

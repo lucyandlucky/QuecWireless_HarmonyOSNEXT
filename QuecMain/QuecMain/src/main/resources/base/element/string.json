@@ -55,6 +55,18 @@
     {
       "name": "quec_login_user_privacy",
       "value": " Service Agreement "
+    },
+    {
+      "name": "quec_agree_and_continue",
+      "value": "Agree and Continue"
+    },
+    {
+      "name": "quec_disagree_and_exit",
+      "value": "Disagree and Exit"
+    },
+    {
+      "name": "quec_browse_product_features",
+      "value": "Browse Product Features"
     }
   ]
 }

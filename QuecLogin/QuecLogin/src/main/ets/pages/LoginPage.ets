@@ -1,5 +1,11 @@
 import { common } from '@kit.AbilityKit';
-import { getWindowInsetsState, QuecTitleBar, WindowInsetsState } from '@quec/basic-ui';
+import {
+  getWindowInsetsState,
+  QuecDialog,
+  QuecDialogHandle,
+  QuecTitleBar,
+  WindowInsetsState
+} from '@quec/basic-ui';
 import { QuecColorUtils } from '@quec/foundation';
 import { HMLifecycleState, HMRouter, HMRouterMgr, IHMLifecycleOwner } from '@hadss/hmrouter';
 
@@ -9,11 +15,20 @@ import { QuecUnderlineTextInput } from '../components/QuecUnderlineTextInput';
 import { LOGIN_ROUTE } from '@quec/login-api';
 import { QuecUserService } from '@quec/user-sdk';
 import { MAIN_ROUTE } from '@quec/main-api';
+import { PolicyRouteParams, PolicySource, PolicyType, PRIVACY_WEBVIEW_ROUTE } from '@quec/privacy-policy-api';
+import { buildLoginPolicyDialog, LoginPolicyDialogData } from '../components/QuecLoginPolicyConfirmDialog';
 
 @HMRouter({ pageUrl: LOGIN_ROUTE })
 @ComponentV2
 export struct LoginPage {
   private lifecycleOwner: IHMLifecycleOwner | null = null
+  private policyDialog: QuecDialogHandle<LoginPolicyDialogData> | null = null
+  private isPageVisible: boolean = false
+  private pageVersion: number = 0
+  private isConfirmingPolicy: boolean = false
+  private isOpeningPolicy: boolean = false
+  private policyDialogActionPending: boolean = false
+  private restorePolicyDialog: boolean = false
   @Local private windowInsets: WindowInsetsState = getWindowInsetsState()
   @Local private isLoggingIn: boolean = false
   @Local private hasAgreedPolicy: boolean = false
@@ -25,7 +40,10 @@ export struct LoginPage {
   }
 
   aboutToAppear(): void {
+    this.isPageVisible = true
     this.lifecycleOwner = HMRouterMgr.getCurrentLifecycleOwner()
+    this.lifecycleOwner?.addObserver(HMLifecycleState.onShown, this.onPageShown)
+    this.lifecycleOwner?.addObserver(HMLifecycleState.onHidden, this.onPageHidden)
     this.lifecycleOwner?.addObserver(
       HMLifecycleState.onBackPressed,
       this.onPageBackPressed
@@ -33,11 +51,35 @@ export struct LoginPage {
   }
 
   aboutToDisappear(): void {
+    this.isPageVisible = false
+    this.pageVersion++
+    this.restorePolicyDialog = false
+    this.lifecycleOwner?.removeObserver(HMLifecycleState.onShown, this.onPageShown)
+    this.lifecycleOwner?.removeObserver(HMLifecycleState.onHidden, this.onPageHidden)
     this.lifecycleOwner?.removeObserver(
       HMLifecycleState.onBackPressed,
       this.onPageBackPressed
     )
+    this.closePolicyDialog().catch((error: Error) => {
+      console.error(`Close login policy dialog failed: ${error.message}`)
+    })
     this.lifecycleOwner = null
+  }
+
+  private onPageShown = (): void => {
+    this.isPageVisible = true
+    if (this.restorePolicyDialog && !this.hasAgreedPolicy) {
+      this.restorePolicyDialog = false
+      this.showPolicyDialog()
+    }
+  }
+
+  private onPageHidden = (): void => {
+    this.isPageVisible = false
+    this.pageVersion++
+    this.closePolicyDialog().catch((error: Error) => {
+      console.error(`Close login policy dialog failed: ${error.message}`)
+    })
   }
 
   @Computed
@@ -51,13 +93,120 @@ export struct LoginPage {
   }
 
   private async onLogin(): Promise<void> {
+    if (!this.loginVerify || !this.isPageVisible || this.isConfirmingPolicy) {
+      return
+    }
     if (!this.hasAgreedPolicy) {
-      this.getUIContext().getPromptAction().showToast({
-        message: $r('app.string.quec_login_selected')
-      })
+      this.showPolicyDialog()
+      return
+    }
+    await this.login()
+  }
+
+  private showPolicyDialog(): void {
+    if (this.policyDialog !== null || !this.isPageVisible || this.isLoggingIn || this.hasAgreedPolicy) {
+      return
+    }
+    const data: LoginPolicyDialogData = {
+      onCancel: () => {
+        this.closePolicyDialog().catch((error: Error) => {
+          console.error(`Close login policy dialog failed: ${error.message}`)
+        })
+      },
+      onConfirm: () => {
+        this.confirmPolicyAndLogin()
+      },
+      onOpenPolicy: (type: PolicyType, title: ResourceStr) => {
+        this.openPolicy(type, title, true)
+      }
+    }
+    const dialog = QuecDialog.showBottom(
+      this.getUIContext(),
+      wrapBuilder(buildLoginPolicyDialog),
+      data,
+      {
+        width: '100%',
+        cornerRadius: { topLeft: 20, topRight: 20, bottomLeft: 0, bottomRight: 0 },
+        closeOnMask: true,
+        closeOnBack: true,
+        onWillDismiss: (action: DismissDialogAction) => {
+          this.policyDialogActionPending = true
+          action.dismiss()
+        }
+      }
+    )
+    this.policyDialog = dialog
+    this.policyDialogActionPending = false
+    dialog.closed.then(() => {
+      if (this.policyDialog === dialog) {
+        this.policyDialog = null
+        this.policyDialogActionPending = false
+      }
+    })
+    dialog.ready.catch((error: Error) => {
+      console.error(`Open login policy dialog failed: ${error.message}`)
+    })
+  }
+
+  private closePolicyDialog(): Promise<void> {
+    if (this.policyDialog === null) {
+      return Promise.resolve()
+    }
+    this.policyDialogActionPending = true
+    return this.policyDialog.close()
+  }
+
+  private async confirmPolicyAndLogin(): Promise<void> {
+    const dialog = this.policyDialog
+    if (dialog === null || this.policyDialogActionPending || this.isConfirmingPolicy ||
+      !this.isPageVisible || !this.loginVerify) {
+      return
+    }
+    this.policyDialogActionPending = true
+    this.isConfirmingPolicy = true
+    this.hasAgreedPolicy = true
+    const version = this.pageVersion
+    try {
+      await dialog.close()
+      if (this.isPageVisible && this.pageVersion === version) {
+        await this.login()
+      }
+    } catch (error) {
+      console.error(`Confirm login policy failed: ${(error as Error).message}`)
+    } finally {
+      this.isConfirmingPolicy = false
+    }
+  }
+
+  private async openPolicy(type: PolicyType, title: ResourceStr, restoreDialog: boolean = false): Promise<void> {
+    if (!this.isPageVisible || this.isOpeningPolicy || this.isConfirmingPolicy || this.policyDialogActionPending) {
+      return
+    }
+    this.isOpeningPolicy = true
+    this.restorePolicyDialog = restoreDialog
+    const version = this.pageVersion
+    try {
+      await this.closePolicyDialog()
+      if (!this.isPageVisible || this.pageVersion !== version) {
+        this.restorePolicyDialog = false
+        return
+      }
+      const params: PolicyRouteParams = { source: PolicySource.LATEST, type, title }
+      HMRouterMgr.push({ pageUrl: PRIVACY_WEBVIEW_ROUTE, param: params })
+    } catch (error) {
+      this.restorePolicyDialog = false
+      console.error(`Open login policy failed: ${(error as Error).message}`)
+    } finally {
+      this.isOpeningPolicy = false
+    }
+  }
+
+  private async login(): Promise<void> {
+    if (!this.isPageVisible || !this.loginVerify || !this.hasAgreedPolicy) {
       return
     }
     this.isLoggingIn = true
+    const version = this.pageVersion
     try {
       const account: string = this.account.trim()
       if (account.includes('@')) {
@@ -65,12 +214,15 @@ export struct LoginPage {
       } else {
         await QuecUserService.loginByPhone(account, this.password, '86')
       }
-      HMRouterMgr.replace({ pageUrl: MAIN_ROUTE })
-
+      if (this.isPageVisible && this.pageVersion === version) {
+        HMRouterMgr.replace({ pageUrl: MAIN_ROUTE })
+      }
     } catch (error) {
-      this.getUIContext().getPromptAction().showToast({
-        message: (error as Error).message
-      })
+      if (this.isPageVisible && this.pageVersion === version) {
+        this.getUIContext().getPromptAction().showToast({
+          message: (error as Error).message
+        })
+      }
     } finally {
       this.isLoggingIn = false
     }
@@ -139,6 +291,9 @@ export struct LoginPage {
             checked: this.hasAgreedPolicy,
             onChecked: (checked) => {
               this.hasAgreedPolicy = checked
+            },
+            onOpenPolicy: (type: PolicyType, title: ResourceStr) => {
+              this.openPolicy(type, title)
             }
           })
             .margin({ top: 16 })

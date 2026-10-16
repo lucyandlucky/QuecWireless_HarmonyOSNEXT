@@ -12,6 +12,7 @@
     "@quec/foundation": "file:../../QuecFoundation",
     "@quec/login-api": "file:../QuecLoginApi",
     "@quec/main-api": "file:../../QuecMain/QuecMainApi",
-    "@quec/user-sdk": "file:../../QuecUserSdk"
+    "@quec/user-sdk": "file:../../QuecUserSdk",
+    "@quec/privacy-policy-api": "file:../../QuecPrivacyPolicy/QuecPrivacyPolicyApi"
   }
 }
