@@ -13,6 +13,7 @@
     "@quec/home-page": "file:../QuecHomePage/QuecHomePage",
     "@quec/personal-center": "file:../QuecPersonalCenter/QuecPersonalCenter",
     "@quec/device-list": "file:../QuecDeviceList/QuecDeviceList",
+    "@quec/device-panel": "file:../QuecDevicePanel/QuecDevicePanel",
     "@quec/ui-config": "file:../QuecUiConfig",
     "@quec/basic-ui": "file:../QuecBasicUi",
     "@quec/network-v2": "file:../QuecNetworkV2",

@@ -3,6 +3,8 @@ import { QuecDeviceModel } from '@quec/device-sdk'
 @ComponentV2
 export struct DeviceCard {
   @Param device: QuecDeviceModel = {}
+  @Event onDeviceClick: (device: QuecDeviceModel) => void = () => {
+  }
   @Local private imageIndex: number = 0
 
   @Monitor('device')
@@ -121,5 +123,6 @@ export struct DeviceCard {
     .backgroundColor($r('app.color.B2'))
     .borderRadius(12)
     .accessibilityGroup(true)
+    .onClick(() => this.onDeviceClick(this.device))
   }
 }

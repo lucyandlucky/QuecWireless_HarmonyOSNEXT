@@ -1,3 +1,4 @@
+import { QuecDevicePanelServiceManager } from '@quec/device-panel-api'
 import { QuecDeviceModel } from '@quec/device-sdk'
 
 import { DeviceListUiState } from '../state/DeviceListUiState'
@@ -16,6 +17,10 @@ export struct DeviceList {
 
   aboutToDisappear(): void {
     this.viewModel.dispose()
+  }
+
+  private openPanel(device: QuecDeviceModel): void {
+    QuecDevicePanelServiceManager.getInstance().loadPanel({ device: device })
   }
 
   @Builder
@@ -89,7 +94,10 @@ export struct DeviceList {
               this.state.deviceList,
               (device: QuecDeviceModel) => {
                 GridItem() {
-                  DeviceCard({ device: device })
+                  DeviceCard({
+                    device: device,
+                    onDeviceClick: (selectedDevice: QuecDeviceModel) => this.openPanel(selectedDevice)
+                  })
                 }
               },
               (device: QuecDeviceModel) => `${device.productKey}_${device.deviceKey}`
