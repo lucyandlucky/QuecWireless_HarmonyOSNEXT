@@ -1,0 +1,13 @@
+{
+  "name": "@quec/rn-container",
+  "version": "1.0.0",
+  "description": "Reusable React Native container for HarmonyOS pages and tabs.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@rnoh/react-native-openharmony": "0.82.30",
+    "@quec/log": "file:../QuecLog",
+    "@quec/ui-config": "file:../QuecUiConfig"
+  }
+}

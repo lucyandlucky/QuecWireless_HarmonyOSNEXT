@@ -101,6 +101,10 @@
       "srcPath": "./QuecDevicePanel/QuecDevicePanelApi",
     },
     {
+      "name": "QuecRNContainer",
+      "srcPath": "./QuecRNContainer",
+    },
+    {
       "name": "QuecUiConfig",
       "srcPath": "./QuecUiConfig",
     },

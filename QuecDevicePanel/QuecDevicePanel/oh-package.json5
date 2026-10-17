@@ -8,6 +8,7 @@
   "dependencies": {
     "@hadss/hmrouter": "1.2.4",
     "@quec/device-panel-api": "file:../QuecDevicePanelApi",
+    "@quec/rn-container": "file:../../QuecRNContainer",
     "@quec/basic-ui": "file:../../QuecBasicUi",
     "@quec/ui-config": "file:../../QuecUiConfig"
   }

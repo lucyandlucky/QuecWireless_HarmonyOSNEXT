@@ -1,6 +1,7 @@
-import { HMParamType, HMRouter, HMRouterMgr } from '@hadss/hmrouter'
-import { getWindowInsetsState, QuecTitleBar, WindowInsetsState } from '@quec/basic-ui'
+import { HMLifecycleState, HMParamType, HMRouter, HMRouterMgr, IHMLifecycleOwner } from '@hadss/hmrouter'
+import { getWindowInsetsState, WindowInsetsState } from '@quec/basic-ui'
 import { QuecDevicePanelInfo } from '@quec/device-panel-api'
+import { QuecRNController, QuecRNLoadInfo, QuecRNView } from '@quec/rn-container'
 
 import { DEVICE_PANEL_ROUTE } from '../navigation/QuecDevicePanelRoutes'
 
@@ -10,48 +11,58 @@ export struct QuecRNPage {
   @Local private windowInsets: WindowInsetsState = getWindowInsetsState()
   @Local private info: QuecDevicePanelInfo =
     (HMRouterMgr.getCurrentParam(HMParamType.routeParam) as QuecDevicePanelInfo | null) ?? { device: {} }
+  @Local private pageVisible: boolean = false
+  private controller: QuecRNController = new QuecRNController()
+  private lifecycleOwner: IHMLifecycleOwner | null = null
+  private loadInfo: QuecRNLoadInfo = this.createLoadInfo()
 
-  @Builder
-  DeviceInfoItem(label: string, value: string) {
-    Column({ space: 6 }) {
-      Text(label)
-        .fontSize(14)
-        .fontColor($r('app.color.W3'))
-      Text(value)
-        .fontSize(16)
-        .fontColor($r('app.color.W1'))
+  private createLoadInfo(): QuecRNLoadInfo {
+    const initialProps: Record<string, string> = { 'device': JSON.stringify(this.info.device) }
+    const info: QuecRNLoadInfo = {
+      bundleId: 'device-panel',
+      appKey: 'QuecRNAPP',
+      bundlePath: 'rn/device-panel/bundle.harmony.js',
+      assetsDest: 'rn/device-panel/assets',
+      initialProps: initialProps
     }
-    .width('100%')
-    .alignItems(HorizontalAlign.Start)
+    return info
+  }
+
+  private onPageShown = (): void => {
+    this.pageVisible = true
+  }
+  private onPageHidden = (): void => {
+    this.pageVisible = false
+  }
+  private onBackPressed = (): boolean => this.pageVisible && this.controller.handleBackPress()
+
+  aboutToAppear(): void {
+    this.lifecycleOwner = HMRouterMgr.getCurrentLifecycleOwner()
+    this.lifecycleOwner?.addObserver(HMLifecycleState.onShown, this.onPageShown)
+    this.lifecycleOwner?.addObserver(HMLifecycleState.onHidden, this.onPageHidden)
+    this.lifecycleOwner?.addObserver(HMLifecycleState.onBackPressed, this.onBackPressed)
+  }
+
+  aboutToDisappear(): void {
+    this.lifecycleOwner?.removeObserver(HMLifecycleState.onShown, this.onPageShown)
+    this.lifecycleOwner?.removeObserver(HMLifecycleState.onHidden, this.onPageHidden)
+    this.lifecycleOwner?.removeObserver(HMLifecycleState.onBackPressed, this.onBackPressed)
+    this.lifecycleOwner = null
   }
 
   build() {
     Column() {
-      QuecTitleBar({
-        title: '设备面板（占位）',
-        onBack: () => HMRouterMgr.pop()
-      })
-      Scroll() {
-        Column({ space: 24 }) {
-          this.DeviceInfoItem('设备名称', this.info.device.deviceName ?? '')
-          if (this.info.device.productName) {
-            this.DeviceInfoItem('产品名称', this.info.device.productName ?? '')
-          }
-          this.DeviceInfoItem('Product Key', this.info.device.productKey ?? '')
-          this.DeviceInfoItem('Device Key', this.info.device.deviceKey ?? '')
-        }
-        .width('100%')
-        .alignItems(HorizontalAlign.Start)
-        .padding(20)
-        .backgroundColor($r('app.color.B2'))
-        .borderRadius(12)
-        .margin({ top: 16, bottom: this.windowInsets.bottom + 16 })
+      Column() {
+        QuecRNView({
+          info: this.loadInfo,
+          controller: this.controller,
+          active: this.pageVisible,
+          onBack: () => HMRouterMgr.pop()
+        })
       }
       .width('100%')
       .layoutWeight(1)
-      .padding({ left: 16, right: 16 })
-      .align(Alignment.Top)
-      .scrollBar(BarState.Off)
+      .padding({ bottom: this.windowInsets.bottom })
     }
     .width('100%')
     .height('100%')
