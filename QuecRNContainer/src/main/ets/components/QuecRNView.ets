@@ -32,8 +32,8 @@ export struct QuecRNView {
   private devLoadingMounted: boolean = false
   private surfaceMounted: boolean = false
   private onSurfaceDetached: (() => void) | undefined = undefined
-  private errorDialog: QuecDialogHandle<QuecRNErrorDialogData> | undefined = undefined
-  private logBoxDialog: CustomDialogController | undefined = undefined
+  private errorCenterDialog: QuecDialogHandle<QuecRNErrorDialogData> | undefined = undefined
+  private rnLogBoxDialog: CustomDialogController | undefined = undefined
   private logBoxClosed: Promise<void> | undefined = undefined
   private onLogBoxClosed: (() => void) | undefined = undefined
   private devCleanUpCallbacks: (() => void)[] = []
@@ -160,11 +160,13 @@ export struct QuecRNView {
     if (!this.isMetro() || context === undefined || !context.context.isDebugModeEnabled) {
       return
     }
-    this.logBoxDialog = new CustomDialogController({
+    this.rnLogBoxDialog = new CustomDialogController({
       cornerRadius: 0,
       customStyle: true,
       alignment: DialogAlignment.TopStart,
       backgroundColor: Color.Transparent,
+      openAnimation: { duration: 0 },
+      closeAnimation: { duration: 0 },
       builder: LogBoxDialog({ ctx: context.context, initialProps: this.info.initialProps ?? {} }),
       onDidDisappear: () => {
         this.onLogBoxClosed?.()
@@ -179,7 +181,7 @@ export struct QuecRNView {
         return
       }
       this.logBoxClosed = new Promise<void>((resolve) => this.onLogBoxClosed = resolve)
-      this.logBoxDialog?.open()
+      this.rnLogBoxDialog?.open()
     }))
     this.devCleanUpCallbacks.push(logBox.eventEmitter.subscribe('HIDE', () => {
       this.closeLogBoxDialog().catch((error: Error) => QLog.e('QuecRNView', error))
@@ -189,7 +191,7 @@ export struct QuecRNView {
   private async closeLogBoxDialog(): Promise<void> {
     const closed = this.logBoxClosed
     if (closed !== undefined) {
-      this.logBoxDialog?.close()
+      this.rnLogBoxDialog?.close()
       await closed
     }
   }
@@ -198,7 +200,7 @@ export struct QuecRNView {
     this.devCleanUpCallbacks.forEach(cleanUp => cleanUp())
     this.devCleanUpCallbacks = []
     await this.closeLogBoxDialog()
-    this.logBoxDialog = undefined
+    this.rnLogBoxDialog = undefined
   }
 
   private dismissDevErrorDialog(): void {
@@ -209,7 +211,7 @@ export struct QuecRNView {
 
   private showErrorDialog(): void {
     if (this.isMetro() || !this.mounted || !this.active || !this.failed || this.leaving ||
-      this.errorDialog !== undefined) {
+      this.errorCenterDialog !== undefined) {
       return
     }
     const data: QuecRNErrorDialogData = { onBack: () => this.returnFromError() }
@@ -225,10 +227,10 @@ export struct QuecRNView {
         }
       }
     })
-    this.errorDialog = dialog
+    this.errorCenterDialog = dialog
     dialog.closed.then(() => {
-      if (this.errorDialog === dialog) {
-        this.errorDialog = undefined
+      if (this.errorCenterDialog === dialog) {
+        this.errorCenterDialog = undefined
       }
     })
     dialog.ready.catch((error: Error) => {
@@ -241,11 +243,11 @@ export struct QuecRNView {
   }
 
   private async closeErrorDialog(): Promise<void> {
-    const dialog = this.errorDialog
+    const dialog = this.errorCenterDialog
     if (dialog !== undefined) {
       await dialog.close()
-      if (this.errorDialog === dialog) {
-        this.errorDialog = undefined
+      if (this.errorCenterDialog === dialog) {
+        this.errorCenterDialog = undefined
       }
     }
   }

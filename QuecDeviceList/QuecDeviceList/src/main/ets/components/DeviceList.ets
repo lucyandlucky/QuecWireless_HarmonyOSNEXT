@@ -1,4 +1,4 @@
-import { QuecDevicePanelServiceManager } from '@quec/device-panel-api'
+import { QuecPanelServiceManager } from '@quec/panel-api'
 import { QuecDeviceModel } from '@quec/device-sdk'
 
 import { DeviceListUiState } from '../state/DeviceListUiState'
@@ -20,7 +20,7 @@ export struct DeviceList {
   }
 
   private openPanel(device: QuecDeviceModel): void {
-    QuecDevicePanelServiceManager.getInstance().loadPanel({ device: device })
+    QuecPanelServiceManager.getInstance().loadPanel({ device: device })
   }
 
   @Builder

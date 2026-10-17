@@ -1,7 +1,0 @@
-{
-  "module": {
-    "name": "QuecDevicePanelApi",
-    "type": "har",
-    "deviceTypes": ["default", "tablet"]
-  }
-}

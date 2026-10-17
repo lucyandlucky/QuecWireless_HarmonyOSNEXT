@@ -93,12 +93,12 @@
       "srcPath": "./QuecDeviceList/QuecDeviceListApi",
     },
     {
-      "name": "QuecDevicePanel",
-      "srcPath": "./QuecDevicePanel/QuecDevicePanel",
+      "name": "QuecPanel",
+      "srcPath": "./QuecPanel/QuecPanel",
     },
     {
-      "name": "QuecDevicePanelApi",
-      "srcPath": "./QuecDevicePanel/QuecDevicePanelApi",
+      "name": "QuecPanelApi",
+      "srcPath": "./QuecPanel/QuecPanelApi",
     },
     {
       "name": "QuecRNContainer",

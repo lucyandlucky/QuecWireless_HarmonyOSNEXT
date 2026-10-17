@@ -1,0 +1,16 @@
+{
+  "name": "@quec/panel",
+  "version": "1.0.0",
+  "description": "Panel pages, loading preparation and service provider.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@hadss/hmrouter": "1.2.4",
+    "@quec/panel-api": "file:../QuecPanelApi",
+    "@quec/rn-container": "file:../../QuecRNContainer",
+    "@rnoh/react-native-openharmony": "0.82.30",
+    "@quec/basic-ui": "file:../../QuecBasicUi",
+    "@quec/ui-config": "file:../../QuecUiConfig"
+  }
+}

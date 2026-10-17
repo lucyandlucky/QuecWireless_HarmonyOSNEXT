@@ -1,0 +1,12 @@
+{
+  "name": "@quec/panel-api",
+  "version": "1.0.0",
+  "description": "Public panel contract and service entry point.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@hadss/hmrouter": "1.2.4",
+    "@quec/device-sdk": "file:../../QuecDeviceSdk"
+  }
+}

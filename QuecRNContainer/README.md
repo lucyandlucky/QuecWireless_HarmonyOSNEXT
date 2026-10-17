@@ -1,8 +1,18 @@
 # QuecRNContainer
 
-`@quec/rn-container` 提供可嵌入原生页面或 Tab 的 `QuecRNView`。宿主 Ability 继承 `RNAbility`，并在 entry 配置 RNOH 的 C++ 构建。
+`@quec/rn-container` 提供可嵌入原生页面或 Tab 的 `QuecRNView`、`QuecRNController` 和加载信息类型 `QuecRNLoadInfo`。宿主 Ability 继承 `RNAbility`，并在 entry 配置 RNOH 的 C++ 构建。
 
 每个容器持有一个 `QuecRNController` 和一个独立 RNInstance，bundle 加载成功后通过 RNSurface 展示。bundleId 用于标识业务，不作为实例缓存键；appKey 必须与 JS 注册名一致。
+
+## 全屏面板
+
+全屏路由页面 `QuecRNPage` 属于 [QuecPanel](../QuecPanel/README.md)。调用方通过 `@quec/panel-api` 的 `QuecPanelServiceManager` 传入业务参数；进入页面后，由页面持有的 `PanelViewModel` 准备 `QuecRNLoadInfo`，再交给 `QuecRNView` 展示。
+
+`QuecRNContainer` 根据加载信息管理 RN 运行过程；面板输入解析、加载配置和路由页面由 `QuecPanel` 管理。
+
+## 嵌入页面或 Tab
+
+页面或 Tab 在各自的组件中创建 controller，直接嵌入 `QuecRNView`：
 
 ```ts
 private rnController: QuecRNController = new QuecRNController()
@@ -55,29 +65,7 @@ QuecRNView({
 
 ## Metro 调试
 
-设备面板在 `QuecDevicePanel/QuecDevicePanel/src/main/ets/viewmodel/DevicePanelViewModel.ets` 的 `createLoadInfo()` 中组装设备参数和加载信息，通过本地变量 `metroEnabled` 选择加载来源。`QuecRNDevicePage` 读取路由参数并创建 ViewModel，将其 `loadInfo` 交给 `QuecRNView`，负责页面生命周期和展示。
-
-```ts
-private createLoadInfo(info: QuecDevicePanelInfo): QuecRNLoadInfo {
-  const metroEnabled: boolean = true
-  const coreContext = AppStorage.get<RNOHCoreContext>('RNOHCoreContext')
-  const useMetro = metroEnabled && coreContext?.isDebugModeEnabled === true
-  const initialProps: Record<string, string> = { 'device': JSON.stringify(info.device) }
-  const loadInfo: QuecRNLoadInfo = {
-    bundleId: 'device-panel',
-    appKey: 'QuecRNAPP',
-    bundleSource: useMetro ? QuecRNBundleSource.Metro : QuecRNBundleSource.Resource,
-    bundlePath: useMetro ?
-      'http://localhost:8081/index.bundle?platform=harmony&dev=true&minify=false' :
-      'rn/device-panel/bundle.harmony.js',
-    assetsDest: 'rn/device-panel/assets',
-    initialProps: initialProps
-  }
-  return loadInfo
-}
-```
-
-`metroEnabled` 为 `true` 且 RNOH 运行时确认是 Debug 包时，使用 Metro URL；变量为 `false` 或 Release 包时，使用包内 rawfile。两种来源共用 appKey、assetsDest 和设备 initialProps，容器仅根据 `QuecRNLoadInfo.bundleSource` 选择加载器。修改本地变量或 URL 后需要重新构建 HAP。后续接入调试面板时，可以把本地变量替换为调试开关的读取；加载信息在页面创建时确定，切换来源后重新进入页面生效。
+全屏面板的加载来源在 `QuecPanel/QuecPanel/src/main/ets/viewmodel/PanelViewModel.ets` 的 `createLoadInfo()` 中准备，通过本地变量 `metroEnabled` 选择。变量为 `true` 且 RNOH 确认是 Debug 包时使用 Metro；变量为 `false` 或 Release 包时使用包内 rawfile。加载信息在页面初始化时确定，切换来源后重新进入页面生效。配置说明见 [QuecPanel](../QuecPanel/README.md)。
 
 USB 连接设备后执行：
 
@@ -100,14 +88,4 @@ Metro 模式不显示“面板加载失败”通用弹窗。开发 bundle 的 JS
 
 使用局域网调试时，将 URL 中的 localhost 替换为电脑局域网 IP，并用 `yarn start --host 0.0.0.0` 启动 Metro；设备和电脑需要能互相访问。Metro 模式下 bundle 和静态图片由开发服务器提供，修改 RN 内容无需重新打包复制到 rawfile。其他页面或 Tab 同样通过各自的 `QuecRNLoadInfo` 指定加载来源和地址。
 
-## 本地设备面板 bundle
-
-在工程根目录执行，参数填写 RN 工程路径：
-
-```sh
-node QuecDevicePanel/QuecDevicePanel/scripts/build-rn-bundle.mjs /path/to/RNProject
-```
-
-脚本使用该 RN 工程的 bundle-harmony 命令，将 bundle 和图片输出至设备面板模块的 rawfile/rn/device-panel。构建鸿蒙 HAP 前先执行此步骤；RN 内容更新后重新打包。生成目录已忽略，不提交生成的 JS 和图片。该命令不启动 Metro。
-
-设备面板通过 initialProps.device 传入完整设备 JSON，当前示例注册名为 QuecRNAPP。
+本地设备面板 bundle 的打包脚本和资源位于 `QuecPanel`，使用方式见 [QuecPanel](../QuecPanel/README.md)。
