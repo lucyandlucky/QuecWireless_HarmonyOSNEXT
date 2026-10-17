@@ -5,7 +5,6 @@ import {
   DisplayMode,
   FileJSBundleProvider,
   JSBundleProvider,
-  MetroJSBundleProvider,
   ResourceJSBundleProvider,
   RNComponentContext,
   RNInstanceImpl,
@@ -19,6 +18,7 @@ import {
 import { buildQuecRNComponent } from '../components/QuecRNComponentBuilder'
 import { QuecRNError } from '../model/QuecRNError'
 import { QuecRNBundleSource, QuecRNLoadInfo } from '../model/QuecRNLoadInfo'
+import { QuecMetroJSBundleProvider } from './QuecMetroJSBundleProvider'
 
 const TAG: string = 'QuecRNController'
 
@@ -45,6 +45,7 @@ export class QuecRNController {
   private instance: RNInstanceImpl | undefined = undefined
   private renderContext: QuecRNRenderContext | undefined = undefined
   private loadTask: Promise<QuecRNRenderContext | undefined> | undefined = undefined
+  private reloadTask: Promise<QuecRNRenderContext | undefined> | undefined = undefined
   private releaseTask: Promise<void> | undefined = undefined
   private disposed: boolean = false
   private active: boolean = true
@@ -56,24 +57,38 @@ export class QuecRNController {
   private offsetY: number = 0
   private info: QuecRNLoadInfo | undefined = undefined
   private cleanUpCallbacks: (() => void)[] = []
+  private unsubscribeReload: (() => void) | undefined = undefined
+  private onBack: () => void = () => {
+  }
+  private onError: (error: QuecRNError) => void = () => {
+  }
+  private onReload: () => void = () => {
+  }
 
-  public load(info: QuecRNLoadInfo, onBack: () => void,
+  public load(
+    info: QuecRNLoadInfo,
+    onBack: () => void,
     onError: (error: QuecRNError) => void = () => {
-    }): Promise<QuecRNRenderContext | undefined> {
+    },
+    onReload: () => void = () => {
+    }
+  ): Promise<QuecRNRenderContext | undefined> {
     if (this.disposed) {
       return Promise.resolve(undefined)
     }
     if (this.loadTask === undefined) {
       this.info = info
-      this.loadTask = this.createRenderContext(info, onBack, onError)
+      this.onBack = onBack
+      this.onError = onError
+      this.onReload = onReload
+      this.loadTask = this.createRenderContext(info)
     }
     return this.loadTask
   }
 
   private async createRenderContext(
     info: QuecRNLoadInfo,
-    onBack: () => void,
-    onError: (error: QuecRNError) => void
+    previousInstance?: RNInstanceImpl
   ): Promise<QuecRNRenderContext | undefined> {
     try {
       const coreContext = AppStorage.get<RNOHCoreContext>('RNOHCoreContext')
@@ -81,27 +96,33 @@ export class QuecRNController {
         throw new Error('RNOHCoreContext is unavailable. Initialize the host with RNAbility first.')
       }
       this.coreContext = coreContext
-      const instance = await coreContext.createAndRegisterRNInstance({
-        name: info.bundleId,
-        createRNPackages: (): RNPackage[] => [],
-        enableDebugger: coreContext.isDebugModeEnabled && info.bundleSource === QuecRNBundleSource.Metro,
-        assetsDest: info.assetsDest,
-        backPressHandler: () => {
-          if (!this.disposed && this.active) {
-            onBack()
+      this.subscribeToReload(coreContext, info)
+      let instance: RNInstanceImpl
+      if (previousInstance !== undefined) {
+        instance = await coreContext.reloadRNInstance(previousInstance) as RNInstanceImpl
+      } else {
+        instance = await coreContext.createAndRegisterRNInstance({
+          name: info.bundleId,
+          createRNPackages: (): RNPackage[] => [],
+          enableDebugger: coreContext.isDebugModeEnabled && info.bundleSource === QuecRNBundleSource.Metro,
+          assetsDest: info.assetsDest,
+          backPressHandler: () => {
+            if (!this.disposed && this.active) {
+              this.onBack()
+            }
           }
-        }
-      }) as RNInstanceImpl
+        }) as RNInstanceImpl
+      }
       this.instance = instance
       if (this.disposed) {
         return undefined
       }
       this.cleanUpCallbacks.push(instance.subscribeToRNOHErrors((error: RNOHError) => {
         if (!this.disposed) {
-          this.reportInstanceError(info, instance, error, onError)
+          this.reportInstanceError(info, instance, error, this.onError)
         }
       }))
-      const provider = this.createBundleProvider(coreContext, info)
+      const provider = this.createBundleProvider(coreContext, info, instance)
       await instance.runJSBundle(provider)
       if (this.disposed) {
         return undefined
@@ -141,6 +162,52 @@ export class QuecRNController {
     }
   }
 
+  private subscribeToReload(coreContext: RNOHCoreContext, info: QuecRNLoadInfo): void {
+    if (this.unsubscribeReload !== undefined || !coreContext.isDebugModeEnabled ||
+      info.bundleSource !== QuecRNBundleSource.Metro) {
+      return
+    }
+    this.unsubscribeReload = coreContext.devToolsController.eventEmitter.subscribe('RELOAD', () => {
+      if (!this.disposed && this.active) {
+        this.onReload()
+      }
+    })
+  }
+
+  public reload(): Promise<QuecRNRenderContext | undefined> {
+    if (this.disposed || this.info === undefined || this.info.bundleSource !== QuecRNBundleSource.Metro ||
+      this.coreContext?.isDebugModeEnabled !== true) {
+      return Promise.resolve(undefined)
+    }
+    if (this.reloadTask !== undefined) {
+      return this.reloadTask
+    }
+    const task = this.reloadRenderContext(this.info, this.loadTask)
+    this.reloadTask = task
+    this.loadTask = task
+    task.then(() => this.reloadTask = undefined, () => this.reloadTask = undefined)
+    return task
+  }
+
+  private async reloadRenderContext(info: QuecRNLoadInfo,
+    previousLoad: Promise<QuecRNRenderContext | undefined> | undefined): Promise<QuecRNRenderContext | undefined> {
+    try {
+      await previousLoad
+    } catch (error) {
+      // A failed Metro request can be retried with Reload.
+    }
+    if (this.disposed) {
+      return undefined
+    }
+    await this.releaseSurface()
+    if (this.disposed) {
+      return undefined
+    }
+    this.releaseTask = undefined
+    QLog.i(TAG, `reloading bundle '${info.bundleId}'`)
+    return this.createRenderContext(info, this.instance)
+  }
+
   private reportInstanceError(
     info: QuecRNLoadInfo,
     instance: RNInstanceImpl,
@@ -167,11 +234,19 @@ export class QuecRNController {
     }
   }
 
-  private createBundleProvider(coreContext: RNOHCoreContext, info: QuecRNLoadInfo): JSBundleProvider {
+  private createBundleProvider(
+    coreContext: RNOHCoreContext,
+    info: QuecRNLoadInfo,
+    instance: RNInstanceImpl
+  ): JSBundleProvider {
     if (info.bundleSource === QuecRNBundleSource.File) {
       return new FileJSBundleProvider(info.bundlePath, [info.appKey])
     } else if (info.bundleSource === QuecRNBundleSource.Metro) {
-      return new MetroJSBundleProvider(info.bundlePath, [info.appKey])
+      return new QuecMetroJSBundleProvider(info.bundlePath, [info.appKey], (message: string) => {
+        if (!this.disposed && this.active && this.instance === instance) {
+          coreContext.devToolsController.eventEmitter.emit('SHOW_DEV_LOADING_VIEW', instance.getId(), message)
+        }
+      })
     }
     return new ResourceJSBundleProvider(coreContext.uiAbilityContext.resourceManager,
       info.bundlePath, [info.appKey])
@@ -181,6 +256,11 @@ export class QuecRNController {
     this.uiContext = uiContext
     this.attached = true
     this.startSurface()
+  }
+
+  public detachSurface(): void {
+    this.attached = false
+    this.uiContext = undefined
   }
 
   public updateLayout(width: number, height: number, offsetX: number, offsetY: number): void {
@@ -247,6 +327,8 @@ export class QuecRNController {
 
   public async dispose(): Promise<void> {
     this.disposed = true
+    this.unsubscribeReload?.()
+    this.unsubscribeReload = undefined
     try {
       await this.loadTask
     } catch (error) {
@@ -263,22 +345,26 @@ export class QuecRNController {
   }
 
   private async releaseResources(): Promise<void> {
+    await this.releaseSurface()
+    const instance = this.instance
+    if (instance !== undefined && this.coreContext !== undefined) {
+      await this.coreContext.destroyAndUnregisterRNInstance(instance)
+      QLog.i(TAG, `released instance ${instance.getId()}`)
+    }
+    this.instance = undefined
+  }
+
+  private async releaseSurface(): Promise<void> {
     this.cleanUpCallbacks.forEach(cleanUp => cleanUp())
     this.cleanUpCallbacks = []
     const surface = this.renderContext?.surface
-    const instance = this.instance
     if (surface !== undefined && !surface.isDestroyed()) {
       if (surface.isRunning()) {
         await surface.stop()
       }
       surface.destroy()
     }
-    if (instance !== undefined && this.coreContext !== undefined) {
-      await this.coreContext.destroyAndUnregisterRNInstance(instance)
-      QLog.i(TAG, `released instance ${instance.getId()}`)
-    }
     this.renderContext = undefined
-    this.instance = undefined
-    this.uiContext = undefined
+    this.detachSurface()
   }
 }

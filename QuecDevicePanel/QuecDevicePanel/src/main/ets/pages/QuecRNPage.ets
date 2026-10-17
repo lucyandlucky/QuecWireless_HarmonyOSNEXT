@@ -1,7 +1,8 @@
 import { HMLifecycleState, HMParamType, HMRouter, HMRouterMgr, IHMLifecycleOwner } from '@hadss/hmrouter'
 import { getWindowInsetsState, WindowInsetsState } from '@quec/basic-ui'
 import { QuecDevicePanelInfo } from '@quec/device-panel-api'
-import { QuecRNController, QuecRNLoadInfo, QuecRNView } from '@quec/rn-container'
+import { QuecRNBundleSource, QuecRNController, QuecRNLoadInfo, QuecRNView } from '@quec/rn-container'
+import { RNOHCoreContext } from '@rnoh/react-native-openharmony'
 
 import { DEVICE_PANEL_ROUTE } from '../navigation/QuecDevicePanelRoutes'
 
@@ -17,11 +18,17 @@ export struct QuecRNPage {
   private loadInfo: QuecRNLoadInfo = this.createLoadInfo()
 
   private createLoadInfo(): QuecRNLoadInfo {
+    const metroEnabled: boolean = true
+    const coreContext = AppStorage.get<RNOHCoreContext>('RNOHCoreContext')
+    const useMetro = metroEnabled && coreContext?.isDebugModeEnabled === true
     const initialProps: Record<string, string> = { 'device': JSON.stringify(this.info.device) }
     const info: QuecRNLoadInfo = {
       bundleId: 'device-panel',
       appKey: 'QuecRNAPP',
-      bundlePath: 'rn/device-panel/bundle.harmony.js',
+      bundleSource: useMetro ? QuecRNBundleSource.Metro : QuecRNBundleSource.Resource,
+      bundlePath: useMetro ?
+        'http://localhost:8081/index.bundle?platform=harmony&dev=true&minify=false' :
+        'rn/device-panel/bundle.harmony.js',
       assetsDest: 'rn/device-panel/assets',
       initialProps: initialProps
     }

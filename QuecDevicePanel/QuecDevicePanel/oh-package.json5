@@ -9,6 +9,7 @@
     "@hadss/hmrouter": "1.2.4",
     "@quec/device-panel-api": "file:../QuecDevicePanelApi",
     "@quec/rn-container": "file:../../QuecRNContainer",
+    "@rnoh/react-native-openharmony": "0.82.30",
     "@quec/basic-ui": "file:../../QuecBasicUi",
     "@quec/ui-config": "file:../../QuecUiConfig"
   }
