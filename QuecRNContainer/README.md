@@ -55,15 +55,15 @@ QuecRNView({
 
 ## Metro 调试
 
-设备面板在 `QuecDevicePanel/QuecDevicePanel/src/main/ets/pages/QuecRNPage.ets` 的 `createLoadInfo()` 中，通过本地变量 `metroEnabled` 选择加载来源：
+设备面板在 `QuecDevicePanel/QuecDevicePanel/src/main/ets/viewmodel/DevicePanelViewModel.ets` 的 `createLoadInfo()` 中组装设备参数和加载信息，通过本地变量 `metroEnabled` 选择加载来源。`QuecRNDevicePage` 读取路由参数并创建 ViewModel，将其 `loadInfo` 交给 `QuecRNView`，负责页面生命周期和展示。
 
 ```ts
-private createLoadInfo(): QuecRNLoadInfo {
+private createLoadInfo(info: QuecDevicePanelInfo): QuecRNLoadInfo {
   const metroEnabled: boolean = true
   const coreContext = AppStorage.get<RNOHCoreContext>('RNOHCoreContext')
   const useMetro = metroEnabled && coreContext?.isDebugModeEnabled === true
-  const initialProps: Record<string, string> = { 'device': JSON.stringify(this.info.device) }
-  const info: QuecRNLoadInfo = {
+  const initialProps: Record<string, string> = { 'device': JSON.stringify(info.device) }
+  const loadInfo: QuecRNLoadInfo = {
     bundleId: 'device-panel',
     appKey: 'QuecRNAPP',
     bundleSource: useMetro ? QuecRNBundleSource.Metro : QuecRNBundleSource.Resource,
@@ -73,7 +73,7 @@ private createLoadInfo(): QuecRNLoadInfo {
     assetsDest: 'rn/device-panel/assets',
     initialProps: initialProps
   }
-  return info
+  return loadInfo
 }
 ```
 

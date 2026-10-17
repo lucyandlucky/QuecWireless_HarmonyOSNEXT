@@ -1,39 +1,21 @@
 import { HMLifecycleState, HMParamType, HMRouter, HMRouterMgr, IHMLifecycleOwner } from '@hadss/hmrouter'
 import { getWindowInsetsState, WindowInsetsState } from '@quec/basic-ui'
 import { QuecDevicePanelInfo } from '@quec/device-panel-api'
-import { QuecRNBundleSource, QuecRNController, QuecRNLoadInfo, QuecRNView } from '@quec/rn-container'
-import { RNOHCoreContext } from '@rnoh/react-native-openharmony'
+import { QuecRNController, QuecRNView } from '@quec/rn-container'
 
 import { DEVICE_PANEL_ROUTE } from '../navigation/QuecDevicePanelRoutes'
+import { DevicePanelViewModel } from '../viewmodel/DevicePanelViewModel'
 
 @HMRouter({ pageUrl: DEVICE_PANEL_ROUTE })
 @ComponentV2
-export struct QuecRNPage {
+export struct QuecRNDevicePage {
   @Local private windowInsets: WindowInsetsState = getWindowInsetsState()
   @Local private info: QuecDevicePanelInfo =
     (HMRouterMgr.getCurrentParam(HMParamType.routeParam) as QuecDevicePanelInfo | null) ?? { device: {} }
   @Local private pageVisible: boolean = false
   private controller: QuecRNController = new QuecRNController()
   private lifecycleOwner: IHMLifecycleOwner | null = null
-  private loadInfo: QuecRNLoadInfo = this.createLoadInfo()
-
-  private createLoadInfo(): QuecRNLoadInfo {
-    const metroEnabled: boolean = true
-    const coreContext = AppStorage.get<RNOHCoreContext>('RNOHCoreContext')
-    const useMetro = metroEnabled && coreContext?.isDebugModeEnabled === true
-    const initialProps: Record<string, string> = { 'device': JSON.stringify(this.info.device) }
-    const info: QuecRNLoadInfo = {
-      bundleId: 'device-panel',
-      appKey: 'QuecRNAPP',
-      bundleSource: useMetro ? QuecRNBundleSource.Metro : QuecRNBundleSource.Resource,
-      bundlePath: useMetro ?
-        'http://localhost:8081/index.bundle?platform=harmony&dev=true&minify=false' :
-        'rn/device-panel/bundle.harmony.js',
-      assetsDest: 'rn/device-panel/assets',
-      initialProps: initialProps
-    }
-    return info
-  }
+  private viewModel: DevicePanelViewModel = new DevicePanelViewModel(this.info)
 
   private onPageShown = (): void => {
     this.pageVisible = true
@@ -61,7 +43,7 @@ export struct QuecRNPage {
     Column() {
       Column() {
         QuecRNView({
-          info: this.loadInfo,
+          info: this.viewModel.loadInfo,
           controller: this.controller,
           active: this.pageVisible,
           onBack: () => HMRouterMgr.pop()

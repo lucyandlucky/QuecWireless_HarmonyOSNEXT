@@ -52,11 +52,11 @@ export struct QuecRNView {
     if (!this.active) {
       this.dismissDevErrorDialog()
       this.closeLogBoxDialog().catch((error: Error) => QLog.e('QuecRNView', error))
-      this.closeFailureDialog()
-        .then(() => this.showFailureDialog())
+      this.closeErrorDialog()
+        .then(() => this.showErrorDialog())
         .catch((error: Error) => QLog.e('QuecRNView', error))
     } else if (this.failed) {
-      this.showFailureDialog()
+      this.showErrorDialog()
     } else if (this.renderContext === undefined && this.loadTask === undefined && this.reloadTask === undefined) {
       if (this.isMetroDebug() && !this.devLoadingMounted) {
         return
@@ -73,7 +73,7 @@ export struct QuecRNView {
         (error: QuecRNError) => {
           if (this.mounted) {
             this.failed = true
-            this.showFailureDialog()
+            this.showErrorDialog()
             this.onError(error)
           }
         }, () => this.reload())
@@ -102,7 +102,7 @@ export struct QuecRNView {
         return
       }
       this.failed = false
-      await this.closeFailureDialog()
+      await this.closeErrorDialog()
       this.dismissDevErrorDialog()
       await this.cleanUpLogBox()
       await this.unmountSurface()
@@ -136,13 +136,13 @@ export struct QuecRNView {
     if (error.stack) {
       QLog.e('QuecRNView', error.stack)
     }
-    this.showFailureDialog()
+    this.showErrorDialog()
   }
 
   aboutToDisappear(): void {
     this.mounted = false
     this.dismissDevErrorDialog()
-    this.closeFailureDialog().catch((error: Error) => QLog.e('QuecRNView', error))
+    this.closeErrorDialog().catch((error: Error) => QLog.e('QuecRNView', error))
     this.cleanUpLogBox().then(() => this.controller.dispose())
       .catch(() => QLog.e('QuecRNView', 'failed to release the RN container'))
   }
@@ -207,7 +207,7 @@ export struct QuecRNView {
     }
   }
 
-  private showFailureDialog(): void {
+  private showErrorDialog(): void {
     if (this.isMetro() || !this.mounted || !this.active || !this.failed || this.leaving ||
       this.errorDialog !== undefined) {
       return
@@ -240,7 +240,7 @@ export struct QuecRNView {
     })
   }
 
-  private async closeFailureDialog(): Promise<void> {
+  private async closeErrorDialog(): Promise<void> {
     const dialog = this.errorDialog
     if (dialog !== undefined) {
       await dialog.close()
@@ -256,7 +256,7 @@ export struct QuecRNView {
     }
     this.leaving = true
     try {
-      await this.closeFailureDialog()
+      await this.closeErrorDialog()
       if (this.mounted && this.active) {
         this.onBack()
       } else {
