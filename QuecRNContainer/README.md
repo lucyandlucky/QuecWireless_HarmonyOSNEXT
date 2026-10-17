@@ -36,6 +36,22 @@ QuecRNView({
 - 路由页面在 onBackPressed 中返回 controller.handleBackPress()；RN 未消费时调用 onBack。原生标题栏可直接关闭路由。
 - bundleSource 默认为 Resource，读取 rawfile 相对路径；File 使用沙箱绝对路径；Metro 使用完整 bundle URL。Metro 开发模式会启用调试器，目前未接入 Reload/LogBox 等调试 UI。
 - initialProps 的值为字符串，对象参数在业务侧 JSON 序列化。RNInstance/Surface 不在容器之间复用。
+- 实例创建后、执行 bundle 前订阅该实例的 RNOH 错误事件，接收 RNOH 上报到该实例的加载和运行错误。错误消息与堆栈写入 `QuecRNController` 标签的 QLog，并通过可选的 `onError` 回调交给业务；释放容器时取消订阅。
+- 加载失败或接收到实例错误时，当前激活容器统一通过 `QuecDialog` 弹出“面板加载失败”，只提供“返回”按钮；点击后关闭弹窗并调用 `onBack`，由业务退出面板。重复错误复用同一个弹窗，隐藏或销毁容器时关闭弹窗。Debug 和 Release 都不在 App 界面展示错误消息、堆栈或实例信息；详细信息保留在日志和 `onError` 回调中。
+
+```ts
+QuecRNView({
+  info: this.rnInfo,
+  controller: this.rnController,
+  active: this.pageVisible,
+  onBack: () => HMRouterMgr.pop(),
+  onError: (error: QuecRNError) => {
+    // 业务错误处理。
+  }
+})
+```
+
+本地生产模式 bundle 的日志堆栈位置对应打包产物；定位到原始 TSX 行号需要匹配的 source map，或使用 Metro 开发模式。
 
 ## 本地设备面板 bundle
 

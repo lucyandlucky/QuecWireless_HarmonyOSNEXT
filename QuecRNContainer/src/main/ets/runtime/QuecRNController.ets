@@ -11,11 +11,13 @@ import {
   RNInstanceImpl,
   RNOHContext,
   RNOHCoreContext,
+  RNOHError,
   RNPackage,
   SurfaceHandle
 } from '@rnoh/react-native-openharmony'
 
 import { buildQuecRNComponent } from '../components/QuecRNComponentBuilder'
+import { QuecRNError } from '../model/QuecRNError'
 import { QuecRNBundleSource, QuecRNLoadInfo } from '../model/QuecRNLoadInfo'
 
 const TAG: string = 'QuecRNController'
@@ -55,20 +57,23 @@ export class QuecRNController {
   private info: QuecRNLoadInfo | undefined = undefined
   private cleanUpCallbacks: (() => void)[] = []
 
-  public load(info: QuecRNLoadInfo, onBack: () => void): Promise<QuecRNRenderContext | undefined> {
+  public load(info: QuecRNLoadInfo, onBack: () => void,
+    onError: (error: QuecRNError) => void = () => {
+    }): Promise<QuecRNRenderContext | undefined> {
     if (this.disposed) {
       return Promise.resolve(undefined)
     }
     if (this.loadTask === undefined) {
       this.info = info
-      this.loadTask = this.createRenderContext(info, onBack)
+      this.loadTask = this.createRenderContext(info, onBack, onError)
     }
     return this.loadTask
   }
 
   private async createRenderContext(
     info: QuecRNLoadInfo,
-    onBack: () => void
+    onBack: () => void,
+    onError: (error: QuecRNError) => void
   ): Promise<QuecRNRenderContext | undefined> {
     try {
       const coreContext = AppStorage.get<RNOHCoreContext>('RNOHCoreContext')
@@ -91,6 +96,11 @@ export class QuecRNController {
       if (this.disposed) {
         return undefined
       }
+      this.cleanUpCallbacks.push(instance.subscribeToRNOHErrors((error: RNOHError) => {
+        if (!this.disposed) {
+          this.reportInstanceError(info, instance, error, onError)
+        }
+      }))
       const provider = this.createBundleProvider(coreContext, info)
       await instance.runJSBundle(provider)
       if (this.disposed) {
@@ -128,6 +138,32 @@ export class QuecRNController {
     } catch (error) {
       await this.release()
       throw new Error(error instanceof Error ? error.message : 'Failed to initialize the RN container.')
+    }
+  }
+
+  private reportInstanceError(
+    info: QuecRNLoadInfo,
+    instance: RNInstanceImpl,
+    error: RNOHError,
+    onError: (error: QuecRNError) => void
+  ): void {
+    const stack = error.getStack()
+    const report: QuecRNError = {
+      bundleId: info.bundleId,
+      appKey: info.appKey,
+      bundlePath: info.bundlePath,
+      instanceId: instance.getId(),
+      message: error.getMessage() || 'Unknown RN error',
+      stack: typeof stack === 'string' ? stack : (stack?.toString() ?? '')
+    }
+    const prefix = `[bundle=${report.bundleId}, instance=${report.instanceId}, appKey=${report.appKey}]`
+    QLog.e(TAG, `${prefix} ${report.message}`)
+    report.stack.split('\n').filter(line => line.length > 0).forEach(line => QLog.e(TAG, `${prefix} ${line}`))
+    try {
+      onError(report)
+    } catch (callbackError) {
+      const message = callbackError instanceof Error ? callbackError.message : 'Unknown error'
+      QLog.e(TAG, `${prefix} onError callback failed: ${message}`)
     }
   }
 
